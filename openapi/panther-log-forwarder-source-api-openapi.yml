@@ -1,0 +1,266 @@
+openapi: 3.0.3
+info:
+  title: Panther REST alert log forwarder source API
+  version: '1.0'
+  description: The alert api handles all operations for alerts
+servers:
+- url: https://{api_host}
+  variables:
+    api_host:
+      default: your-api-host
+security:
+- ApiKeyAuth: []
+tags:
+- name: log forwarder source
+  description: The log forwarder source api handles all operations for log forwarder sources
+paths:
+  /log-sources/log-forwarder:
+    post:
+      tags:
+      - log forwarder source
+      summary: create log forwarder source
+      operationId: log forwarder source#create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogForwarderSourceAPI.ModifyLogForwarderSource'
+      responses:
+        '201':
+          description: Created response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogForwarderSourceAPI.LogForwarderSource'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogForwarderSourceAPI.BadRequestError'
+        '409':
+          description: 'exists: Conflict response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogForwarderSourceAPI.ExistsError'
+        '500':
+          description: 'service: Internal Server Error response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogForwarderSourceAPI.ServiceError'
+  /log-sources/log-forwarder/{id}:
+    delete:
+      tags:
+      - log forwarder source
+      summary: delete log forwarder source
+      operationId: log forwarder source#delete
+      parameters:
+      - name: id
+        in: path
+        description: ID of the log forwarder source to delete
+        required: true
+        schema:
+          type: string
+          description: ID of the log forwarder source to delete
+      responses:
+        '204':
+          description: No Content response.
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogForwarderSourceAPI.BadRequestError'
+        '500':
+          description: 'service: Internal Server Error response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogForwarderSourceAPI.ServiceError'
+    get:
+      tags:
+      - log forwarder source
+      summary: get log forwarder source
+      operationId: log forwarder source#get
+      parameters:
+      - name: id
+        in: path
+        description: ID of the log forwarder source to fetch
+        required: true
+        schema:
+          type: string
+          description: ID of the log forwarder source to fetch
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogForwarderSourceAPI.LogForwarderSource'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogForwarderSourceAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogForwarderSourceAPI.NotFoundError'
+        '500':
+          description: 'service: Internal Server Error response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogForwarderSourceAPI.ServiceError'
+    put:
+      tags:
+      - log forwarder source
+      summary: put log forwarder source
+      description: put updates a log forwarder source
+      operationId: log forwarder source#put
+      parameters:
+      - name: id
+        in: path
+        description: ID of the log forwarder source to update
+        required: true
+        schema:
+          type: string
+          description: ID of the log forwarder source to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogForwarderSourceAPI.ModifyLogForwarderSource'
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogForwarderSourceAPI.LogForwarderSource'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogForwarderSourceAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogForwarderSourceAPI.NotFoundError'
+        '409':
+          description: 'exists: Conflict response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogForwarderSourceAPI.ExistsError'
+        '500':
+          description: 'service: Internal Server Error response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogForwarderSourceAPI.ServiceError'
+components:
+  schemas:
+    LogForwarderSourceAPI.ModifyLogForwarderSource:
+      type: object
+      properties:
+        integrationLabel:
+          type: string
+          description: The integration label (name)
+        logStreamType:
+          type: string
+          description: 'The log stream type. Supported log stream types: Auto, JSON, JsonArray, Lines, XML'
+          enum:
+          - Auto
+          - JSON
+          - JsonArray
+          - Lines
+          - XML
+        logStreamTypeOptions:
+          $ref: '#/components/schemas/LogForwarderSourceAPI.LogStreamTypeOptions'
+        logTypes:
+          type: array
+          items:
+            type: string
+          description: The log types of the integration
+      required:
+      - integrationLabel
+      - logTypes
+      - logStreamType
+    LogForwarderSourceAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    LogForwarderSourceAPI.ServiceError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    LogForwarderSourceAPI.LogForwarderSource:
+      type: object
+      properties:
+        integrationId:
+          type: string
+          description: The id of the log forwarder source
+        integrationLabel:
+          type: string
+          description: The integration label (name)
+        logStreamType:
+          type: string
+          description: 'The log stream type. Supported log stream types: Auto, JSON, JsonArray, Lines, XML'
+          enum:
+          - Auto
+          - JSON
+          - JsonArray
+          - Lines
+          - XML
+        logStreamTypeOptions:
+          $ref: '#/components/schemas/LogForwarderSourceAPI.LogStreamTypeOptions'
+        logTypes:
+          type: array
+          items:
+            type: string
+          description: The log types of the integration
+    LogForwarderSourceAPI.LogStreamTypeOptions:
+      type: object
+      properties:
+        jsonArrayEnvelopeField:
+          type: string
+          description: Path to the array value to extract elements from, only applicable if logStreamType is JsonArray. Leave empty if the input JSON is an array itself
+        xmlRootElement:
+          type: string
+          description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
+    LogForwarderSourceAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    LogForwarderSourceAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-Key
+      in: header

@@ -1,0 +1,246 @@
+openapi: 3.0.3
+info:
+  title: Panther REST alert contexttag API
+  version: '1.0'
+  description: The alert api handles all operations for alerts
+servers:
+- url: https://{api_host}
+  variables:
+    api_host:
+      default: your-api-host
+security:
+- ApiKeyAuth: []
+tags:
+- name: contexttag
+  description: The context tag API handles all operations for alert context tags
+paths:
+  /alert-context-tags:
+    get:
+      tags:
+      - contexttag
+      summary: List all context tags
+      description: Returns all context tags, both managed (system-defined) and custom (user-defined)
+      operationId: contexttag#list
+      parameters:
+      - name: cursor
+        in: query
+        description: Pagination token from a previous request
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: Pagination token from a previous request
+      - name: limit
+        in: query
+        description: Maximum number of results to return
+        allowEmptyValue: true
+        schema:
+          type: integer
+          description: Maximum number of results to return
+          default: 2000
+          format: int64
+          minimum: 1
+          maximum: 2000
+      - name: managed
+        in: query
+        description: 'Filter by tag type: true for managed tags only, false for custom tags only, omit for all tags'
+        allowEmptyValue: true
+        schema:
+          type: boolean
+          description: 'Filter by tag type: true for managed tags only, false for custom tags only, omit for all tags'
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contexttagAPI.ListContextTagsResp'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contexttagAPI.BadRequestError'
+    post:
+      tags:
+      - contexttag
+      summary: Create a custom context tag
+      description: Creates a new custom context tag. Returns 409 Conflict if the tag already exists.
+      operationId: contexttag#create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contexttagAPI.CreateContextTagReq'
+      responses:
+        '201':
+          description: Created response.
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contexttagAPI.BadRequestError'
+        '409':
+          description: 'exists: Conflict response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contexttagAPI.ExistsError'
+  /alert-context-tags/{tag}:
+    delete:
+      tags:
+      - contexttag
+      summary: Delete a custom context tag
+      description: Deletes a custom context tag. Managed tags cannot be deleted.
+      operationId: contexttag#delete
+      parameters:
+      - name: tag
+        in: path
+        description: The tag value to delete
+        required: true
+        schema:
+          type: string
+          description: The tag value to delete
+          pattern: ^[a-z0-9_-]+$
+          minLength: 1
+          maxLength: 30
+      responses:
+        '204':
+          description: No Content response.
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contexttagAPI.BadRequestError'
+    patch:
+      tags:
+      - contexttag
+      summary: Rename a custom context tag
+      description: Atomically renames a custom context tag. Returns 404 if the tag doesn't exist, 409 if the target tag already exists.
+      operationId: contexttag#update
+      parameters:
+      - name: tag
+        in: path
+        description: The current tag value to rename
+        required: true
+        schema:
+          type: string
+          description: The current tag value to rename
+          pattern: ^[a-z0-9_-]+$
+          minLength: 1
+          maxLength: 30
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contexttagAPI.UpdateContextTagReq'
+      responses:
+        '204':
+          description: No Content response.
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contexttagAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contexttagAPI.NotFoundError'
+        '409':
+          description: 'exists: Conflict response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contexttagAPI.ExistsError'
+components:
+  schemas:
+    contexttagAPI.UpdateContextTagReq:
+      type: object
+      properties:
+        tag:
+          type: string
+          description: The new tag value
+          pattern: ^[a-z0-9_-]+$
+          minLength: 1
+          maxLength: 30
+      description: Request to rename a custom context tag
+      required:
+      - tag
+    contexttagAPI.ContextTag:
+      type: object
+      properties:
+        category:
+          type: string
+          description: The category of the tag
+        managed:
+          type: boolean
+          description: Whether the tag is managed by Panther
+        tag:
+          type: string
+          description: The tag value
+          pattern: ^[a-z0-9_-]+$
+          minLength: 1
+          maxLength: 30
+      description: A context tag that can be applied to alerts
+      required:
+      - tag
+      - category
+      - managed
+    contexttagAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    contexttagAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    contexttagAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    contexttagAPI.CreateContextTagReq:
+      type: object
+      properties:
+        tag:
+          type: string
+          description: The tag value to create
+          pattern: ^[a-z0-9_-]+$
+          minLength: 1
+          maxLength: 30
+      description: Request to create a custom context tag
+      required:
+      - tag
+    contexttagAPI.ListContextTagsResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: Pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/contexttagAPI.ContextTag'
+          description: The list of context tags
+      description: Response for listing context tags
+      required:
+      - results
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-Key
+      in: header

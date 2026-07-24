@@ -1,0 +1,304 @@
+openapi: 3.0.3
+info:
+  title: Panther REST alert aws cloud account API
+  version: '1.0'
+  description: The alert api handles all operations for alerts
+servers:
+- url: https://{api_host}
+  variables:
+    api_host:
+      default: your-api-host
+security:
+- ApiKeyAuth: []
+tags:
+- name: aws cloud account
+  description: The AWS Cloud Account API handles all operations for AWS Cloud Account scanner integrations
+paths:
+  /cloud-accounts/aws:
+    post:
+      tags:
+      - aws cloud account
+      summary: create aws cloud account
+      operationId: aws cloud account#create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSCloudAccountAPI.CreateAWSCloudAccount'
+      responses:
+        '201':
+          description: Created response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCloudAccountAPI.AWSCloudAccount'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCloudAccountAPI.BadRequestError'
+        '409':
+          description: 'exists: Conflict response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCloudAccountAPI.ExistsError'
+        '500':
+          description: 'service: Internal Server Error response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCloudAccountAPI.ServiceError'
+  /cloud-accounts/aws/{id}:
+    delete:
+      tags:
+      - aws cloud account
+      summary: delete aws cloud account
+      operationId: aws cloud account#delete
+      parameters:
+      - name: id
+        in: path
+        description: ID of the AWS Cloud Account to delete
+        required: true
+        schema:
+          type: string
+          description: ID of the AWS Cloud Account to delete
+      responses:
+        '204':
+          description: No Content response.
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCloudAccountAPI.BadRequestError'
+        '500':
+          description: 'service: Internal Server Error response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCloudAccountAPI.ServiceError'
+    get:
+      tags:
+      - aws cloud account
+      summary: get aws cloud account
+      operationId: aws cloud account#get
+      parameters:
+      - name: id
+        in: path
+        description: ID of the AWS Cloud Account to fetch
+        required: true
+        schema:
+          type: string
+          description: ID of the AWS Cloud Account to fetch
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCloudAccountAPI.AWSCloudAccount'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCloudAccountAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCloudAccountAPI.NotFoundError'
+        '500':
+          description: 'service: Internal Server Error response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCloudAccountAPI.ServiceError'
+    put:
+      tags:
+      - aws cloud account
+      summary: put aws cloud account
+      operationId: aws cloud account#put
+      parameters:
+      - name: id
+        in: path
+        description: ID of the AWS Cloud Account to update
+        required: true
+        schema:
+          type: string
+          description: ID of the AWS Cloud Account to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSCloudAccountAPI.ModifyAWSCloudAccount'
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCloudAccountAPI.AWSCloudAccount'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCloudAccountAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCloudAccountAPI.NotFoundError'
+        '500':
+          description: 'service: Internal Server Error response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCloudAccountAPI.ServiceError'
+components:
+  schemas:
+    AWSCloudAccountAPI.ServiceError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    AWSCloudAccountAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    AWSCloudAccountAPI.AWSScanConfig:
+      type: object
+      properties:
+        auditRole:
+          type: string
+          description: The IAM role ARN that Panther assumes to scan the AWS account
+    AWSCloudAccountAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    AWSCloudAccountAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    AWSCloudAccountAPI.ModifyAWSCloudAccount:
+      type: object
+      properties:
+        awsScanConfig:
+          $ref: '#/components/schemas/AWSCloudAccountAPI.AWSScanConfig'
+        integrationLabel:
+          type: string
+          description: The display name for the AWS Cloud Account integration
+          pattern: ^[0-9a-zA-Z- ]+$
+          maxLength: 36
+        regionIgnoreList:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z]{2}(?:-gov)?-[a-z]+-\d+$
+          description: Regions to exclude from scanning
+        resourceRegexIgnoreList:
+          type: array
+          items:
+            type: string
+          description: Regex patterns matching resource ARNs to exclude from scanning
+        resourceTypeIgnoreList:
+          type: array
+          items:
+            type: string
+          description: Resource types to exclude from scanning (e.g. AWS.S3.Bucket)
+      required:
+      - integrationLabel
+      - awsScanConfig
+    AWSCloudAccountAPI.AWSCloudAccount:
+      type: object
+      properties:
+        awsAccountId:
+          type: string
+          description: The 12-digit AWS account ID (immutable)
+        awsScanConfig:
+          $ref: '#/components/schemas/AWSCloudAccountAPI.AWSScanConfig'
+        integrationId:
+          type: string
+          description: The unique ID of the AWS Cloud Account integration
+        integrationLabel:
+          type: string
+          description: The display name for the AWS Cloud Account integration
+          pattern: ^[0-9a-zA-Z- ]+$
+          maxLength: 36
+        regionIgnoreList:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z]{2}(?:-gov)?-[a-z]+-\d+$
+          description: Regions to exclude from scanning
+        resourceRegexIgnoreList:
+          type: array
+          items:
+            type: string
+          description: Regex patterns matching resource ARNs to exclude from scanning
+        resourceTypeIgnoreList:
+          type: array
+          items:
+            type: string
+          description: Resource types to exclude from scanning (e.g. AWS.S3.Bucket)
+      required:
+      - regionIgnoreList
+      - resourceTypeIgnoreList
+      - resourceRegexIgnoreList
+    AWSCloudAccountAPI.CreateAWSCloudAccount:
+      type: object
+      properties:
+        awsAccountId:
+          type: string
+          description: The 12-digit AWS account ID
+          pattern: ^[0-9]{12}$
+        awsScanConfig:
+          $ref: '#/components/schemas/AWSCloudAccountAPI.AWSScanConfig'
+        integrationLabel:
+          type: string
+          description: The display name for the AWS Cloud Account integration
+          pattern: ^[0-9a-zA-Z- ]+$
+          maxLength: 36
+        regionIgnoreList:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z]{2}(?:-gov)?-[a-z]+-\d+$
+          description: Regions to exclude from scanning
+        resourceRegexIgnoreList:
+          type: array
+          items:
+            type: string
+          description: Regex patterns matching resource ARNs to exclude from scanning
+        resourceTypeIgnoreList:
+          type: array
+          items:
+            type: string
+          description: Resource types to exclude from scanning (e.g. AWS.S3.Bucket)
+      required:
+      - awsAccountId
+      - integrationLabel
+      - awsScanConfig
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-Key
+      in: header

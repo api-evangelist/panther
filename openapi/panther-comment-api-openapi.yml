@@ -1,0 +1,261 @@
+openapi: 3.0.3
+info:
+  title: Panther REST alert comment API
+  version: '1.0'
+  description: The alert api handles all operations for alerts
+servers:
+- url: https://{api_host}
+  variables:
+    api_host:
+      default: your-api-host
+security:
+- ApiKeyAuth: []
+tags:
+- name: comment
+  description: The comment api handles all operations for alerts comments
+paths:
+  /alert-comments:
+    get:
+      tags:
+      - comment
+      summary: List alert comments
+      operationId: comment#list
+      parameters:
+      - name: alert-id
+        in: query
+        description: The alert ID the comments are associated with
+        allowEmptyValue: true
+        required: true
+        schema:
+          type: string
+          description: The alert ID the comments are associated with
+      - name: cursor
+        in: query
+        description: the pagination token
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: the pagination token
+      - name: limit
+        in: query
+        description: the maximum results to return
+        allowEmptyValue: true
+        schema:
+          type: integer
+          description: the maximum results to return
+          default: 25
+          format: int64
+          maximum: 50
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentAPI.ListResp'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentAPI.BadRequestError'
+    post:
+      tags:
+      - comment
+      summary: Create a comment for an alert
+      operationId: comment#create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentAPI.ModifyCommentReq'
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentAPI.Comment'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentAPI.NotFoundError'
+  /alert-comments/{id}:
+    get:
+      tags:
+      - comment
+      summary: Get a comment for an alert
+      operationId: comment#get
+      parameters:
+      - name: id
+        in: path
+        description: ID of the comment
+        required: true
+        schema:
+          type: string
+          description: ID of the comment
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentAPI.Comment'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentAPI.NotFoundError'
+    post:
+      tags:
+      - comment
+      summary: Update a comment for an alert
+      operationId: comment#update
+      parameters:
+      - name: id
+        in: path
+        description: ID of the comment
+        required: true
+        schema:
+          type: string
+          description: ID of the comment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentAPI.ModifyCommentReq'
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentAPI.Comment'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentAPI.NotFoundError'
+components:
+  schemas:
+    CommentAPI.Comment:
+      type: object
+      properties:
+        alertId:
+          type: string
+          description: The alert ID the comment is associated with
+        body:
+          description: The body of the comment
+        createdAt:
+          type: string
+          description: The date the comment was created
+        createdBy:
+          type: object
+          properties:
+            id:
+              type: string
+              enum:
+              - user
+              - api-token
+              - system
+            type:
+              type: string
+          description: The actor who created the comment
+        format:
+          type: string
+          description: The format of the comment
+          enum:
+          - PLAIN_TEXT
+          - HTML
+        id:
+          type: string
+          description: The comment ID
+        updatedAt:
+          type: string
+          description: The date the comment was updated
+        updatedBy:
+          type: object
+          properties:
+            id:
+              type: string
+              enum:
+              - user
+              - api-token
+              - system
+            type:
+              type: string
+          description: The actor who updated the comment
+    CommentAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    CommentAPI.ListResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: Pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommentAPI.Comment'
+      required:
+      - results
+    CommentAPI.ModifyCommentReq:
+      type: object
+      properties:
+        alertId:
+          type: string
+          description: The alert ID the comment is associated with
+        body:
+          type: string
+          description: The body of the comment
+        format:
+          type: string
+          description: The format of the comment
+          enum:
+          - PLAIN_TEXT
+          - HTML
+      required:
+      - alertId
+      - body
+      - format
+    CommentAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-Key
+      in: header

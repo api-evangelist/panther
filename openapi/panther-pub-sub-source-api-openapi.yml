@@ -1,0 +1,304 @@
+openapi: 3.0.3
+info:
+  title: Panther REST alert pub/sub source API
+  version: '1.0'
+  description: The alert api handles all operations for alerts
+servers:
+- url: https://{api_host}
+  variables:
+    api_host:
+      default: your-api-host
+security:
+- ApiKeyAuth: []
+tags:
+- name: pub/sub source
+  description: The Pub/Sub source API handles all operations for GCP Pub/Sub log sources
+paths:
+  /log-sources/pubsub:
+    post:
+      tags:
+      - pub/sub source
+      summary: create pub/sub source
+      operationId: pub/sub source#create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PubSubSourceAPI.ModifyPubSubSource'
+      responses:
+        '201':
+          description: Created response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PubSubSourceAPI.PubSubSource'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PubSubSourceAPI.BadRequestError'
+        '409':
+          description: 'exists: Conflict response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PubSubSourceAPI.ExistsError'
+        '500':
+          description: 'service: Internal Server Error response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PubSubSourceAPI.ServiceError'
+  /log-sources/pubsub/{id}:
+    delete:
+      tags:
+      - pub/sub source
+      summary: delete pub/sub source
+      operationId: pub/sub source#delete
+      parameters:
+      - name: id
+        in: path
+        description: ID of the pubsub source to delete
+        required: true
+        schema:
+          type: string
+          description: ID of the pubsub source to delete
+      responses:
+        '204':
+          description: No Content response.
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PubSubSourceAPI.BadRequestError'
+        '500':
+          description: 'service: Internal Server Error response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PubSubSourceAPI.ServiceError'
+    get:
+      tags:
+      - pub/sub source
+      summary: get pub/sub source
+      operationId: pub/sub source#get
+      parameters:
+      - name: id
+        in: path
+        description: ID of the pubsub source to fetch
+        required: true
+        schema:
+          type: string
+          description: ID of the pubsub source to fetch
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PubSubSourceAPI.PubSubSource'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PubSubSourceAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PubSubSourceAPI.NotFoundError'
+        '500':
+          description: 'service: Internal Server Error response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PubSubSourceAPI.ServiceError'
+    put:
+      tags:
+      - pub/sub source
+      summary: put pub/sub source
+      description: put updates a pubsub source
+      operationId: pub/sub source#put
+      parameters:
+      - name: id
+        in: path
+        description: ID of the pubsub source to update
+        required: true
+        schema:
+          type: string
+          description: ID of the pubsub source to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PubSubSourceAPI.ModifyPubSubSource'
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PubSubSourceAPI.PubSubSource'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PubSubSourceAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PubSubSourceAPI.NotFoundError'
+        '409':
+          description: 'exists: Conflict response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PubSubSourceAPI.ExistsError'
+        '500':
+          description: 'service: Internal Server Error response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PubSubSourceAPI.ServiceError'
+components:
+  schemas:
+    PubSubSourceAPI.PubSubSource:
+      type: object
+      properties:
+        credentials:
+          type: string
+          description: The GCP credentials JSON content (service account key or WIF config). Required on create, optional on update.
+        credentialsType:
+          type: string
+          description: 'The type of credentials being used: service_account or wif (Workload Identity Federation).'
+          enum:
+          - service_account
+          - wif
+        integrationId:
+          type: string
+          description: The id of the pubsub source
+        integrationLabel:
+          type: string
+          description: The integration label (name)
+        logStreamType:
+          type: string
+          description: 'The log stream type. Supported log stream types: Auto, JSON, JsonArray, Lines, XML'
+          enum:
+          - Auto
+          - JSON
+          - JsonArray
+          - Lines
+          - XML
+        logStreamTypeOptions:
+          $ref: '#/components/schemas/PubSubSourceAPI.LogStreamTypeOptions'
+        logTypes:
+          type: array
+          items:
+            type: string
+          description: The log types for parsing ingested data
+        projectId:
+          type: string
+          description: The GCP project ID. Optional for service_account credentials (derived from the keyfile). Required for WIF.
+        regionalEndpoint:
+          type: string
+          description: Optional regional endpoint override (e.g. europe-west3). If not set, the global endpoint is used.
+        subscriptionId:
+          type: string
+          description: The GCP Pub/Sub subscription ID
+    PubSubSourceAPI.ServiceError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    PubSubSourceAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    PubSubSourceAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    PubSubSourceAPI.ModifyPubSubSource:
+      type: object
+      properties:
+        credentials:
+          type: string
+          description: The GCP credentials JSON content (service account key or WIF config). Required on create, optional on update.
+        credentialsType:
+          type: string
+          description: 'The type of credentials being used: service_account or wif (Workload Identity Federation).'
+          enum:
+          - service_account
+          - wif
+        integrationLabel:
+          type: string
+          description: The integration label (name)
+        logStreamType:
+          type: string
+          description: 'The log stream type. Supported log stream types: Auto, JSON, JsonArray, Lines, XML'
+          enum:
+          - Auto
+          - JSON
+          - JsonArray
+          - Lines
+          - XML
+        logStreamTypeOptions:
+          $ref: '#/components/schemas/PubSubSourceAPI.LogStreamTypeOptions'
+        logTypes:
+          type: array
+          items:
+            type: string
+          description: The log types for parsing ingested data
+        projectId:
+          type: string
+          description: The GCP project ID. Optional for service_account credentials (derived from the keyfile). Required for WIF.
+        regionalEndpoint:
+          type: string
+          description: Optional regional endpoint override (e.g. europe-west3). If not set, the global endpoint is used.
+        subscriptionId:
+          type: string
+          description: The GCP Pub/Sub subscription ID
+      required:
+      - integrationLabel
+      - subscriptionId
+      - logTypes
+      - logStreamType
+      - credentialsType
+    PubSubSourceAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    PubSubSourceAPI.LogStreamTypeOptions:
+      type: object
+      properties:
+        jsonArrayEnvelopeField:
+          type: string
+          description: Path to the array value to extract elements from, only applicable if logStreamType is JsonArray. Leave empty if the input JSON is an array itself
+        xmlRootElement:
+          type: string
+          description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-Key
+      in: header

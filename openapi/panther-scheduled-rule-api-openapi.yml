@@ -1,0 +1,576 @@
+openapi: 3.0.3
+info:
+  title: Panther REST alert scheduled rule API
+  version: '1.0'
+  description: The alert api handles all operations for alerts
+servers:
+- url: https://{api_host}
+  variables:
+    api_host:
+      default: your-api-host
+security:
+- ApiKeyAuth: []
+tags:
+- name: scheduled rule
+  description: The scheduled rule api handles all operations for scheduled rules
+paths:
+  /scheduled-rules:
+    get:
+      tags:
+      - scheduled rule
+      summary: list scheduled rules
+      operationId: scheduled rule#list
+      parameters:
+      - name: cursor
+        in: query
+        description: the pagination token
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: the pagination token
+      - name: limit
+        in: query
+        description: the maximum results to return
+        allowEmptyValue: true
+        schema:
+          type: integer
+          description: the maximum results to return
+          default: 100
+          format: int64
+      - name: name-contains
+        in: query
+        description: Substring search by name (case-insensitive)
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: Substring search by name (case-insensitive)
+      - name: state
+        in: query
+        description: Only include rules in the given state
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: Only include rules in the given state
+          enum:
+          - enabled
+          - disabled
+      - name: scheduled-query
+        in: query
+        description: Only include rules which apply to one of these scheduled queries
+        allowEmptyValue: true
+        schema:
+          type: array
+          items:
+            type: string
+          description: Only include rules which apply to one of these scheduled queries
+      - name: severity
+        in: query
+        description: Only include rules with one of the given severities
+        allowEmptyValue: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - INFO
+            - LOW
+            - MEDIUM
+            - HIGH
+            - CRITICAL
+          description: Only include rules with one of the given severities
+      - name: tag
+        in: query
+        description: Only include rules with one of the given tags (case-insensitive)
+        allowEmptyValue: true
+        schema:
+          type: array
+          items:
+            type: string
+          description: Only include rules with one of the given tags (case-insensitive)
+      - name: created-by
+        in: query
+        description: Only include rules whose creator matches this user ID or actor ID
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: Only include rules whose creator matches this user ID or actor ID
+      - name: last-modified-by
+        in: query
+        description: Only include rules last modified by this user ID or actor ID
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: Only include rules last modified by this user ID or actor ID
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledRuleAPI.ListResp'
+    post:
+      tags:
+      - scheduled rule
+      summary: create scheduled rule
+      operationId: scheduled rule#create
+      parameters:
+      - name: run-tests-first
+        in: query
+        description: set this field to false to exclude running tests prior to saving
+        allowEmptyValue: true
+        schema:
+          type: boolean
+          description: set this field to false to exclude running tests prior to saving
+          default: true
+      - name: run-tests-only
+        in: query
+        description: set this field to true if you want to run tests without saving
+        allowEmptyValue: true
+        schema:
+          type: boolean
+          description: set this field to true if you want to run tests without saving
+          default: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduledRuleAPI.ModifyRule'
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledRuleAPI.ScheduledRule'
+        '204':
+          description: No Content response.
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledRuleAPI.BadRequestWithTestResultsErr'
+        '409':
+          description: 'exists: Conflict response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledRuleAPI.ExistsError'
+  /scheduled-rules/{id}:
+    delete:
+      tags:
+      - scheduled rule
+      summary: delete scheduled rule
+      operationId: scheduled rule#delete
+      parameters:
+      - name: id
+        in: path
+        description: ID of the rule to delete
+        required: true
+        schema:
+          type: string
+          description: ID of the rule to delete
+      responses:
+        '204':
+          description: No Content response.
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledRuleAPI.BadRequestWithTestResultsErr'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledRuleAPI.NotFoundError'
+    get:
+      tags:
+      - scheduled rule
+      summary: get scheduled rule
+      operationId: scheduled rule#get
+      parameters:
+      - name: id
+        in: path
+        description: ID of the rule to fetch
+        required: true
+        schema:
+          type: string
+          description: ID of the rule to fetch
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledRuleAPI.ScheduledRule'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledRuleAPI.NotFoundError'
+    put:
+      tags:
+      - scheduled rule
+      summary: put scheduled rule
+      description: put creates or updates a scheduled rule
+      operationId: scheduled rule#put
+      parameters:
+      - name: run-tests-first
+        in: query
+        description: set this field to false to exclude running tests prior to saving
+        allowEmptyValue: true
+        schema:
+          type: boolean
+          description: set this field to false to exclude running tests prior to saving
+          default: true
+      - name: run-tests-only
+        in: query
+        description: set this field to true if you want to run tests without saving
+        allowEmptyValue: true
+        schema:
+          type: boolean
+          description: set this field to true if you want to run tests without saving
+          default: false
+      - name: id
+        in: path
+        description: the id of the scheduled rule
+        required: true
+        schema:
+          type: string
+          description: the id of the scheduled rule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduledRuleAPI.ModifyRule'
+      responses:
+        '200':
+          description: 200 returned if the item already existed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledRuleAPI.ScheduledRule'
+        '201':
+          description: 201 returned if the item was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledRuleAPI.ScheduledRule'
+        '204':
+          description: No Content response.
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledRuleAPI.BadRequestWithTestResultsErr'
+components:
+  schemas:
+    ScheduledRuleAPI.TestErr:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    ScheduledRuleAPI.ListResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduledRuleAPI.ScheduledRule'
+    ScheduledRuleAPI.TestDetectionRecordFunctions:
+      type: object
+      properties:
+        alertContext:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        dedup:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        description:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        destinations:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        detection:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        reference:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        runbook:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        severity:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        title:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+    ScheduledRuleAPI.TestDetectionSubRecord:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestErr'
+        output:
+          type: string
+    ScheduledRuleAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    ScheduledRuleAPI.UnitTest:
+      type: object
+      properties:
+        expectedResult:
+          type: boolean
+          description: The expected result
+        log:
+          description: A test event object that your detection will receive as input.
+        mocks:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduledRuleAPI.UnitTestMock'
+          description: mocks
+        name:
+          type: string
+          description: name
+        resource:
+          type: string
+          description: A test event object that your detection will receive as input, JSON-encoded. Prefer `log`.
+      required:
+      - name
+      - expectedResult
+    ScheduledRuleAPI.UnitTestMock:
+      type: object
+      additionalProperties:
+        type: string
+    ScheduledRuleAPI.TestDetectionRecord:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestErr'
+        errored:
+          type: boolean
+        functions:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionRecordFunctions'
+        name:
+          type: string
+        passed:
+          type: boolean
+        triggerAlert:
+          type: boolean
+    ScheduledRuleAPI.ModifyRule:
+      type: object
+      properties:
+        body:
+          type: string
+          description: The python body of the scheduled rule
+        createAlert:
+          type: boolean
+          description: Determines whether the scheduled rule should create alerts when it triggers
+        dedupPeriodMinutes:
+          type: integer
+          description: The amount of time in minutes for grouping alerts
+          default: 60
+          format: int64
+          minimum: 1
+        description:
+          type: string
+          description: The description of the scheduled rule
+        displayName:
+          type: string
+          description: The display name of the scheduled rule
+        enabled:
+          type: boolean
+          description: Determines whether or not the scheduled rule is active
+        id:
+          type: string
+          description: The id of the scheduled rule
+        managed:
+          type: boolean
+          description: Determines if the scheduled rule is managed by panther
+        outputIDs:
+          type: array
+          items:
+            type: string
+          description: Destination IDs that override default alert routing based on severity
+        reference:
+          type: string
+          description: A URL or note for additional reference material
+        reports:
+          type: object
+          description: reports
+          additionalProperties:
+            items:
+              type: string
+            type: array
+        runbook:
+          type: string
+          description: How to handle the generated alert
+        scheduledQueries:
+          type: array
+          items:
+            type: string
+          description: the queries that this scheduled rule utilizes
+        severity:
+          type: string
+          enum:
+          - INFO
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        summaryAttributes:
+          type: array
+          items:
+            type: string
+          description: A list of fields in the event to create top 5 summaries for
+        tags:
+          type: array
+          items:
+            type: string
+          description: The tags for the scheduled rule
+        tests:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduledRuleAPI.UnitTest'
+          description: Unit tests for the Rule. Best practice is to include a positive and negative case
+        threshold:
+          type: integer
+          description: the number of events that must match before an alert is triggered
+          default: 1
+          format: int64
+          minimum: 1
+      required:
+      - id
+      - body
+      - severity
+    ScheduledRuleAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    ScheduledRuleAPI.BadRequestWithTestResultsErr:
+      type: object
+      properties:
+        message:
+          type: string
+        testResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionRecord'
+      required:
+      - message
+    ScheduledRuleAPI.ScheduledRule:
+      type: object
+      properties:
+        body:
+          type: string
+          description: The python body of the scheduled rule
+        createAlert:
+          type: boolean
+          description: Determines whether the scheduled rule should create alerts when it triggers
+        createdAt:
+          type: string
+        createdBy:
+          type: object
+          properties:
+            id:
+              type: string
+              enum:
+              - user
+              - api-token
+              - system
+            type:
+              type: string
+          description: The actor who created the rule
+        createdByExternal:
+          type: string
+          description: The text of the user-provided CreatedBy field when uploaded via CI/CD
+        dedupPeriodMinutes:
+          type: integer
+          description: The amount of time in minutes for grouping alerts
+          default: 60
+          format: int64
+          minimum: 1
+        description:
+          type: string
+          description: The description of the scheduled rule
+        displayName:
+          type: string
+          description: The display name of the scheduled rule
+        enabled:
+          type: boolean
+          description: Determines whether or not the scheduled rule is active
+        id:
+          type: string
+          description: The id of the scheduled rule
+        lastModified:
+          type: string
+        managed:
+          type: boolean
+          description: Determines if the scheduled rule is managed by panther
+        outputIDs:
+          type: array
+          items:
+            type: string
+          description: Destination IDs that override default alert routing based on severity
+        reference:
+          type: string
+          description: A URL or note for additional reference material
+        reports:
+          type: object
+          description: reports
+          additionalProperties:
+            items:
+              type: string
+            type: array
+        runbook:
+          type: string
+          description: How to handle the generated alert
+        scheduledQueries:
+          type: array
+          items:
+            type: string
+          description: the queries that this scheduled rule utilizes
+        severity:
+          type: string
+          enum:
+          - INFO
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        summaryAttributes:
+          type: array
+          items:
+            type: string
+          description: A list of fields in the event to create top 5 summaries for
+        tags:
+          type: array
+          items:
+            type: string
+          description: The tags for the scheduled rule
+        tests:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduledRuleAPI.UnitTest'
+          description: Unit tests for the Rule. Best practice is to include a positive and negative case
+        threshold:
+          type: integer
+          description: the number of events that must match before an alert is triggered
+          default: 1
+          format: int64
+          minimum: 1
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-Key
+      in: header

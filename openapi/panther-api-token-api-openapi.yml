@@ -1,0 +1,394 @@
+openapi: 3.0.3
+info:
+  title: Panther REST alert api token API
+  version: '1.0'
+  description: The alert api handles all operations for alerts
+servers:
+- url: https://{api_host}
+  variables:
+    api_host:
+      default: your-api-host
+security:
+- ApiKeyAuth: []
+tags:
+- name: api token
+  description: The api token api handles all operations for api tokens
+paths:
+  /api-tokens:
+    get:
+      tags:
+      - api token
+      summary: List api tokens
+      operationId: api token#list
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APITokenAPI.ListResp'
+    post:
+      tags:
+      - api token
+      summary: Create an api token
+      operationId: api token#create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APITokenAPI.ModifyAPIToken'
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APITokenAPI.APIToken'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APITokenAPI.BadRequestError'
+  /api-tokens/{id}:
+    delete:
+      tags:
+      - api token
+      summary: delete api token
+      operationId: api token#delete
+      parameters:
+      - name: id
+        in: path
+        description: 'ID of the api token to delete. Note: if self is provided, the current api token will be deleted'
+        required: true
+        schema:
+          type: string
+          description: 'ID of the api token to delete. Note: if self is provided, the current api token will be deleted'
+      responses:
+        '204':
+          description: No Content response.
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APITokenAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APITokenAPI.NotFoundError'
+    get:
+      tags:
+      - api token
+      summary: Get an api token
+      operationId: api token#get
+      parameters:
+      - name: id
+        in: path
+        description: 'ID of the api token. Note: if self is provided, the current api token will be returned'
+        required: true
+        schema:
+          type: string
+          description: 'ID of the api token. Note: if self is provided, the current api token will be returned'
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APITokenAPI.APIToken'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APITokenAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APITokenAPI.NotFoundError'
+    post:
+      tags:
+      - api token
+      summary: Update an api token
+      operationId: api token#update
+      parameters:
+      - name: id
+        in: path
+        description: 'ID of the api token. Note: if self is provided, the current api token will be updated'
+        required: true
+        schema:
+          type: string
+          description: 'ID of the api token. Note: if self is provided, the current api token will be updated'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APITokenAPI.ModifyAPIToken'
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APITokenAPI.APIToken'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APITokenAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APITokenAPI.NotFoundError'
+  /api-tokens/{id}/rotate:
+    post:
+      tags:
+      - api token
+      summary: Rotate an api token. If self is provided the current token will be rotated
+      operationId: api token#rotate
+      parameters:
+      - name: id
+        in: path
+        description: 'ID of the api token to rotate. Note: if self is provided, the current api token will be rotated'
+        required: true
+        schema:
+          type: string
+          description: 'ID of the api token to rotate. Note: if self is provided, the current api token will be rotated'
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APITokenAPI.APIToken'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APITokenAPI.BadRequestError'
+        '403':
+          description: 'forbidden: Forbidden response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APITokenAPI.ForbiddenErr'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APITokenAPI.NotFoundError'
+components:
+  schemas:
+    APITokenAPI.ListResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: Pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/APITokenAPI.APIToken'
+      required:
+      - results
+    APITokenAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    APITokenAPI.APIToken:
+      type: object
+      properties:
+        allowedCIDRBlocks:
+          type: array
+          items:
+            type: string
+          description: The set of CIDR blocks that are allowed to use this API token. If empty, all CIDR blocks are allowed
+        createdAt:
+          type: string
+          description: Time when the API token was created
+        createdBy:
+          type: object
+          properties:
+            id:
+              type: string
+              enum:
+              - user
+              - api-token
+              - system
+            type:
+              type: string
+          description: The actor who created the token
+        expiresAt:
+          type: string
+          description: Time when the API token will expire. Will be null if the token is non-expiring
+        id:
+          type: string
+          description: The unique identifier of the token
+        lastUsedAt:
+          type: string
+          description: The last time this token was used to authenticate
+        name:
+          type: string
+          description: The name of the token
+        permissions:
+          type: array
+          items:
+            type: string
+            enum:
+            - AIRunAsModify
+            - AlertModify
+            - AlertRead
+            - BulkUpload
+            - BulkUploadValidate
+            - CloudsecSourceModify
+            - CloudsecSourceRead
+            - DataAnalyticsModify
+            - DataAnalyticsRead
+            - DestinationModify
+            - DestinationRead
+            - GeneralSettingsModify
+            - GeneralSettingsRead
+            - LogSourceModify
+            - LogSourceRawDataRead
+            - LogSourceRead
+            - LookupModify
+            - LookupRead
+            - ManageAIResponses
+            - ManageAISkills
+            - ManageScheduledPrompts
+            - McpServerModify
+            - McpServerRead
+            - NotificationsSend
+            - OrganizationAPITokenModify
+            - OrganizationAPITokenRead
+            - PolicyModify
+            - PolicyRead
+            - ResourceModify
+            - ResourceRead
+            - RuleModify
+            - RuleRead
+            - RunPantherAI
+            - SummaryRead
+            - UserModify
+            - UserRead
+            - ViewAIPrivateResponses
+            - ViewAISkills
+            - ViewScheduledPrompts
+        rotatedAt:
+          type: string
+          description: Time when the API token was rotated
+        updatedAt:
+          type: string
+          description: Time when the API token was updated
+        updatedBy:
+          type: object
+          properties:
+            id:
+              type: string
+              enum:
+              - user
+              - api-token
+              - system
+            type:
+              type: string
+          description: The actor who updated the token
+        value:
+          type: string
+          description: The API token value, only populated during create and rotate actions
+      required:
+      - name
+      - permissions
+      - id
+      - createdAt
+    APITokenAPI.ForbiddenErr:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    APITokenAPI.ModifyAPIToken:
+      type: object
+      properties:
+        allowedCIDRBlocks:
+          type: array
+          items:
+            type: string
+          description: The set of CIDR blocks that are allowed to use this API token. If empty, all CIDR blocks are allowed
+        name:
+          type: string
+          description: The name of the token
+        permissions:
+          type: array
+          items:
+            type: string
+            enum:
+            - AIRunAsModify
+            - AlertModify
+            - AlertRead
+            - BulkUpload
+            - BulkUploadValidate
+            - CloudsecSourceModify
+            - CloudsecSourceRead
+            - DataAnalyticsModify
+            - DataAnalyticsRead
+            - DestinationModify
+            - DestinationRead
+            - GeneralSettingsModify
+            - GeneralSettingsRead
+            - LogSourceModify
+            - LogSourceRawDataRead
+            - LogSourceRead
+            - LookupModify
+            - LookupRead
+            - ManageAIResponses
+            - ManageAISkills
+            - ManageScheduledPrompts
+            - McpServerModify
+            - McpServerRead
+            - NotificationsSend
+            - OrganizationAPITokenModify
+            - OrganizationAPITokenRead
+            - PolicyModify
+            - PolicyRead
+            - ResourceModify
+            - ResourceRead
+            - RuleModify
+            - RuleRead
+            - RunPantherAI
+            - SummaryRead
+            - UserModify
+            - UserRead
+            - ViewAIPrivateResponses
+            - ViewAISkills
+            - ViewScheduledPrompts
+      required:
+      - name
+      - permissions
+    APITokenAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-Key
+      in: header

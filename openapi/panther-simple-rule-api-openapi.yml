@@ -1,0 +1,628 @@
+openapi: 3.0.3
+info:
+  title: Panther REST alert simple rule API
+  version: '1.0'
+  description: The alert api handles all operations for alerts
+servers:
+- url: https://{api_host}
+  variables:
+    api_host:
+      default: your-api-host
+security:
+- ApiKeyAuth: []
+tags:
+- name: simple rule
+  description: The simple rule api handles all operations for simple rules
+paths:
+  /simple-rules:
+    get:
+      tags:
+      - simple rule
+      summary: list simple rules
+      operationId: simple rule#list
+      parameters:
+      - name: cursor
+        in: query
+        description: the pagination token
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: the pagination token
+      - name: limit
+        in: query
+        description: the maximum results to return
+        allowEmptyValue: true
+        schema:
+          type: integer
+          description: the maximum results to return
+          default: 100
+          format: int64
+      - name: include-python
+        in: query
+        description: determines if associated python for the generated rule is returned
+        allowEmptyValue: true
+        schema:
+          type: boolean
+          description: determines if associated python for the generated rule is returned
+          default: false
+      - name: name-contains
+        in: query
+        description: Substring search by name (case-insensitive)
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: Substring search by name (case-insensitive)
+      - name: state
+        in: query
+        description: Only include rules in the given state
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: Only include rules in the given state
+          enum:
+          - enabled
+          - disabled
+      - name: log-type
+        in: query
+        description: Only include rules which apply to one of the given log types
+        allowEmptyValue: true
+        schema:
+          type: array
+          items:
+            type: string
+          description: Only include rules which apply to one of the given log types
+      - name: severity
+        in: query
+        description: Only include rules with one of the given severities
+        allowEmptyValue: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - INFO
+            - LOW
+            - MEDIUM
+            - HIGH
+            - CRITICAL
+          description: Only include rules with one of the given severities
+      - name: tag
+        in: query
+        description: Only include rules with one of the given tags (case-insensitive)
+        allowEmptyValue: true
+        schema:
+          type: array
+          items:
+            type: string
+          description: Only include rules with one of the given tags (case-insensitive)
+      - name: created-by
+        in: query
+        description: Only include rules whose creator matches this user ID or actor ID
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: Only include rules whose creator matches this user ID or actor ID
+      - name: last-modified-by
+        in: query
+        description: Only include rules last modified by this user ID or actor ID
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: Only include rules last modified by this user ID or actor ID
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleRuleAPI.ListResp'
+    post:
+      tags:
+      - simple rule
+      summary: create simple rule
+      operationId: simple rule#create
+      parameters:
+      - name: run-tests-first
+        in: query
+        description: set this field to false to exclude running tests prior to saving
+        allowEmptyValue: true
+        schema:
+          type: boolean
+          description: set this field to false to exclude running tests prior to saving
+          default: true
+      - name: run-tests-only
+        in: query
+        description: set this field to true if you want to run tests without saving
+        allowEmptyValue: true
+        schema:
+          type: boolean
+          description: set this field to true if you want to run tests without saving
+          default: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimpleRuleAPI.ModifyRule'
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleRuleAPI.SimpleRule'
+        '204':
+          description: No Content response.
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleRuleAPI.BadRequestWithTestResultsErr'
+        '409':
+          description: 'exists: Conflict response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleRuleAPI.ExistsError'
+  /simple-rules/{id}:
+    delete:
+      tags:
+      - simple rule
+      summary: delete simple rule
+      operationId: simple rule#delete
+      parameters:
+      - name: id
+        in: path
+        description: ID of the simple rule to delete
+        required: true
+        schema:
+          type: string
+          description: ID of the simple rule to delete
+      responses:
+        '204':
+          description: No Content response.
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleRuleAPI.BadRequestWithTestResultsErr'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleRuleAPI.NotFoundError'
+    get:
+      tags:
+      - simple rule
+      summary: get a simple rule
+      operationId: simple rule#get
+      parameters:
+      - name: include-python
+        in: query
+        description: determines if associated python for the generated rule is returned
+        allowEmptyValue: true
+        schema:
+          type: boolean
+          description: determines if associated python for the generated rule is returned
+          default: false
+      - name: id
+        in: path
+        description: ID of the rule to fetch
+        required: true
+        schema:
+          type: string
+          description: ID of the rule to fetch
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleRuleAPI.SimpleRule'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleRuleAPI.NotFoundError'
+    put:
+      tags:
+      - simple rule
+      summary: put simple rule
+      description: put creates or updates a rule
+      operationId: simple rule#put
+      parameters:
+      - name: run-tests-first
+        in: query
+        description: set this field to false to exclude running tests prior to saving
+        allowEmptyValue: true
+        schema:
+          type: boolean
+          description: set this field to false to exclude running tests prior to saving
+          default: true
+      - name: run-tests-only
+        in: query
+        description: set this field to true if you want to run tests without saving
+        allowEmptyValue: true
+        schema:
+          type: boolean
+          description: set this field to true if you want to run tests without saving
+          default: false
+      - name: id
+        in: path
+        description: the id of the rule
+        required: true
+        schema:
+          type: string
+          description: the id of the rule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimpleRuleAPI.ModifyRule'
+      responses:
+        '200':
+          description: 200 returned if the item already existed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleRuleAPI.SimpleRule'
+        '201':
+          description: 201 returned if the item was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleRuleAPI.SimpleRule'
+        '204':
+          description: No Content response.
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleRuleAPI.BadRequestWithTestResultsErr'
+components:
+  schemas:
+    SimpleRuleAPI.TestDetectionRecordFunctions:
+      type: object
+      properties:
+        alertContext:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        dedup:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        description:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        destinations:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        detection:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        reference:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        runbook:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        severity:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        title:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+    SimpleRuleAPI.UnitTestMock:
+      type: object
+      additionalProperties:
+        type: string
+    SimpleRuleAPI.UnitTest:
+      type: object
+      properties:
+        expectedResult:
+          type: boolean
+          description: The expected result
+        log:
+          description: A test event object that your detection will receive as input.
+        mocks:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleRuleAPI.UnitTestMock'
+          description: mocks
+        name:
+          type: string
+          description: name
+        resource:
+          type: string
+          description: A test event object that your detection will receive as input, JSON-encoded. Prefer `log`.
+      required:
+      - name
+      - expectedResult
+    SimpleRuleAPI.BadRequestWithTestResultsErr:
+      type: object
+      properties:
+        message:
+          type: string
+        testResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionRecord'
+      required:
+      - message
+    SimpleRuleAPI.TestDetectionSubRecord:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestErr'
+        output:
+          type: string
+    SimpleRuleAPI.TestErr:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    SimpleRuleAPI.TestDetectionRecord:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestErr'
+        errored:
+          type: boolean
+        functions:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionRecordFunctions'
+        name:
+          type: string
+        passed:
+          type: boolean
+        triggerAlert:
+          type: boolean
+    SimpleRuleAPI.SimpleRule:
+      type: object
+      properties:
+        alertContext:
+          type: string
+          description: The alert context represented in YAML
+        alertTitle:
+          type: string
+          description: The alert title represented in YAML
+        createAlert:
+          type: boolean
+          description: Determines whether the rule should create alerts when it triggers
+        createdAt:
+          type: string
+        createdBy:
+          type: object
+          properties:
+            id:
+              type: string
+              enum:
+              - user
+              - api-token
+              - system
+            type:
+              type: string
+          description: The actor who created the rule
+        createdByExternal:
+          type: string
+          description: The text of the user-provided CreatedBy field when uploaded via CI/CD
+        dedupPeriodMinutes:
+          type: integer
+          description: The amount of time in minutes for grouping alerts
+          default: 60
+          format: int64
+          minimum: 1
+        description:
+          type: string
+          description: The description of the rule
+        detection:
+          type: string
+          description: The yaml representation of the rule
+        displayName:
+          type: string
+          description: The display name of the rule
+        dynamicSeverities:
+          type: string
+          description: The dynamic severity represented in YAML
+        enabled:
+          type: boolean
+          description: Determines whether or not the rule is active
+        groupBy:
+          type: string
+          description: The key on an event to group by represented in YAML
+        id:
+          type: string
+          description: The id of the rule
+        inlineFilters:
+          type: string
+          description: The filter for the rule represented in YAML
+        lastModified:
+          type: string
+        logTypes:
+          type: array
+          items:
+            type: string
+          description: log types
+        managed:
+          type: boolean
+          description: Determines if the simple rule is managed by panther
+        outputIDs:
+          type: array
+          items:
+            type: string
+          description: Destination IDs that override default alert routing based on severity
+        pythonBody:
+          type: string
+          description: The python body of the rule
+        reference:
+          type: string
+          description: A URL or note for additional reference material
+        reports:
+          type: object
+          description: reports
+          additionalProperties:
+            items:
+              type: string
+            type: array
+        runbook:
+          type: string
+          description: How to handle the generated alert
+        severity:
+          type: string
+          enum:
+          - INFO
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        summaryAttributes:
+          type: array
+          items:
+            type: string
+          description: A list of fields in the event to create top 5 summaries for
+        tags:
+          type: array
+          items:
+            type: string
+          description: The tags for the simple rule
+        tests:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleRuleAPI.UnitTest'
+          description: Unit tests for the Rule. Best practice is to include a positive and negative case
+        threshold:
+          type: integer
+          description: the number of events that must match before an alert is triggered
+          default: 1
+          format: int64
+          minimum: 1
+    SimpleRuleAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    SimpleRuleAPI.ModifyRule:
+      type: object
+      properties:
+        alertContext:
+          type: string
+          description: The alert context represented in YAML
+        alertTitle:
+          type: string
+          description: The alert title represented in YAML
+        createAlert:
+          type: boolean
+          description: Determines whether the rule should create alerts when it triggers
+        dedupPeriodMinutes:
+          type: integer
+          description: The amount of time in minutes for grouping alerts
+          default: 60
+          format: int64
+          minimum: 1
+        description:
+          type: string
+          description: The description of the rule
+        detection:
+          type: string
+          description: The yaml representation of the rule
+        displayName:
+          type: string
+          description: The display name of the rule
+        dynamicSeverities:
+          type: string
+          description: The dynamic severity represented in YAML
+        enabled:
+          type: boolean
+          description: Determines whether or not the rule is active
+        groupBy:
+          type: string
+          description: The key on an event to group by represented in YAML
+        id:
+          type: string
+          description: The id of the rule
+        inlineFilters:
+          type: string
+          description: The filter for the rule represented in YAML
+        logTypes:
+          type: array
+          items:
+            type: string
+          description: log types
+        managed:
+          type: boolean
+          description: Determines if the simple rule is managed by panther
+        outputIDs:
+          type: array
+          items:
+            type: string
+          description: Destination IDs that override default alert routing based on severity
+        pythonBody:
+          type: string
+          description: The python body of the rule
+        reference:
+          type: string
+          description: A URL or note for additional reference material
+        reports:
+          type: object
+          description: reports
+          additionalProperties:
+            items:
+              type: string
+            type: array
+        runbook:
+          type: string
+          description: How to handle the generated alert
+        severity:
+          type: string
+          enum:
+          - INFO
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        summaryAttributes:
+          type: array
+          items:
+            type: string
+          description: A list of fields in the event to create top 5 summaries for
+        tags:
+          type: array
+          items:
+            type: string
+          description: The tags for the simple rule
+        tests:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleRuleAPI.UnitTest'
+          description: Unit tests for the Rule. Best practice is to include a positive and negative case
+        threshold:
+          type: integer
+          description: the number of events that must match before an alert is triggered
+          default: 1
+          format: int64
+          minimum: 1
+      required:
+      - id
+      - detection
+      - severity
+    SimpleRuleAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    SimpleRuleAPI.ListResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleRuleAPI.SimpleRule'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-Key
+      in: header

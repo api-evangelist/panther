@@ -1,0 +1,282 @@
+openapi: 3.0.3
+info:
+  title: Panther REST alert data model API
+  version: '1.0'
+  description: The alert api handles all operations for alerts
+servers:
+- url: https://{api_host}
+  variables:
+    api_host:
+      default: your-api-host
+security:
+- ApiKeyAuth: []
+tags:
+- name: data model
+  description: The data model api handles all operations for data models
+paths:
+  /data-models:
+    get:
+      tags:
+      - data model
+      summary: list data models
+      operationId: data model#list
+      parameters:
+      - name: cursor
+        in: query
+        description: the pagination token
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: the pagination token
+      - name: limit
+        in: query
+        description: the maximum results to return
+        allowEmptyValue: true
+        schema:
+          type: integer
+          description: the maximum results to return
+          default: 100
+          format: int64
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataModelAPI.ListResp'
+    post:
+      tags:
+      - data model
+      summary: create data model
+      operationId: data model#create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataModelAPI.ModifyDataModel'
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataModelAPI.DataModel'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataModelAPI.BadRequestError'
+        '409':
+          description: 'exists: Conflict response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataModelAPI.ExistsError'
+  /data-models/{id}:
+    delete:
+      tags:
+      - data model
+      summary: delete data model
+      operationId: data model#delete
+      parameters:
+      - name: id
+        in: path
+        description: ID of the data model to delete
+        required: true
+        schema:
+          type: string
+          description: ID of the data model to delete
+      responses:
+        '204':
+          description: No Content response.
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataModelAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataModelAPI.NotFoundError'
+    get:
+      tags:
+      - data model
+      summary: get data model
+      operationId: data model#get
+      parameters:
+      - name: id
+        in: path
+        description: ID of the data model to fetch
+        required: true
+        schema:
+          type: string
+          description: ID of the data model to fetch
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataModelAPI.DataModel'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataModelAPI.NotFoundError'
+    put:
+      tags:
+      - data model
+      summary: put data model
+      description: put creates or updates a data model
+      operationId: data model#put
+      parameters:
+      - name: id
+        in: path
+        description: the id of the data model
+        required: true
+        schema:
+          type: string
+          description: the id of the data model
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataModelAPI.ModifyDataModel'
+      responses:
+        '200':
+          description: 200 returned if the item already existed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataModelAPI.DataModel'
+        '201':
+          description: 201 returned if the item was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataModelAPI.DataModel'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataModelAPI.BadRequestError'
+components:
+  schemas:
+    DataModelAPI.DataModelMapping:
+      type: object
+      properties:
+        method:
+          type: string
+          description: the python function name that should be called
+        name:
+          type: string
+          description: the name of the mapping
+        path:
+          type: string
+          description: the json path
+      required:
+      - name
+    DataModelAPI.DataModel:
+      type: object
+      properties:
+        body:
+          type: string
+          description: The python body of the data model
+        createdAt:
+          type: string
+        description:
+          type: string
+          description: The description of the data model
+        displayName:
+          type: string
+          description: The name used for the data model
+        enabled:
+          type: boolean
+          description: enables/disables a data model
+        id:
+          type: string
+          description: The id of the data model
+        lastModified:
+          type: string
+        logTypes:
+          type: array
+          items:
+            type: string
+          description: 'The log type this data model should associate to. NOTE: only one data model can be assigned to a log type'
+        mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataModelAPI.DataModelMapping'
+    DataModelAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    DataModelAPI.ListResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataModelAPI.DataModel'
+    DataModelAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    DataModelAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    DataModelAPI.ModifyDataModel:
+      type: object
+      properties:
+        body:
+          type: string
+          description: The python body of the data model
+        description:
+          type: string
+          description: The description of the data model
+        displayName:
+          type: string
+          description: The name used for the data model
+        enabled:
+          type: boolean
+          description: enables/disables a data model
+        id:
+          type: string
+          description: The id of the data model
+        logTypes:
+          type: array
+          items:
+            type: string
+          description: 'The log type this data model should associate to. NOTE: only one data model can be assigned to a log type'
+        mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataModelAPI.DataModelMapping'
+      required:
+      - id
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-Key
+      in: header

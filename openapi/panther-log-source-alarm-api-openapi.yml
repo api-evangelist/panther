@@ -1,0 +1,282 @@
+openapi: 3.0.3
+info:
+  title: Panther REST alert log source alarm API
+  version: '1.0'
+  description: The alert api handles all operations for alerts
+servers:
+- url: https://{api_host}
+  variables:
+    api_host:
+      default: your-api-host
+security:
+- ApiKeyAuth: []
+tags:
+- name: log source alarm
+  description: Manage the drop-off alarm (SOURCE_NO_DATA) for log source integrations. Other alarm types shown in the Panther UI (permissions checks, classification failures, log-processing errors, scanning errors) are system-managed and not exposed via this API.
+paths:
+  /log-source-alarms/{sourceId}/{type}:
+    delete:
+      tags:
+      - log source alarm
+      summary: delete log source alarm
+      description: 'Delete the drop-off alarm for a log source. Idempotent: returns 204 even if no alarm exists.'
+      operationId: log source alarm#delete
+      parameters:
+      - name: sourceId
+        in: path
+        description: The ID of the log source
+        required: true
+        schema:
+          type: string
+          description: The ID of the log source
+          format: uuid
+      - name: type
+        in: path
+        description: The alarm type. Only SOURCE_NO_DATA is supported on DELETE.
+        required: true
+        schema:
+          type: string
+          description: The alarm type. Only SOURCE_NO_DATA is supported on DELETE.
+          enum:
+          - SOURCE_NO_DATA
+      responses:
+        '204':
+          description: No Content response.
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogSourceAlarmAPI.BadRequestError'
+        '500':
+          description: 'service: Internal Server Error response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogSourceAlarmAPI.ServiceError'
+        '504':
+          description: 'timeout: Gateway Timeout response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/LogSourceAlarmAPI.Error'
+    get:
+      tags:
+      - log source alarm
+      summary: get log source alarm
+      description: Get a specific alarm for a log source
+      operationId: log source alarm#get
+      parameters:
+      - name: sourceId
+        in: path
+        description: The ID of the log source
+        required: true
+        schema:
+          type: string
+          description: The ID of the log source
+          format: uuid
+      - name: type
+        in: path
+        description: The alarm type. Only SOURCE_NO_DATA is exposed.
+        required: true
+        schema:
+          type: string
+          description: The alarm type. Only SOURCE_NO_DATA is exposed.
+          enum:
+          - SOURCE_NO_DATA
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogSourceAlarmAPI.SourceAlarm'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogSourceAlarmAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogSourceAlarmAPI.NotFoundError'
+        '500':
+          description: 'service: Internal Server Error response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogSourceAlarmAPI.ServiceError'
+        '504':
+          description: 'timeout: Gateway Timeout response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/LogSourceAlarmAPI.Error'
+    put:
+      tags:
+      - log source alarm
+      summary: put log source alarm
+      description: Create or update the drop-off threshold for a log source. Only the SOURCE_NO_DATA alarm type is user-configurable. Not supported for cloud-security sources (returns 400).
+      operationId: log source alarm#put
+      parameters:
+      - name: sourceId
+        in: path
+        description: The ID of the log source
+        required: true
+        schema:
+          type: string
+          description: The ID of the log source
+          format: uuid
+      - name: type
+        in: path
+        description: The alarm type. Only SOURCE_NO_DATA is supported on PUT.
+        required: true
+        schema:
+          type: string
+          description: The alarm type. Only SOURCE_NO_DATA is supported on PUT.
+          enum:
+          - SOURCE_NO_DATA
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogSourceAlarmAPI.PutSourceAlarmData'
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogSourceAlarmAPI.PutSourceAlarmResp'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogSourceAlarmAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogSourceAlarmAPI.NotFoundError'
+        '500':
+          description: 'service: Internal Server Error response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogSourceAlarmAPI.ServiceError'
+        '504':
+          description: 'timeout: Gateway Timeout response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/LogSourceAlarmAPI.Error'
+components:
+  schemas:
+    LogSourceAlarmAPI.PutSourceAlarmData:
+      type: object
+      properties:
+        minutesThreshold:
+          type: integer
+          description: The no-data evaluation period in minutes. Minimum 15, maximum 43200 (30 days).
+          format: int32
+      required:
+      - minutesThreshold
+    LogSourceAlarmAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    LogSourceAlarmAPI.SourceAlarm:
+      type: object
+      properties:
+        minutesThreshold:
+          type: integer
+          description: The no-data evaluation period in minutes.
+          format: int32
+        state:
+          type: string
+          description: The current CloudWatch state of the alarm
+          enum:
+          - OK
+          - ALARM
+          - INSUFFICIENT_DATA
+        type:
+          type: string
+          description: The alarm type
+          enum:
+          - SOURCE_NO_DATA
+      required:
+      - type
+    LogSourceAlarmAPI.PutSourceAlarmResp:
+      type: object
+      properties:
+        minutesThreshold:
+          type: integer
+          description: The configured no-data evaluation period in minutes
+          format: int32
+        type:
+          type: string
+          description: The alarm type
+          enum:
+          - SOURCE_NO_DATA
+      required:
+      - type
+      - minutesThreshold
+    LogSourceAlarmAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    LogSourceAlarmAPI.ServiceError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    LogSourceAlarmAPI.Error:
+      type: object
+      properties:
+        fault:
+          type: boolean
+          description: Is the error a server-side fault?
+        id:
+          type: string
+          description: ID is a unique identifier for this particular occurrence of the problem.
+          example: 123abc
+        message:
+          type: string
+          description: Message is a human-readable explanation specific to this occurrence of the problem.
+          example: parameter 'p' must be an integer
+        name:
+          type: string
+          description: Name is the name of this class of errors.
+          example: bad_request
+        temporary:
+          type: boolean
+          description: Is the error temporary?
+        timeout:
+          type: boolean
+          description: Is the error a timeout?
+      required:
+      - name
+      - id
+      - message
+      - temporary
+      - timeout
+      - fault
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-Key
+      in: header

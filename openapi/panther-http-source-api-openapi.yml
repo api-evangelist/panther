@@ -1,0 +1,321 @@
+openapi: 3.0.3
+info:
+  title: Panther REST alert http source API
+  version: '1.0'
+  description: The alert api handles all operations for alerts
+servers:
+- url: https://{api_host}
+  variables:
+    api_host:
+      default: your-api-host
+security:
+- ApiKeyAuth: []
+tags:
+- name: http source
+  description: The http source api handles all operations for http sources
+paths:
+  /log-sources/http:
+    post:
+      tags:
+      - http source
+      summary: create http source
+      operationId: http source#create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HttpSourceAPI.ModifyHTTPSource'
+      responses:
+        '201':
+          description: Created response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpSourceAPI.HTTPSource'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpSourceAPI.BadRequestError'
+        '409':
+          description: 'exists: Conflict response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpSourceAPI.ExistsError'
+        '500':
+          description: 'service: Internal Server Error response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpSourceAPI.ServiceError'
+  /log-sources/http/{id}:
+    delete:
+      tags:
+      - http source
+      summary: delete http source
+      operationId: http source#delete
+      parameters:
+      - name: id
+        in: path
+        description: ID of the http source to delete
+        required: true
+        schema:
+          type: string
+          description: ID of the http source to delete
+      responses:
+        '204':
+          description: No Content response.
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpSourceAPI.BadRequestError'
+        '500':
+          description: 'service: Internal Server Error response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpSourceAPI.ServiceError'
+    get:
+      tags:
+      - http source
+      summary: get http source
+      operationId: http source#get
+      parameters:
+      - name: id
+        in: path
+        description: ID of the http source to fetch
+        required: true
+        schema:
+          type: string
+          description: ID of the http source to fetch
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpSourceAPI.HTTPSource'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpSourceAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpSourceAPI.NotFoundError'
+        '500':
+          description: 'service: Internal Server Error response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpSourceAPI.ServiceError'
+    put:
+      tags:
+      - http source
+      summary: put http source
+      description: put updates an http source
+      operationId: http source#put
+      parameters:
+      - name: id
+        in: path
+        description: ID of the http source to update
+        required: true
+        schema:
+          type: string
+          description: ID of the http source to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HttpSourceAPI.ModifyHTTPSource'
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpSourceAPI.HTTPSource'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpSourceAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpSourceAPI.NotFoundError'
+        '409':
+          description: 'exists: Conflict response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpSourceAPI.ExistsError'
+        '500':
+          description: 'service: Internal Server Error response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpSourceAPI.ServiceError'
+components:
+  schemas:
+    HttpSourceAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    HttpSourceAPI.HTTPSource:
+      type: object
+      properties:
+        authBearerToken:
+          type: string
+          description: The authentication bearer token value of the http source. Used for Bearer auth method
+        authHeaderKey:
+          type: string
+          description: The authentication header key of the http source. Used for HMAC and SharedSecret auth methods
+        authHmacAlg:
+          type: string
+          description: The authentication algorithm of the http source. Used for HMAC auth method
+        authMethod:
+          type: string
+          description: The authentication method of the http source
+          enum:
+          - SharedSecret
+          - HMAC
+          - Bearer
+          - Basic
+          - None
+        authPassword:
+          type: string
+          description: The authentication header password of the http source. Used for Basic auth method
+        authSecretValue:
+          type: string
+          description: The authentication header secret value of the http source. Used for HMAC and SharedSecret auth methods
+        authUsername:
+          type: string
+          description: The authentication header username of the http source. Used for Basic auth method
+        integrationId:
+          type: string
+          description: The id of the http source
+        integrationLabel:
+          type: string
+          description: The integration label (name)
+        logStreamType:
+          type: string
+          description: 'The log stream type. Supported log stream types: Auto, JSON, JsonArray, Lines, XML'
+          enum:
+          - Auto
+          - JSON
+          - JsonArray
+          - Lines
+          - XML
+        logStreamTypeOptions:
+          $ref: '#/components/schemas/HttpSourceAPI.LogStreamTypeOptions'
+        logTypes:
+          type: array
+          items:
+            type: string
+          description: The log types of the integration
+    HttpSourceAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    HttpSourceAPI.LogStreamTypeOptions:
+      type: object
+      properties:
+        jsonArrayEnvelopeField:
+          type: string
+          description: Path to the array value to extract elements from, only applicable if logStreamType is JsonArray. Leave empty if the input JSON is an array itself
+        xmlRootElement:
+          type: string
+          description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
+    HttpSourceAPI.ServiceError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    HttpSourceAPI.ModifyHTTPSource:
+      type: object
+      properties:
+        authBearerToken:
+          type: string
+          description: The authentication bearer token value of the http source. Used for Bearer auth method
+        authHeaderKey:
+          type: string
+          description: The authentication header key of the http source. Used for HMAC and SharedSecret auth methods
+        authHmacAlg:
+          type: string
+          description: The authentication algorithm of the http source. Used for HMAC auth method
+        authMethod:
+          type: string
+          description: The authentication method of the http source
+          enum:
+          - SharedSecret
+          - HMAC
+          - Bearer
+          - Basic
+          - None
+        authPassword:
+          type: string
+          description: The authentication header password of the http source. Used for Basic auth method
+        authSecretValue:
+          type: string
+          description: The authentication header secret value of the http source. Used for HMAC and SharedSecret auth methods
+        authUsername:
+          type: string
+          description: The authentication header username of the http source. Used for Basic auth method
+        integrationLabel:
+          type: string
+          description: The integration label (name)
+        logStreamType:
+          type: string
+          description: 'The log stream type. Supported log stream types: Auto, JSON, JsonArray, Lines, XML'
+          enum:
+          - Auto
+          - JSON
+          - JsonArray
+          - Lines
+          - XML
+        logStreamTypeOptions:
+          $ref: '#/components/schemas/HttpSourceAPI.LogStreamTypeOptions'
+        logTypes:
+          type: array
+          items:
+            type: string
+          description: The log types of the integration
+      required:
+      - integrationLabel
+      - logTypes
+      - logStreamType
+      - authMethod
+    HttpSourceAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-Key
+      in: header

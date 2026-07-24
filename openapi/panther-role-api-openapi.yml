@@ -1,0 +1,367 @@
+openapi: 3.0.3
+info:
+  title: Panther REST alert role API
+  version: '1.0'
+  description: The alert api handles all operations for alerts
+servers:
+- url: https://{api_host}
+  variables:
+    api_host:
+      default: your-api-host
+security:
+- ApiKeyAuth: []
+tags:
+- name: role
+  description: The role api handles all operations for roles
+paths:
+  /roles:
+    get:
+      tags:
+      - role
+      summary: List roles
+      operationId: role#list
+      parameters:
+      - name: name-contains
+        in: query
+        description: A string to search for in the Role name
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: A string to search for in the Role name
+      - name: name
+        in: query
+        description: An exact match of a role's name to return. If provided all other parameters are ignored
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: An exact match of a role's name to return. If provided all other parameters are ignored
+      - name: id
+        in: query
+        description: Set of IDS to return
+        allowEmptyValue: true
+        schema:
+          type: array
+          items:
+            type: string
+          description: Set of IDS to return
+      - name: ids
+        in: query
+        description: A comma delimited list of IDs
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: A comma delimited list of IDs
+      - name: sort-dir
+        in: query
+        description: The sort direction of the results
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: The sort direction of the results
+          default: asc
+          enum:
+          - asc
+          - desc
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleAPI.ListResp'
+    post:
+      tags:
+      - role
+      summary: Create a role
+      operationId: role#create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleAPI.ModifyRole'
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleAPI.Role'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleAPI.BadRequestError'
+  /roles/{id}:
+    delete:
+      tags:
+      - role
+      summary: Delete a role
+      operationId: role#delete
+      parameters:
+      - name: id
+        in: path
+        description: ID of the role
+        required: true
+        schema:
+          type: string
+          description: ID of the role
+      responses:
+        '200':
+          description: OK response.
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleAPI.NotFoundError'
+    get:
+      tags:
+      - role
+      summary: Get a role
+      operationId: role#get
+      parameters:
+      - name: id
+        in: path
+        description: ID of the role
+        required: true
+        schema:
+          type: string
+          description: ID of the role
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleAPI.Role'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleAPI.NotFoundError'
+    post:
+      tags:
+      - role
+      summary: Update a role
+      operationId: role#update
+      parameters:
+      - name: id
+        in: path
+        description: ID of the role
+        required: true
+        schema:
+          type: string
+          description: ID of the role
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleAPI.ModifyRole'
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleAPI.Role'
+        '400':
+          description: 'bad_request: Bad Request response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleAPI.BadRequestError'
+        '404':
+          description: 'not_found: Not Found response.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleAPI.NotFoundError'
+components:
+  schemas:
+    RoleAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    RoleAPI.ModifyRole:
+      type: object
+      properties:
+        logTypeAccess:
+          type: array
+          items:
+            type: string
+          description: The log types that the role can or cannot access, according to the `logTypeAccessKind` field. This field should be omitted if `logTypeAccessKind` has a value of `ALLOW_ALL` or `DENY_ALL`
+        logTypeAccessKind:
+          type: string
+          description: Defines the role's access to log types. This field is required and has effect only if the datalake RBAC feature is enabled.
+          enum:
+          - ALLOW
+          - ALLOW_ALL
+          - DENY
+          - DENY_ALL
+        name:
+          type: string
+          description: The name of the role
+        permissions:
+          type: array
+          items:
+            type: string
+            enum:
+            - AIRunAsModify
+            - AlertModify
+            - AlertRead
+            - BulkUpload
+            - BulkUploadValidate
+            - CloudsecSourceModify
+            - CloudsecSourceRead
+            - DataAnalyticsModify
+            - DataAnalyticsRead
+            - DestinationModify
+            - DestinationRead
+            - GeneralSettingsModify
+            - GeneralSettingsRead
+            - LogSourceModify
+            - LogSourceRawDataRead
+            - LogSourceRead
+            - LookupModify
+            - LookupRead
+            - ManageAIResponses
+            - ManageAISkills
+            - ManageScheduledPrompts
+            - McpServerModify
+            - McpServerRead
+            - NotificationsSend
+            - OrganizationAPITokenModify
+            - OrganizationAPITokenRead
+            - PolicyModify
+            - PolicyRead
+            - ResourceModify
+            - ResourceRead
+            - RuleModify
+            - RuleRead
+            - RunPantherAI
+            - SummaryRead
+            - UserModify
+            - UserRead
+            - ViewAIPrivateResponses
+            - ViewAISkills
+            - ViewScheduledPrompts
+      required:
+      - name
+      - permissions
+    RoleAPI.ListResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: Pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleAPI.Role'
+      required:
+      - results
+    RoleAPI.Role:
+      type: object
+      properties:
+        createdAt:
+          type: string
+        id:
+          type: string
+          description: ID of the role
+        logTypeAccess:
+          type: array
+          items:
+            type: string
+          description: The log types that the role can or cannot access, according to the `logTypeAccessKind` field. This field should be omitted if `logTypeAccessKind` has a value of `ALLOW_ALL` or `DENY_ALL`
+        logTypeAccessKind:
+          type: string
+          description: Defines the role's access to log types. This field is required and has effect only if the datalake RBAC feature is enabled.
+          enum:
+          - ALLOW
+          - ALLOW_ALL
+          - DENY
+          - DENY_ALL
+        name:
+          type: string
+          description: The name of the role
+        permissions:
+          type: array
+          items:
+            type: string
+            enum:
+            - AIRunAsModify
+            - AlertModify
+            - AlertRead
+            - BulkUpload
+            - BulkUploadValidate
+            - CloudsecSourceModify
+            - CloudsecSourceRead
+            - DataAnalyticsModify
+            - DataAnalyticsRead
+            - DestinationModify
+            - DestinationRead
+            - GeneralSettingsModify
+            - GeneralSettingsRead
+            - LogSourceModify
+            - LogSourceRawDataRead
+            - LogSourceRead
+            - LookupModify
+            - LookupRead
+            - ManageAIResponses
+            - ManageAISkills
+            - ManageScheduledPrompts
+            - McpServerModify
+            - McpServerRead
+            - NotificationsSend
+            - OrganizationAPITokenModify
+            - OrganizationAPITokenRead
+            - PolicyModify
+            - PolicyRead
+            - ResourceModify
+            - ResourceRead
+            - RuleModify
+            - RuleRead
+            - RunPantherAI
+            - SummaryRead
+            - UserModify
+            - UserRead
+            - ViewAIPrivateResponses
+            - ViewAISkills
+            - ViewScheduledPrompts
+        updatedAt:
+          type: string
+      required:
+      - name
+      - permissions
+      - logTypeAccessKind
+    RoleAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-Key
+      in: header
