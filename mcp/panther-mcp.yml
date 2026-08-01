@@ -1,0 +1,57 @@
+generated: '2026-07-20'
+method: searched
+status: published
+source: https://docs.panther.com/ai/mcp
+summary: >-
+  Panther publishes official MCP servers. A hosted Remote MCP server exposes a
+  customer's Panther instance to any MCP-compatible AI client over OAuth 2.1 +
+  PKCE, and a local open-source server (mcp-panther) runs in CI/agent pipelines.
+servers:
+- name: panther-remote-mcp
+  kind: remote
+  status: beta
+  transport: http
+  url: https://api.<your-panther-host>/mcp
+  auth:
+    type: oauth2.1
+    flow: authorization_code+pkce
+    dynamic_client_registration: true
+    rfc: RFC 7591
+    client: public
+  docs: https://docs.panther.com/ai/mcp/panther-remote-mcp
+  clients: [Claude for Desktop, Cursor, Goose]
+  capabilities: [alerts, detections, data lake, schemas, identity, enrichments]
+- name: mcp-panther
+  kind: local
+  status: ga
+  transport: [stdio, streamable-http]
+  repo: https://github.com/panther-labs/mcp-panther
+  image: ghcr.io/panther-labs/mcp-panther
+  docs: https://docs.panther.com/ai/mcp/mcp-server
+  install:
+  - uvx mcp-panther
+  - docker run -i -e PANTHER_INSTANCE_URL -e PANTHER_API_TOKEN --rm ghcr.io/panther-labs/mcp-panther
+  auth:
+    type: apiKey
+    env: [PANTHER_INSTANCE_URL, PANTHER_API_TOKEN]
+  tool_count: "40+"
+  tools:
+  - name: query_data_lake
+    description: Run a natural-language / SQL query against the security data lake
+  - name: get_alert
+    description: Retrieve a single alert
+    source_operation: openapi/panther-rest-openapi.yml#alert#get
+  - name: list_alerts
+    description: List alerts
+    source_operation: openapi/panther-rest-openapi.yml#alert#list
+  - name: add_alert_comment
+    description: Add a comment to an alert
+    source_operation: openapi/panther-rest-openapi.yml#comment#create
+  - name: list_detections
+    description: List detection rules/policies
+  - name: get_detection
+    description: Retrieve a single detection
+notes: >-
+  MCP is also gated by API-token permissions McpServerRead / McpServerModify.
+  Panther additionally supports connecting third-party remote MCP servers
+  (Atlassian, GitHub, Notion, PagerDuty, Slack) into Panther AI.

@@ -1,0 +1,32 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.panther.com/panther-developer-workflows
+clis:
+- name: panther_analysis_tool
+  aka: PAT
+  description: >-
+    Command-line tool for managing Panther detection content (rules, policies,
+    data models, globals, queries, lookups) as code — validate, test, and upload
+    a detections repository to a Panther instance.
+  docs: https://docs.panther.com/panther-developer-workflows/detections-repo/pat
+  install:
+  - pip install panther_analysis_tool
+  repo: https://github.com/panther-labs/panther_analysis_tool
+  auth: X-API-Key API token (or PANTHER_API_TOKEN + PANTHER_API_HOST env vars)
+  command_groups:
+  - test
+  - validate
+  - upload
+  - delete
+  - enrich-test-data
+  - check-connection
+- name: pantherlog
+  description: >-
+    CLI tool to work with Panther custom log schemas — infer, generate, and
+    validate log schemas from sample data.
+  docs: https://docs.panther.com/panther-developer-workflows/pantherlog
+  repo: https://github.com/panther-labs/panther
+  command_groups:
+  - infer
+  - parse
+  - validate

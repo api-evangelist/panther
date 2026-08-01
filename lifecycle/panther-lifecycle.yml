@@ -1,0 +1,18 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.panther.com/panther-developer-workflows/api/rest
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://docs.panther.com/panther-developer-workflows/api/rest
+  notes: >-
+    Cloud Connected / self-hosted deployments serve the REST API under a /v1
+    path suffix. The OpenAPI document is titled "Panther REST API" version 1.0.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: No public deprecation policy or RFC 8594 Sunset/Deprecation header support was found.
+sla:
+  url: null
+status_page: https://status.panther.com/
+deprecated_operations: []

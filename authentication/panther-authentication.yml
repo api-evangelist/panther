@@ -1,0 +1,63 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/panther-rest-openapi.yml
+docs: https://docs.panther.com/panther-developer-workflows/api/rest/api-tokens
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+notes: >-
+  Panther's REST API authenticates with a per-instance API token passed in the
+  X-API-Key header. Tokens are created in the Console under Settings > Developer
+  Tools > API Tokens and carry granular permission scopes (see permissions[]).
+  A token can rotate itself via POST /api-tokens/self/rotate. The Remote MCP
+  server uses OAuth 2.1 + PKCE (RFC 7591 dynamic client registration) instead of
+  a static API key.
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: X-API-Key
+  sources:
+  - openapi/panther-rest-openapi.yml
+permissions:
+- AIRunAsModify
+- AlertModify
+- AlertRead
+- BulkUpload
+- BulkUploadValidate
+- CloudsecSourceModify
+- CloudsecSourceRead
+- DataAnalyticsModify
+- DataAnalyticsRead
+- DestinationModify
+- DestinationRead
+- GeneralSettingsModify
+- GeneralSettingsRead
+- LogSourceModify
+- LogSourceRawDataRead
+- LogSourceRead
+- LookupModify
+- LookupRead
+- ManageAIResponses
+- ManageAISkills
+- ManageScheduledPrompts
+- McpServerModify
+- McpServerRead
+- NotificationsSend
+- OrganizationAPITokenModify
+- OrganizationAPITokenRead
+- PolicyModify
+- PolicyRead
+- ResourceModify
+- ResourceRead
+- RuleModify
+- RuleRead
+- RunPantherAI
+- SummaryRead
+- UserModify
+- UserRead
+- ViewAIPrivateResponses
+- ViewAISkills
+- ViewScheduledPrompts

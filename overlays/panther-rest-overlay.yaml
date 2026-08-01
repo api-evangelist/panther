@@ -1,0 +1,19 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Panther REST API
+  version: 1.0.0
+extends: openapi/panther-rest-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-20'
+    x-api-style: rest
+    x-authentication: apiKey (X-API-Key)
+    x-pagination: cursor (results/next)
+    x-error-envelope: '{ message }'
+    x-mcp-server: https://api.<your-panther-host>/mcp
+- target: $.info
+  update:
+    x-provider-docs: https://docs.panther.com/panther-developer-workflows/api/rest
+    x-trust-center: https://app.panther.com/security
+    x-status-page: https://status.panther.com/

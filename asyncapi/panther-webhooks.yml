@@ -1,0 +1,27 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.panther.com/alerts/destinations
+spec_type: Webhooks
+summary: >-
+  Panther has an event surface in both directions but publishes no AsyncAPI
+  document. Outbound: alerts are delivered to destinations, including a generic
+  Custom Webhook destination (HTTP POST of alert JSON). Inbound: an HTTP log
+  source accepts webhook deliveries from third-party systems for ingestion.
+outbound:
+  kind: alert-destination-webhook
+  docs: https://docs.panther.com/alerts/destinations/custom_webhook
+  transport: https-post
+  description: >-
+    A Custom Webhook alert destination POSTs the alert payload to a
+    customer-supplied HTTPS endpoint when a detection triggers. Panther also
+    ships 40+ prebuilt destinations (Slack, PagerDuty, Jira, Microsoft Teams,
+    Opsgenie, etc.).
+inbound:
+  kind: http-log-source
+  docs: https://docs.panther.com/data-onboarding/data-transports/http
+  transport: https-post
+  description: >-
+    An HTTP source exposes a Panther-hosted endpoint that third-party services
+    (e.g. Auth0) push webhook events to for real-time log ingestion.
+asyncapi_document: null
+notes: No published AsyncAPI/CloudEvents document; captured as a webhook catalog.

@@ -1,28 +1,579 @@
 aid: panther
 name: Panther
-description: 'Panther is a company surfaced as a portfolio company of iconiq-capital, lightspeed-venture-partners
-  and added to the API Evangelist network as a stub for enrichment. Sector: security. This profile is
-  a lead awaiting the enrichment pipeline.'
+description: >-
+  Panther is a cloud-native, code-driven detection and response platform and
+  AI-powered SOC that ingests and normalizes security logs at petabyte scale
+  into a security data lake (customer-connected AWS/Snowflake/Databricks or
+  Panther-hosted). It offers Python detection-as-code, AI-generated detections,
+  correlation and scheduled rules, cloud-security policies, and an AI SOC agent
+  that auto-triages and investigates alerts. Developers automate it through a
+  REST API (X-API-Key), a GraphQL API, Terraform, the panther_analysis_tool
+  CLI, and official local and remote MCP servers. Backed by ICONIQ Capital and
+  Lightspeed Venture Partners.
 url: https://raw.githubusercontent.com/api-evangelist/panther/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://framerusercontent.com/images/bECYyaf1j2jroija0ScFzkorrSo.jpg
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - iconiq-capital
 - lightspeed-venture-partners
-x-tier: stub
+x-tier: profile
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
 - Security
-apis: []
+- SIEM
+- Detection and Response
+- Security Operations
+- Threat Detection
+- Log Management
+- Data Lake
+- Cloud Security
+- Developer Tools
+apis:
+- aid: panther:panther-alert-api
+  name: Panther alert API
+  description: The alert api handles all operations for alerts
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - alert
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-alert-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-api-token-api
+  name: Panther api token API
+  description: The api token api handles all operations for api tokens
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - api token
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-api-token-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-aws-cloud-account-api
+  name: Panther aws cloud account API
+  description: >-
+    The AWS Cloud Account API handles all operations for AWS Cloud Account scanner integrations
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - aws cloud account
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-aws-cloud-account-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-comment-api
+  name: Panther comment API
+  description: The comment api handles all operations for alerts comments
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - comment
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-comment-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-contexttag-api
+  name: Panther contexttag API
+  description: The context tag API handles all operations for alert context tags
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - contexttag
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-contexttag-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-correlation-rule-api
+  name: Panther correlation rule API
+  description: The correlation rule api handles all operations for correlation rules
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - correlation rule
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-correlation-rule-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-data-model-api
+  name: Panther data model API
+  description: The data model api handles all operations for data models
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - data model
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-data-model-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-gcs-source-api
+  name: Panther gcs source API
+  description: The GCS source API handles all operations for Google Cloud Storage log sources
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - gcs source
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-gcs-source-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-global-api
+  name: Panther global API
+  description: The global api handles all operations for globals
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - global
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-global-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-http-source-api
+  name: Panther http source API
+  description: The http source api handles all operations for http sources
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - http source
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-http-source-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-log-forwarder-source-api
+  name: Panther log forwarder source API
+  description: The log forwarder source api handles all operations for log forwarder sources
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - log forwarder source
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-log-forwarder-source-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-log-source-alarm-api
+  name: Panther log source alarm API
+  description: >-
+    Manage the drop-off alarm (SOURCE_NO_DATA) for log source integrations. Other alarm types shown in
+    the Panther UI (permissions checks, classification failures, log-processing errors, scanning errors)
+    are system-managed and not exposed via this API.
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - log source alarm
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-log-source-alarm-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-policy-api
+  name: Panther policy API
+  description: The policy api handles all operations for policies
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - policy
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-policy-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-pub-sub-source-api
+  name: Panther pub/sub source API
+  description: The Pub/Sub source API handles all operations for GCP Pub/Sub log sources
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - pub/sub source
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-pub-sub-source-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-query-api
+  name: Panther query API
+  description: The query api handles operations for queries
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - query
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-query-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-role-api
+  name: Panther role API
+  description: The role api handles all operations for roles
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - role
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-role-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-rule-api
+  name: Panther rule API
+  description: The rule api handles all operations for rules
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - rule
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-rule-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-s3-source-api
+  name: Panther s3 source API
+  description: The S3 source API handles all operations for AWS S3 log sources
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - s3 source
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-s3-source-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-scheduled-rule-api
+  name: Panther scheduled rule API
+  description: The scheduled rule api handles all operations for scheduled rules
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - scheduled rule
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-scheduled-rule-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-simple-rule-api
+  name: Panther simple rule API
+  description: The simple rule api handles all operations for simple rules
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - simple rule
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-simple-rule-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
+- aid: panther:panther-user-api
+  name: Panther user API
+  description: The user api handles all operations for users
+  humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
+  baseURL: https://api.your-panther-host
+  tags:
+  - user
+  properties:
+  - type: OpenAPI
+    url: openapi/panther-user-api-openapi.yml
+  - type: Authentication
+    url: authentication/panther-authentication.yml
+  - type: Conventions
+    url: conventions/panther-conventions.yml
+  - type: ErrorCatalog
+    url: errors/panther-problem-types.yml
+  - type: DataModel
+    url: data-model/panther-data-model.yml
+  - type: APIReference
+    url: https://docs.panther.com/panther-developer-workflows/api/rest
+  - type: Sandbox
+    url: https://docs.panther.com/panther-developer-workflows/api/api-playground
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v1
 common:
+- type: AgenticAccess
+  url: agentic-access/panther-agentic-access.yml
+- type: DomainSecurity
+  url: security/panther-domain-security.yml
+- type: Authentication
+  url: authentication/panther-authentication.yml
+- type: MCPServer
+  url: mcp/panther-mcp.yml
+- type: LLMsTxt
+  url: llms/panther-llms.txt
+- type: Packages
+  url: packages/panther-packages.yml
+- type: CLI
+  url: cli/panther-cli.yml
+- type: Conventions
+  url: conventions/panther-conventions.yml
+- type: Lifecycle
+  url: lifecycle/panther-lifecycle.yml
+- type: StatusPage
+  url: https://status.panther.com/
+- type: Conformance
+  url: conformance/panther-conformance.yml
+- type: Compliance
+  url: https://www.panther.com/security
+- type: TrustCenter
+  url: security/panther-trust-center.yml
+- type: WellKnown
+  url: well-known/panther-well-known.yml
+- type: Webhooks
+  url: asyncapi/panther-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DeveloperPortal
+  url: https://docs.panther.com/
+- type: Documentation
+  url: https://docs.panther.com/
+- type: GettingStarted
+  url: https://docs.panther.com/quick-start
+- type: Support
+  url: https://help.panther.com/
+- type: Blog
+  url: https://www.panther.com/blog
+- type: GitHubOrganization
+  url: https://github.com/panther-labs
+- type: Pricing
+  url: https://www.panther.com/pricing
+- type: SignUp
+  url: https://www.panther.com/request-a-demo
+- type: TermsOfService
+  url: https://www.panther.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.panther.com/privacy-policy
 - type: Website
   url: https://www.panther.com/

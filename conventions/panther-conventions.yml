@@ -1,0 +1,53 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/panther-rest-openapi.yml
+docs: https://docs.panther.com/panther-developer-workflows/api/rest
+summary: >-
+  Cross-cutting request/response semantics for the Panther REST API, derived from
+  the OpenAPI 3.0.3 spec and the developer docs.
+authentication:
+  style: api-key
+  header: X-API-Key
+  docs: https://docs.panther.com/panther-developer-workflows/api/rest/api-tokens
+  see: authentication/panther-authentication.yml
+pagination:
+  style: cursor
+  request_params:
+  - cursor
+  - limit
+  response_fields:
+  - results
+  - next
+  notes: >-
+    List endpoints return a page envelope { results: [...], next: <cursor> }.
+    Pass the returned `next` value back as the `cursor` query parameter to fetch
+    the following page; an empty/absent `next` signals the last page.
+idempotency:
+  key_header: null
+  supported: false
+  notes: >-
+    Panther does not document a client-supplied idempotency-key header. DELETE
+    operations are individually idempotent by design (e.g. delete log source
+    alarm returns 204 even when no alarm exists), but there is no request-replay
+    idempotency contract for create/update.
+versioning:
+  scheme: uri-path
+  notes: >-
+    Cloud Connected / self-hosted deployments expose the REST API under a /v1
+    path suffix; SaaS deployments use the per-tenant API host shown in the
+    Console (Settings > Developer Tools > API Tokens). The base host is
+    per-instance (api.<your-panther-host>).
+error_envelope:
+  format: custom-json
+  shape: '{ "message": "<human readable error>" }'
+  problem_json: false
+  see: errors/panther-problem-types.yml
+rate_limit_signaling:
+  documented: false
+  notes: No rate-limit response headers are declared in the OpenAPI spec.
+request_tracing:
+  request_id_header: null
+cross_links:
+  errors: errors/panther-problem-types.yml
+  lifecycle: lifecycle/panther-lifecycle.yml
+  authentication: authentication/panther-authentication.yml

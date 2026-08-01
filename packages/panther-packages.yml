@@ -1,0 +1,31 @@
+generated: '2026-07-20'
+method: searched
+source: https://pypi.org/project/panther-analysis-tool/
+packages:
+- language: python
+  registry: pypi
+  name: panther_analysis_tool
+  url: https://pypi.org/project/panther-analysis-tool/
+  install: pip install panther_analysis_tool
+  repo: https://github.com/panther-labs/panther_analysis_tool
+  official: true
+  role: cli
+  description: >-
+    Panther Analysis Tool (PAT) — manage detections-as-code (rules, policies,
+    data models, globals, queries) and upload them to a Panther instance.
+- language: python
+  registry: pypi
+  name: mcp-panther
+  url: https://github.com/panther-labs/mcp-panther
+  install: uvx mcp-panther
+  repo: https://github.com/panther-labs/mcp-panther
+  official: true
+  role: mcp-server
+  description: >-
+    Panther's local Model Context Protocol server (40+ tools). Also distributed
+    as a container image at ghcr.io/panther-labs/mcp-panther.
+notes: >-
+  Panther does not ship general-purpose per-language REST client SDKs; the
+  API is consumed via the panther_analysis_tool CLI, direct REST/GraphQL calls,
+  Terraform, and the MCP servers. The Go-based `pantherlog` binary is
+  distributed via the panther-labs/panther repo, not a package registry.

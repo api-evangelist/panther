@@ -1,0 +1,84 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/panther-rest-openapi.yml
+docs: https://docs.panther.com/panther-developer-workflows/api/rest
+summary: >-
+  Entity-relationship graph derived from the Panther REST API resource tags,
+  paths, and id-reference fields. Entities map to the top-level resource
+  collections exposed by the API.
+entities:
+- name: Alert
+  path: /alerts
+  operations: [alert#list, alert#get, alert#patch, alert#bulkPatch, alert#events]
+  relationships:
+  - type: has_many
+    target: Comment
+    via: alert-id
+  - type: has_many
+    target: ContextTag
+- name: Comment
+  path: /alert-comments
+  operations: [comment#list, comment#create, comment#get, comment#update]
+  relationships:
+  - type: belongs_to
+    target: Alert
+    via: alert-id
+- name: ContextTag
+  path: /alert-context-tags
+  operations: [contexttag#list, contexttag#create, contexttag#delete, contexttag#update]
+- name: Rule
+  path: /rules
+  operations: [rule#list, rule#create, rule#get, rule#put, rule#delete]
+- name: SimpleRule
+  path: /simple-rules
+  operations: [simple rule#list, simple rule#create, simple rule#get, simple rule#put, simple rule#delete]
+- name: ScheduledRule
+  path: /scheduled-rules
+  operations: [scheduled rule#list, scheduled rule#create, scheduled rule#get, scheduled rule#put, scheduled rule#delete]
+  relationships:
+  - type: has_many
+    target: Query
+- name: CorrelationRule
+  path: /correlation-rules
+  operations: [correlation rule#list, correlation rule#create, correlation rule#get, correlation rule#put, correlation rule#delete]
+- name: Policy
+  path: /policies
+  operations: [policy#list, policy#create, policy#get, policy#put, policy#delete]
+- name: DataModel
+  path: /data-models
+  operations: [data model#list, data model#create, data model#get, data model#put, data model#delete]
+- name: Global
+  path: /globals
+  operations: [global#list, global#create, global#get, global#put, global#delete]
+- name: Query
+  path: /queries
+  operations: [query#list, query#create, query#get, query#update, query#delete]
+- name: LogSource
+  path: /log-sources
+  variants: [s3, gcs, http, pubsub, log-forwarder]
+  relationships:
+  - type: has_many
+    target: LogSourceAlarm
+    via: sourceId
+- name: LogSourceAlarm
+  path: /log-source-alarms/{sourceId}/{type}
+  operations: [log source alarm#get, log source alarm#put, log source alarm#delete]
+  relationships:
+  - type: belongs_to
+    target: LogSource
+    via: sourceId
+- name: AWSCloudAccount
+  path: /cloud-accounts/aws
+  operations: [aws cloud account#create, aws cloud account#get, aws cloud account#put, aws cloud account#delete]
+- name: User
+  path: /users
+  operations: [user#list, user#create, user#get, user#update, user#delete]
+  relationships:
+  - type: belongs_to
+    target: Role
+- name: Role
+  path: /roles
+  operations: [role#list, role#create, role#get, role#update, role#delete]
+- name: APIToken
+  path: /api-tokens
+  operations: [api token#list, api token#create, api token#get, api token#update, api token#delete, api token#rotate]

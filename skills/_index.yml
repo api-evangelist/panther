@@ -1,0 +1,12 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/panther-rest-openapi.yml
+skills:
+- file: panther-triage-alert.md
+  name: Triage a Panther alert
+  api: openapi/panther-rest-openapi.yml
+  operations: [alert#list, alert#get, alert#events, comment#create, alert#patch]
+- file: panther-manage-detections.md
+  name: Manage Panther detection rules
+  api: openapi/panther-rest-openapi.yml
+  operations: [rule#list, rule#get, rule#create, rule#put, rule#delete]

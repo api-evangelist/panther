@@ -1,0 +1,34 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/panther-rest-openapi.yml
+docs: https://docs.panther.com/panther-developer-workflows/api/rest
+format: custom-json
+envelope: '{ "message": "<human readable error>" }'
+notes: Panther returns a simple JSON error envelope with a `message` field (not RFC 9457 application/problem+json).
+  Error schemas are per-resource (e.g. AlertAPI.BadRequestError, AWSCloudAccountAPI.ExistsError). Status
+  codes below are those declared across all 96 operations.
+problems:
+- status: 400
+  title: Bad Request
+  aliases:
+  - bad_request
+- status: 403
+  title: Forbidden
+  aliases:
+  - forbidden
+- status: 404
+  title: Not Found
+  aliases:
+  - not_found
+- status: 409
+  title: Conflict
+  aliases:
+  - exists
+- status: 500
+  title: Internal Server Error
+  aliases:
+  - service
+- status: 504
+  title: Gateway Timeout
+  aliases:
+  - timeout
