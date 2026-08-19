@@ -1,0 +1,1311 @@
+{
+  "item": [
+    {
+      "id": "82a2c8d9-456a-4b6b-bd93-49f18024400d",
+      "name": "pub/sub source",
+      "description": {
+        "content": "The Pub/Sub source API handles all operations for GCP Pub/Sub log sources",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5d11fbba-a2b7-4339-9bba-a9b3206540fb",
+          "name": "create pub/sub source",
+          "request": {
+            "name": "create pub/sub source",
+            "description": {},
+            "url": {
+              "path": [
+                "log-sources",
+                "pubsub"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"regionalEndpoint\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1281f77d-87a7-4c25-b331-658af1118bba",
+              "name": "Created response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "pubsub"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"regionalEndpoint\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"credentials\": \"string\",\n  \"credentialsType\": \"service_account\",\n  \"integrationId\": \"string\",\n  \"integrationLabel\": \"string\",\n  \"logStreamType\": \"Lines\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"logTypes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"projectId\": \"string\",\n  \"regionalEndpoint\": \"string\",\n  \"subscriptionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1bcab780-842d-46c6-aa45-59787decbb67",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "pubsub"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"regionalEndpoint\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d612363f-2010-48b1-bc5e-be716818beee",
+              "name": "exists: Conflict response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "pubsub"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"regionalEndpoint\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3bca53c1-d47c-41b9-a614-895a6c009f0c",
+              "name": "service: Internal Server Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "pubsub"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"regionalEndpoint\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f5a687fa-1337-4ce4-a532-305877f4a6c1",
+          "name": "delete pub/sub source",
+          "request": {
+            "name": "delete pub/sub source",
+            "description": {},
+            "url": {
+              "path": [
+                "log-sources",
+                "pubsub",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the pubsub source to delete"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b07110b5-e6ce-4669-9a6b-3fdd2cf66c0a",
+              "name": "No Content response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "pubsub",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the pubsub source to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "22b33691-473d-4f3c-a044-d0003c670ae7",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "pubsub",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the pubsub source to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "867fe3a9-cee5-468e-bf0e-9b64c78a2f8b",
+              "name": "service: Internal Server Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "pubsub",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the pubsub source to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e331376b-5897-4059-a30a-5cba908fa10b",
+          "name": "get pub/sub source",
+          "request": {
+            "name": "get pub/sub source",
+            "description": {},
+            "url": {
+              "path": [
+                "log-sources",
+                "pubsub",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the pubsub source to fetch"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "11bb7d83-1e59-4046-ba49-55b5b44f7bf5",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "pubsub",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the pubsub source to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"credentials\": \"string\",\n  \"credentialsType\": \"wif\",\n  \"integrationId\": \"string\",\n  \"integrationLabel\": \"string\",\n  \"logStreamType\": \"Auto\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"logTypes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"projectId\": \"string\",\n  \"regionalEndpoint\": \"string\",\n  \"subscriptionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4bd57361-586b-405b-ac5e-d59a39b327b4",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "pubsub",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the pubsub source to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb0e73b3-57bd-4570-8021-c9584ba31a5a",
+              "name": "not_found: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "pubsub",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the pubsub source to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eeab0331-5e98-4383-b3bc-a86805944fa4",
+              "name": "service: Internal Server Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "pubsub",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the pubsub source to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee1ddc13-46b4-4c78-995f-62e5f14f6dab",
+          "name": "put pub/sub source",
+          "request": {
+            "name": "put pub/sub source",
+            "description": {
+              "content": "put updates a pubsub source",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "log-sources",
+                "pubsub",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the pubsub source to update"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"regionalEndpoint\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bf3a8bf6-167c-4931-8e5f-9ebafa66c74b",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "pubsub",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the pubsub source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"regionalEndpoint\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"credentials\": \"string\",\n  \"credentialsType\": \"wif\",\n  \"integrationId\": \"string\",\n  \"integrationLabel\": \"string\",\n  \"logStreamType\": \"Auto\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"logTypes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"projectId\": \"string\",\n  \"regionalEndpoint\": \"string\",\n  \"subscriptionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4052bbfe-ad8a-4002-8878-e966070a4cb9",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "pubsub",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the pubsub source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"regionalEndpoint\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac0a88d3-ec52-4c07-b4cc-9a5049fbdc2d",
+              "name": "not_found: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "pubsub",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the pubsub source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"regionalEndpoint\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87c49945-8112-420c-9d0f-9ca9d335a9c7",
+              "name": "exists: Conflict response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "pubsub",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the pubsub source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"regionalEndpoint\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6248925a-b773-4a6d-b100-fffa245d9d35",
+              "name": "service: Internal Server Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "pubsub",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the pubsub source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\",\n  \"regionalEndpoint\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-api-host",
+      "key": "api_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{api_host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c84d3e19-6705-481d-b620-3b9ed34e73f8",
+    "name": "Panther REST alert pub/sub source API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The alert api handles all operations for alerts",
+      "type": "text/plain"
+    }
+  }
+}

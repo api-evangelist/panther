@@ -1,0 +1,1308 @@
+{
+  "item": [
+    {
+      "id": "95645b18-dd97-48eb-8f66-73174020723b",
+      "name": "gcs source",
+      "description": {
+        "content": "The GCS source API handles all operations for Google Cloud Storage log sources",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "96b9b540-ee8c-46d9-810e-8183516ec080",
+          "name": "create gcs source",
+          "request": {
+            "name": "create gcs source",
+            "description": {},
+            "url": {
+              "path": [
+                "log-sources",
+                "gcs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"gcsBucket\": \"<string>\",\n  \"prefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bba05014-f576-4e95-be6b-7d9a916b0fe2",
+              "name": "Created response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "gcs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"gcsBucket\": \"<string>\",\n  \"prefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"credentials\": \"string\",\n  \"credentialsType\": \"service_account\",\n  \"gcsBucket\": \"string\",\n  \"integrationId\": \"string\",\n  \"integrationLabel\": \"string\",\n  \"logStreamType\": \"Auto\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"prefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"projectId\": \"string\",\n  \"subscriptionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80258408-2592-4941-ae40-b4ac16529c96",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "gcs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"gcsBucket\": \"<string>\",\n  \"prefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d652bf9-fd46-4771-800a-33f392a9754b",
+              "name": "exists: Conflict response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "gcs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"gcsBucket\": \"<string>\",\n  \"prefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11e1a362-1bba-42aa-979d-451ec9a3975b",
+              "name": "service: Internal Server Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "gcs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"gcsBucket\": \"<string>\",\n  \"prefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "091f6be0-9a3f-4a5d-a6ca-9ed1a41036a6",
+          "name": "delete gcs source",
+          "request": {
+            "name": "delete gcs source",
+            "description": {},
+            "url": {
+              "path": [
+                "log-sources",
+                "gcs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the GCS source to delete"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5d63f75b-4f4c-459b-84c2-78bdbc4e7af5",
+              "name": "No Content response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "gcs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the GCS source to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "69b92f60-d7aa-46ce-8901-2a7570e19995",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "gcs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the GCS source to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ebc0761-fd40-4855-85db-0ae9b9e63a50",
+              "name": "service: Internal Server Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "gcs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the GCS source to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de3cc020-9af6-429e-b280-34a5c593b03d",
+          "name": "get gcs source",
+          "request": {
+            "name": "get gcs source",
+            "description": {},
+            "url": {
+              "path": [
+                "log-sources",
+                "gcs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the GCS source to fetch"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7ae22a20-b270-4a22-8e3c-446629f77c1c",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "gcs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the GCS source to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"credentials\": \"string\",\n  \"credentialsType\": \"service_account\",\n  \"gcsBucket\": \"string\",\n  \"integrationId\": \"string\",\n  \"integrationLabel\": \"string\",\n  \"logStreamType\": \"JSON\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"prefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"projectId\": \"string\",\n  \"subscriptionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae66dd26-7806-4c24-8beb-74cac6ec7a1f",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "gcs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the GCS source to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c32dd1e9-7d0f-43b8-93ab-f312e0bbf224",
+              "name": "not_found: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "gcs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the GCS source to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51f3b5ba-987b-4f74-bcaf-754144aa4793",
+              "name": "service: Internal Server Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "gcs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the GCS source to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b9976532-e391-46e3-ae9b-51e80f0652b2",
+          "name": "put gcs source",
+          "request": {
+            "name": "put gcs source",
+            "description": {},
+            "url": {
+              "path": [
+                "log-sources",
+                "gcs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the GCS source to update"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"gcsBucket\": \"<string>\",\n  \"prefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dbf12c6f-f663-494b-adcd-c7fbc10f758c",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "gcs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the GCS source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"gcsBucket\": \"<string>\",\n  \"prefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"credentials\": \"string\",\n  \"credentialsType\": \"service_account\",\n  \"gcsBucket\": \"string\",\n  \"integrationId\": \"string\",\n  \"integrationLabel\": \"string\",\n  \"logStreamType\": \"JSON\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"prefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"projectId\": \"string\",\n  \"subscriptionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb3d987e-892e-4db2-a8ce-cdae6b1cad2c",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "gcs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the GCS source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"gcsBucket\": \"<string>\",\n  \"prefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71b04a39-c912-4dd9-b9c8-63d4b061a964",
+              "name": "not_found: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "gcs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the GCS source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"gcsBucket\": \"<string>\",\n  \"prefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ace9c9cd-b806-4b1e-9648-a7d37ac6b35d",
+              "name": "exists: Conflict response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "gcs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the GCS source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"gcsBucket\": \"<string>\",\n  \"prefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf410655-50ec-449c-8c72-6facc038a918",
+              "name": "service: Internal Server Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "gcs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the GCS source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"subscriptionId\": \"<string>\",\n  \"gcsBucket\": \"<string>\",\n  \"prefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"logStreamType\": \"<string>\",\n  \"credentialsType\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-api-host",
+      "key": "api_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{api_host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "628a8c11-9f5a-480a-87af-dff936320b05",
+    "name": "Panther REST alert gcs source API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The alert api handles all operations for alerts",
+      "type": "text/plain"
+    }
+  }
+}

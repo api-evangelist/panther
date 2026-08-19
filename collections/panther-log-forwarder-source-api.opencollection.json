@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Panther REST alert log forwarder source API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "log forwarder source",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "create log forwarder source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{api_host}/log-sources/log-forwarder",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "create log forwarder source"
+        },
+        {
+          "info": {
+            "name": "get log forwarder source",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/log-sources/log-forwarder/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the log forwarder source to fetch"
+              }
+            ]
+          },
+          "docs": "get log forwarder source"
+        },
+        {
+          "info": {
+            "name": "put log forwarder source",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{api_host}/log-sources/log-forwarder/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the log forwarder source to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "put updates a log forwarder source"
+        },
+        {
+          "info": {
+            "name": "delete log forwarder source",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{api_host}/log-sources/log-forwarder/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the log forwarder source to delete"
+              }
+            ]
+          },
+          "docs": "delete log forwarder source"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

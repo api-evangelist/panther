@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Panther REST alert role API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "role",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/roles",
+            "params": [
+              {
+                "name": "name-contains",
+                "value": "",
+                "type": "query",
+                "description": "A string to search for in the Role name"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "An exact match of a role's name to return. If provided all other parameters are ignored"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Set of IDS to return"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma delimited list of IDs"
+              },
+              {
+                "name": "sort-dir",
+                "value": "",
+                "type": "query",
+                "description": "The sort direction of the results"
+              }
+            ]
+          },
+          "docs": "List roles"
+        },
+        {
+          "info": {
+            "name": "Create a role",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{api_host}/roles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a role"
+        },
+        {
+          "info": {
+            "name": "Get a role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the role"
+              }
+            ]
+          },
+          "docs": "Get a role"
+        },
+        {
+          "info": {
+            "name": "Update a role",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{api_host}/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the role"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a role"
+        },
+        {
+          "info": {
+            "name": "Delete a role",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{api_host}/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the role"
+              }
+            ]
+          },
+          "docs": "Delete a role"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

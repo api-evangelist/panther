@@ -1,0 +1,1407 @@
+{
+  "item": [
+    {
+      "id": "766b2fc3-5df1-4858-b8ec-51634e417d12",
+      "name": "scheduled rule",
+      "description": {
+        "content": "The scheduled rule api handles all operations for scheduled rules",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b522b6c8-4682-4a05-83fa-536e8c70c84c",
+          "name": "list scheduled rules",
+          "request": {
+            "name": "list scheduled rules",
+            "description": {},
+            "url": {
+              "path": [
+                "scheduled-rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "the pagination token"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "the maximum results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "name-contains",
+                  "value": "<string>",
+                  "description": "Substring search by name (case-insensitive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Only include rules in the given state"
+                },
+                {
+                  "disabled": false,
+                  "key": "scheduled-query",
+                  "value": "<string>",
+                  "description": "Only include rules which apply to one of these scheduled queries"
+                },
+                {
+                  "disabled": false,
+                  "key": "scheduled-query",
+                  "value": "<string>",
+                  "description": "Only include rules which apply to one of these scheduled queries"
+                },
+                {
+                  "disabled": false,
+                  "key": "severity",
+                  "value": "<string>",
+                  "description": "Only include rules with one of the given severities"
+                },
+                {
+                  "disabled": false,
+                  "key": "severity",
+                  "value": "<string>",
+                  "description": "Only include rules with one of the given severities"
+                },
+                {
+                  "disabled": false,
+                  "key": "tag",
+                  "value": "<string>",
+                  "description": "Only include rules with one of the given tags (case-insensitive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "tag",
+                  "value": "<string>",
+                  "description": "Only include rules with one of the given tags (case-insensitive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "created-by",
+                  "value": "<string>",
+                  "description": "Only include rules whose creator matches this user ID or actor ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "last-modified-by",
+                  "value": "<string>",
+                  "description": "Only include rules last modified by this user ID or actor ID"
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b82c91ab-b329-48a8-b709-d4b97292c312",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "name-contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scheduled-query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scheduled-query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created-by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last-modified-by",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": \"string\",\n  \"results\": [\n    {\n      \"body\": \"string\",\n      \"createAlert\": false,\n      \"createdAt\": \"string\",\n      \"createdBy\": {\n        \"id\": \"api-token\",\n        \"type\": \"string\"\n      },\n      \"createdByExternal\": \"string\",\n      \"dedupPeriodMinutes\": 60,\n      \"description\": \"string\",\n      \"displayName\": \"string\",\n      \"enabled\": false,\n      \"id\": \"string\",\n      \"lastModified\": \"string\",\n      \"managed\": true,\n      \"outputIDs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"reference\": \"string\",\n      \"reports\": {\n        \"key_0\": [\n          \"string\",\n          \"string\"\n        ],\n        \"key_1\": [\n          \"string\",\n          \"string\"\n        ],\n        \"key_2\": [\n          \"string\",\n          \"string\"\n        ],\n        \"key_3\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"runbook\": \"string\",\n      \"scheduledQueries\": [\n        \"string\",\n        \"string\"\n      ],\n      \"severity\": \"HIGH\",\n      \"summaryAttributes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tests\": [\n        {\n          \"name\": \"string\",\n          \"expectedResult\": false,\n          \"log\": {},\n          \"mocks\": [\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"resource\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"expectedResult\": false,\n          \"log\": {},\n          \"mocks\": [\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"resource\": \"string\"\n        }\n      ],\n      \"threshold\": 1\n    },\n    {\n      \"body\": \"string\",\n      \"createAlert\": false,\n      \"createdAt\": \"string\",\n      \"createdBy\": {\n        \"id\": \"api-token\",\n        \"type\": \"string\"\n      },\n      \"createdByExternal\": \"string\",\n      \"dedupPeriodMinutes\": 60,\n      \"description\": \"string\",\n      \"displayName\": \"string\",\n      \"enabled\": true,\n      \"id\": \"string\",\n      \"lastModified\": \"string\",\n      \"managed\": false,\n      \"outputIDs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"reference\": \"string\",\n      \"reports\": {\n        \"key_0\": [\n          \"string\",\n          \"string\"\n        ],\n        \"key_1\": [\n          \"string\",\n          \"string\"\n        ],\n        \"key_2\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"runbook\": \"string\",\n      \"scheduledQueries\": [\n        \"string\",\n        \"string\"\n      ],\n      \"severity\": \"HIGH\",\n      \"summaryAttributes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tests\": [\n        {\n          \"name\": \"string\",\n          \"expectedResult\": true,\n          \"log\": {},\n          \"mocks\": [\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"resource\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"expectedResult\": false,\n          \"log\": {},\n          \"mocks\": [\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"resource\": \"string\"\n        }\n      ],\n      \"threshold\": 1\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9d718d0-4fa6-4fb2-952d-0d22ed5a213a",
+          "name": "create scheduled rule",
+          "request": {
+            "name": "create scheduled rule",
+            "description": {},
+            "url": {
+              "path": [
+                "scheduled-rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "run-tests-first",
+                  "value": "true",
+                  "description": "set this field to false to exclude running tests prior to saving"
+                },
+                {
+                  "disabled": false,
+                  "key": "run-tests-only",
+                  "value": "false",
+                  "description": "set this field to true if you want to run tests without saving"
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"createAlert\": \"<boolean>\",\n  \"dedupPeriodMinutes\": 60,\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"runbook\": \"<string>\",\n  \"scheduledQueries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"summaryAttributes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\",\n          \"key_3\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ],\n  \"threshold\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7dc78733-2213-4a44-b5ba-eff056caf301",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "run-tests-first",
+                      "value": "true"
+                    },
+                    {
+                      "key": "run-tests-only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"createAlert\": \"<boolean>\",\n  \"dedupPeriodMinutes\": 60,\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"runbook\": \"<string>\",\n  \"scheduledQueries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"summaryAttributes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ],\n  \"threshold\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": \"string\",\n  \"createAlert\": true,\n  \"createdAt\": \"string\",\n  \"createdBy\": {\n    \"id\": \"system\",\n    \"type\": \"string\"\n  },\n  \"createdByExternal\": \"string\",\n  \"dedupPeriodMinutes\": 60,\n  \"description\": \"string\",\n  \"displayName\": \"string\",\n  \"enabled\": true,\n  \"id\": \"string\",\n  \"lastModified\": \"string\",\n  \"managed\": true,\n  \"outputIDs\": [\n    \"string\",\n    \"string\"\n  ],\n  \"reference\": \"string\",\n  \"reports\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"runbook\": \"string\",\n  \"scheduledQueries\": [\n    \"string\",\n    \"string\"\n  ],\n  \"severity\": \"MEDIUM\",\n  \"summaryAttributes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ],\n  \"threshold\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d619630-77c8-4915-961e-9b1d3dd93eb0",
+              "name": "No Content response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "run-tests-first",
+                      "value": "true"
+                    },
+                    {
+                      "key": "run-tests-only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"createAlert\": \"<boolean>\",\n  \"dedupPeriodMinutes\": 60,\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"runbook\": \"<string>\",\n  \"scheduledQueries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"summaryAttributes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ],\n  \"threshold\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "68d0e77a-50be-4b88-a388-96e33c49f2bf",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "run-tests-first",
+                      "value": "true"
+                    },
+                    {
+                      "key": "run-tests-only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"createAlert\": \"<boolean>\",\n  \"dedupPeriodMinutes\": 60,\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"runbook\": \"<string>\",\n  \"scheduledQueries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"summaryAttributes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ],\n  \"threshold\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"testResults\": [\n    {\n      \"error\": {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      \"errored\": true,\n      \"functions\": {\n        \"alertContext\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"dedup\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"description\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"destinations\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"detection\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"reference\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"runbook\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"severity\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"title\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        }\n      },\n      \"name\": \"string\",\n      \"passed\": true,\n      \"triggerAlert\": false\n    },\n    {\n      \"error\": {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      \"errored\": true,\n      \"functions\": {\n        \"alertContext\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"dedup\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"description\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"destinations\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"detection\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"reference\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"runbook\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"severity\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"title\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        }\n      },\n      \"name\": \"string\",\n      \"passed\": false,\n      \"triggerAlert\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b51fc62-b05c-48e8-ab6d-8c51196c92a1",
+              "name": "exists: Conflict response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "run-tests-first",
+                      "value": "true"
+                    },
+                    {
+                      "key": "run-tests-only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"createAlert\": \"<boolean>\",\n  \"dedupPeriodMinutes\": 60,\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"runbook\": \"<string>\",\n  \"scheduledQueries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"summaryAttributes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ],\n  \"threshold\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "754db0c8-b26e-4c14-9f9f-4f5934e5c490",
+          "name": "delete scheduled rule",
+          "request": {
+            "name": "delete scheduled rule",
+            "description": {},
+            "url": {
+              "path": [
+                "scheduled-rules",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the rule to delete"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "83d22799-203d-43cf-8523-32903cbac290",
+              "name": "No Content response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the rule to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "49209f16-30df-48b2-9bf7-e4feffcb567a",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the rule to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"testResults\": [\n    {\n      \"error\": {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      \"errored\": false,\n      \"functions\": {\n        \"alertContext\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"dedup\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"description\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"destinations\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"detection\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"reference\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"runbook\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"severity\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"title\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        }\n      },\n      \"name\": \"string\",\n      \"passed\": true,\n      \"triggerAlert\": true\n    },\n    {\n      \"error\": {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      \"errored\": true,\n      \"functions\": {\n        \"alertContext\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"dedup\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"description\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"destinations\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"detection\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"reference\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"runbook\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"severity\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"title\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        }\n      },\n      \"name\": \"string\",\n      \"passed\": false,\n      \"triggerAlert\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79b9edbf-84aa-4a6e-b24c-ed42c80fa8ff",
+              "name": "not_found: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the rule to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9478540-7981-402d-a235-38fb52431ab0",
+          "name": "get scheduled rule",
+          "request": {
+            "name": "get scheduled rule",
+            "description": {},
+            "url": {
+              "path": [
+                "scheduled-rules",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the rule to fetch"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4c35086f-bdb4-4f0c-b148-5a93bab6389b",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the rule to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": \"string\",\n  \"createAlert\": true,\n  \"createdAt\": \"string\",\n  \"createdBy\": {\n    \"id\": \"system\",\n    \"type\": \"string\"\n  },\n  \"createdByExternal\": \"string\",\n  \"dedupPeriodMinutes\": 60,\n  \"description\": \"string\",\n  \"displayName\": \"string\",\n  \"enabled\": true,\n  \"id\": \"string\",\n  \"lastModified\": \"string\",\n  \"managed\": true,\n  \"outputIDs\": [\n    \"string\",\n    \"string\"\n  ],\n  \"reference\": \"string\",\n  \"reports\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"runbook\": \"string\",\n  \"scheduledQueries\": [\n    \"string\",\n    \"string\"\n  ],\n  \"severity\": \"MEDIUM\",\n  \"summaryAttributes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ],\n  \"threshold\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d9206e8-4df2-4c08-a4ca-f10f64bbf3ff",
+              "name": "not_found: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the rule to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "da4b8764-0f95-43a0-b80b-6acc74ddf462",
+          "name": "put scheduled rule",
+          "request": {
+            "name": "put scheduled rule",
+            "description": {
+              "content": "put creates or updates a scheduled rule",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scheduled-rules",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "run-tests-first",
+                  "value": "true",
+                  "description": "set this field to false to exclude running tests prior to saving"
+                },
+                {
+                  "disabled": false,
+                  "key": "run-tests-only",
+                  "value": "false",
+                  "description": "set this field to true if you want to run tests without saving"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) the id of the scheduled rule"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"createAlert\": \"<boolean>\",\n  \"dedupPeriodMinutes\": 60,\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_2\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"runbook\": \"<string>\",\n  \"scheduledQueries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"summaryAttributes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\",\n          \"key_3\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ],\n  \"threshold\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3f24869b-78cd-476c-9244-f59967ff15c4",
+              "name": "200 returned if the item already existed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "run-tests-first",
+                      "value": "true"
+                    },
+                    {
+                      "key": "run-tests-only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) the id of the scheduled rule"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"createAlert\": \"<boolean>\",\n  \"dedupPeriodMinutes\": 60,\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"runbook\": \"<string>\",\n  \"scheduledQueries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"summaryAttributes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ],\n  \"threshold\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": \"string\",\n  \"createAlert\": true,\n  \"createdAt\": \"string\",\n  \"createdBy\": {\n    \"id\": \"system\",\n    \"type\": \"string\"\n  },\n  \"createdByExternal\": \"string\",\n  \"dedupPeriodMinutes\": 60,\n  \"description\": \"string\",\n  \"displayName\": \"string\",\n  \"enabled\": true,\n  \"id\": \"string\",\n  \"lastModified\": \"string\",\n  \"managed\": true,\n  \"outputIDs\": [\n    \"string\",\n    \"string\"\n  ],\n  \"reference\": \"string\",\n  \"reports\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"runbook\": \"string\",\n  \"scheduledQueries\": [\n    \"string\",\n    \"string\"\n  ],\n  \"severity\": \"MEDIUM\",\n  \"summaryAttributes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ],\n  \"threshold\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb8f011a-1179-45db-b11c-6f32eef52a54",
+              "name": "201 returned if the item was created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "run-tests-first",
+                      "value": "true"
+                    },
+                    {
+                      "key": "run-tests-only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) the id of the scheduled rule"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"createAlert\": \"<boolean>\",\n  \"dedupPeriodMinutes\": 60,\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"runbook\": \"<string>\",\n  \"scheduledQueries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"summaryAttributes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ],\n  \"threshold\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": \"string\",\n  \"createAlert\": true,\n  \"createdAt\": \"string\",\n  \"createdBy\": {\n    \"id\": \"system\",\n    \"type\": \"string\"\n  },\n  \"createdByExternal\": \"string\",\n  \"dedupPeriodMinutes\": 60,\n  \"description\": \"string\",\n  \"displayName\": \"string\",\n  \"enabled\": true,\n  \"id\": \"string\",\n  \"lastModified\": \"string\",\n  \"managed\": true,\n  \"outputIDs\": [\n    \"string\",\n    \"string\"\n  ],\n  \"reference\": \"string\",\n  \"reports\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"runbook\": \"string\",\n  \"scheduledQueries\": [\n    \"string\",\n    \"string\"\n  ],\n  \"severity\": \"MEDIUM\",\n  \"summaryAttributes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ],\n  \"threshold\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10cfa926-1e82-4e1a-be04-c3ac219a9c5a",
+              "name": "No Content response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "run-tests-first",
+                      "value": "true"
+                    },
+                    {
+                      "key": "run-tests-only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) the id of the scheduled rule"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"createAlert\": \"<boolean>\",\n  \"dedupPeriodMinutes\": 60,\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"runbook\": \"<string>\",\n  \"scheduledQueries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"summaryAttributes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ],\n  \"threshold\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c1d9e929-d4d8-4b3e-a214-21a5c0425d0d",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "run-tests-first",
+                      "value": "true"
+                    },
+                    {
+                      "key": "run-tests-only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) the id of the scheduled rule"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"createAlert\": \"<boolean>\",\n  \"dedupPeriodMinutes\": 60,\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"runbook\": \"<string>\",\n  \"scheduledQueries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"summaryAttributes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ],\n  \"threshold\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"testResults\": [\n    {\n      \"error\": {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      \"errored\": false,\n      \"functions\": {\n        \"alertContext\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"dedup\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"description\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"destinations\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"detection\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"reference\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"runbook\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"severity\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"title\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        }\n      },\n      \"name\": \"string\",\n      \"passed\": true,\n      \"triggerAlert\": true\n    },\n    {\n      \"error\": {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      \"errored\": true,\n      \"functions\": {\n        \"alertContext\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"dedup\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"description\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"destinations\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"detection\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"reference\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"runbook\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"severity\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"title\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        }\n      },\n      \"name\": \"string\",\n      \"passed\": false,\n      \"triggerAlert\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-api-host",
+      "key": "api_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{api_host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6ac5cf78-c3d2-42d7-bbe6-f091614fde7d",
+    "name": "Panther REST alert scheduled rule API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The alert api handles all operations for alerts",
+      "type": "text/plain"
+    }
+  }
+}

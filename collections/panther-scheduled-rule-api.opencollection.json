@@ -1,0 +1,195 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Panther REST alert scheduled rule API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "scheduled rule",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list scheduled rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/scheduled-rules",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "the pagination token"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "the maximum results to return"
+              },
+              {
+                "name": "name-contains",
+                "value": "",
+                "type": "query",
+                "description": "Substring search by name (case-insensitive)"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Only include rules in the given state"
+              },
+              {
+                "name": "scheduled-query",
+                "value": "",
+                "type": "query",
+                "description": "Only include rules which apply to one of these scheduled queries"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "Only include rules with one of the given severities"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Only include rules with one of the given tags (case-insensitive)"
+              },
+              {
+                "name": "created-by",
+                "value": "",
+                "type": "query",
+                "description": "Only include rules whose creator matches this user ID or actor ID"
+              },
+              {
+                "name": "last-modified-by",
+                "value": "",
+                "type": "query",
+                "description": "Only include rules last modified by this user ID or actor ID"
+              }
+            ]
+          },
+          "docs": "list scheduled rules"
+        },
+        {
+          "info": {
+            "name": "create scheduled rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{api_host}/scheduled-rules",
+            "params": [
+              {
+                "name": "run-tests-first",
+                "value": "",
+                "type": "query",
+                "description": "set this field to false to exclude running tests prior to saving"
+              },
+              {
+                "name": "run-tests-only",
+                "value": "",
+                "type": "query",
+                "description": "set this field to true if you want to run tests without saving"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "create scheduled rule"
+        },
+        {
+          "info": {
+            "name": "get scheduled rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/scheduled-rules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the rule to fetch"
+              }
+            ]
+          },
+          "docs": "get scheduled rule"
+        },
+        {
+          "info": {
+            "name": "put scheduled rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{api_host}/scheduled-rules/:id",
+            "params": [
+              {
+                "name": "run-tests-first",
+                "value": "",
+                "type": "query",
+                "description": "set this field to false to exclude running tests prior to saving"
+              },
+              {
+                "name": "run-tests-only",
+                "value": "",
+                "type": "query",
+                "description": "set this field to true if you want to run tests without saving"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "the id of the scheduled rule"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "put creates or updates a scheduled rule"
+        },
+        {
+          "info": {
+            "name": "delete scheduled rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{api_host}/scheduled-rules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the rule to delete"
+              }
+            ]
+          },
+          "docs": "delete scheduled rule"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

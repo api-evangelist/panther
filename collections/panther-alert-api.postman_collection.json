@@ -1,0 +1,1610 @@
+{
+  "item": [
+    {
+      "id": "66565543-0757-44b8-b085-4d24f36be355",
+      "name": "alert",
+      "description": {
+        "content": "The alert api handles all operations for alerts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "24cf89f4-79d4-44b3-947b-0370bd909d8c",
+          "name": "List alerts",
+          "request": {
+            "name": "List alerts",
+            "description": {},
+            "url": {
+              "path": [
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "ALERT"
+                },
+                {
+                  "disabled": false,
+                  "key": "sub-type",
+                  "value": "<string>",
+                  "description": "The sub-type of the alert"
+                },
+                {
+                  "disabled": false,
+                  "key": "sub-type",
+                  "value": "<string>",
+                  "description": "The sub-type of the alert"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "the pagination token"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "the maximum results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "created-after",
+                  "value": "<string>",
+                  "description": "The date and time after which the alerts were created. If empty we default to 30 days ago"
+                },
+                {
+                  "disabled": false,
+                  "key": "created-before",
+                  "value": "<string>",
+                  "description": "The date and time before which the alerts were created. If empty we default to the current time"
+                },
+                {
+                  "disabled": false,
+                  "key": "detection-id",
+                  "value": "<string>",
+                  "description": "The detection ID to filter alerts by"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-dir",
+                  "value": "desc",
+                  "description": "The sort direction of the results"
+                },
+                {
+                  "disabled": false,
+                  "key": "name-contains",
+                  "value": "<string>",
+                  "description": "A string to search for in the alert name"
+                },
+                {
+                  "disabled": false,
+                  "key": "log-source",
+                  "value": "<string>",
+                  "description": "The log source of the alert"
+                },
+                {
+                  "disabled": false,
+                  "key": "log-source",
+                  "value": "<string>",
+                  "description": "The log source of the alert"
+                },
+                {
+                  "disabled": false,
+                  "key": "log-type",
+                  "value": "<string>",
+                  "description": "The log type of the alert"
+                },
+                {
+                  "disabled": false,
+                  "key": "log-type",
+                  "value": "<string>",
+                  "description": "The log type of the alert"
+                },
+                {
+                  "disabled": false,
+                  "key": "resource-type",
+                  "value": "<string>",
+                  "description": "The resource type of the alert"
+                },
+                {
+                  "disabled": false,
+                  "key": "resource-type",
+                  "value": "<string>",
+                  "description": "The resource type of the alert"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The status of the alert"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The status of the alert"
+                },
+                {
+                  "disabled": false,
+                  "key": "severity",
+                  "value": "<string>",
+                  "description": "The severity of the alert"
+                },
+                {
+                  "disabled": false,
+                  "key": "severity",
+                  "value": "<string>",
+                  "description": "The severity of the alert"
+                },
+                {
+                  "disabled": false,
+                  "key": "assignee",
+                  "value": "<string>",
+                  "description": "The assignee of the alert. This should be a user id"
+                },
+                {
+                  "disabled": false,
+                  "key": "assignee",
+                  "value": "<string>",
+                  "description": "The assignee of the alert. This should be a user id"
+                },
+                {
+                  "disabled": false,
+                  "key": "event-count-min",
+                  "value": "<long>",
+                  "description": "The minimum number of events in the alert"
+                },
+                {
+                  "disabled": false,
+                  "key": "event-count-max",
+                  "value": "<long>",
+                  "description": "The maximum number of events in the alert"
+                },
+                {
+                  "disabled": false,
+                  "key": "quality",
+                  "value": "<string>",
+                  "description": "Filter by alert quality"
+                },
+                {
+                  "disabled": false,
+                  "key": "quality",
+                  "value": "<string>",
+                  "description": "Filter by alert quality"
+                },
+                {
+                  "disabled": false,
+                  "key": "context-tag",
+                  "value": "<string>",
+                  "description": "Filter by context tags applied to alerts"
+                },
+                {
+                  "disabled": false,
+                  "key": "context-tag",
+                  "value": "<string>",
+                  "description": "Filter by context tags applied to alerts"
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a0a94485-9466-454a-9e99-ea4a726070f8",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "ALERT"
+                    },
+                    {
+                      "key": "sub-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sub-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "created-after",
+                      "value": "2025-01-01"
+                    },
+                    {
+                      "key": "created-before",
+                      "value": "2025-01-01"
+                    },
+                    {
+                      "key": "detection-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort-dir",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "name-contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "log-source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "log-source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "log-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "log-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resource-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resource-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assignee",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assignee",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "event-count-min",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "event-count-max",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "quality",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "quality",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "context-tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "context-tag",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"status\": \"OPEN\",\n      \"assignee\": {\n        \"id\": \"user\",\n        \"type\": \"string\"\n      },\n      \"context\": {},\n      \"contextTags\": [\n        \"9m699vfep36\",\n        \"7k4\"\n      ],\n      \"createdAt\": \"string\",\n      \"deliveries\": [\n        {\n          \"dispatchedAt\": \"string\",\n          \"label\": \"string\",\n          \"message\": \"string\",\n          \"statusCode\": 2248,\n          \"success\": false,\n          \"outputId\": \"string\"\n        },\n        {\n          \"dispatchedAt\": \"string\",\n          \"label\": \"string\",\n          \"message\": \"string\",\n          \"statusCode\": 3634,\n          \"success\": true,\n          \"outputId\": \"string\"\n        }\n      ],\n      \"detection\": {\n        \"id\": \"string\",\n        \"type\": \"CORRELATION_RULE\"\n      },\n      \"eventCount\": 9680,\n      \"firstEventOccurredAt\": \"string\",\n      \"lastReceivedEventAt\": \"string\",\n      \"quality\": \"NOISE\",\n      \"runbook\": \"string\",\n      \"severity\": \"MEDIUM\",\n      \"systemError\": {\n        \"detection\": {\n          \"id\": \"string\",\n          \"type\": \"RULE\"\n        },\n        \"sourceId\": \"string\",\n        \"sourceType\": \"string\",\n        \"type\": \"string\"\n      },\n      \"title\": \"string\",\n      \"updatedBy\": {\n        \"id\": \"user\",\n        \"type\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"status\": \"CLOSED\",\n      \"assignee\": {\n        \"id\": \"user\",\n        \"type\": \"string\"\n      },\n      \"context\": {},\n      \"contextTags\": [\n        \"1m\",\n        \"p2-i9dgf\"\n      ],\n      \"createdAt\": \"string\",\n      \"deliveries\": [\n        {\n          \"dispatchedAt\": \"string\",\n          \"label\": \"string\",\n          \"message\": \"string\",\n          \"statusCode\": 8261,\n          \"success\": true,\n          \"outputId\": \"string\"\n        },\n        {\n          \"dispatchedAt\": \"string\",\n          \"label\": \"string\",\n          \"message\": \"string\",\n          \"statusCode\": 1087,\n          \"success\": false,\n          \"outputId\": \"string\"\n        }\n      ],\n      \"detection\": {\n        \"id\": \"string\",\n        \"type\": \"RULE\"\n      },\n      \"eventCount\": 6087,\n      \"firstEventOccurredAt\": \"string\",\n      \"lastReceivedEventAt\": \"string\",\n      \"quality\": \"USEFUL\",\n      \"runbook\": \"string\",\n      \"severity\": \"MEDIUM\",\n      \"systemError\": {\n        \"detection\": {\n          \"id\": \"string\",\n          \"type\": \"RULE\"\n        },\n        \"sourceId\": \"string\",\n        \"sourceType\": \"string\",\n        \"type\": \"string\"\n      },\n      \"title\": \"string\",\n      \"updatedBy\": {\n        \"id\": \"api-token\",\n        \"type\": \"string\"\n      }\n    }\n  ],\n  \"next\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f689d751-190b-4837-9311-8c45e0f842d9",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "ALERT"
+                    },
+                    {
+                      "key": "sub-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sub-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "created-after",
+                      "value": "2025-01-01"
+                    },
+                    {
+                      "key": "created-before",
+                      "value": "2025-01-01"
+                    },
+                    {
+                      "key": "detection-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort-dir",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "name-contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "log-source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "log-source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "log-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "log-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resource-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resource-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assignee",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assignee",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "event-count-min",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "event-count-max",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "quality",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "quality",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "context-tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "context-tag",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c996fb36-82f6-495e-a536-302dacde8246",
+          "name": "Update the status, assignee, quality or contextTags of multiple alerts",
+          "request": {
+            "name": "Update the status, assignee, quality or contextTags of multiple alerts",
+            "description": {},
+            "url": {
+              "path": [
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"assignee\": \"<string>\",\n  \"contextTags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"quality\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d397317f-58cb-4a71-be7e-0570775e63c9",
+              "name": "No Content response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"assignee\": \"<string>\",\n  \"contextTags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"quality\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "72e0c43d-43b8-4021-b574-cda4a4195c7d",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"assignee\": \"<string>\",\n  \"contextTags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"quality\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e428c44-321b-4721-9423-28e6d3bad342",
+              "name": "not_found: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"assignee\": \"<string>\",\n  \"contextTags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"quality\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c8aa8adb-b9e4-45b1-9a99-5a2168de62ec",
+          "name": "Get an alert",
+          "request": {
+            "name": "Get an alert",
+            "description": {},
+            "url": {
+              "path": [
+                "alerts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the alert"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c6cf0e1-c1f7-436c-813d-5e143397df44",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the alert"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"type\": \"string\",\n  \"status\": \"TRIAGED\",\n  \"assignee\": {\n    \"id\": \"api-token\",\n    \"type\": \"string\"\n  },\n  \"context\": {},\n  \"contextTags\": [\n    \"5hfdgh1kntv\",\n    \"xwgfn4xj5\"\n  ],\n  \"createdAt\": \"string\",\n  \"deliveries\": [\n    {\n      \"dispatchedAt\": \"string\",\n      \"label\": \"string\",\n      \"message\": \"string\",\n      \"statusCode\": 5654,\n      \"success\": false,\n      \"outputId\": \"string\"\n    },\n    {\n      \"dispatchedAt\": \"string\",\n      \"label\": \"string\",\n      \"message\": \"string\",\n      \"statusCode\": 5790,\n      \"success\": true,\n      \"outputId\": \"string\"\n    }\n  ],\n  \"detection\": {\n    \"id\": \"string\",\n    \"type\": \"POLICY\"\n  },\n  \"eventCount\": 4048,\n  \"firstEventOccurredAt\": \"string\",\n  \"lastReceivedEventAt\": \"string\",\n  \"quality\": \"NOISE\",\n  \"runbook\": \"string\",\n  \"severity\": \"INFO\",\n  \"systemError\": {\n    \"detection\": {\n      \"id\": \"string\",\n      \"type\": \"SCHEDULED_RULE\"\n    },\n    \"sourceId\": \"string\",\n    \"sourceType\": \"string\",\n    \"type\": \"string\"\n  },\n  \"title\": \"string\",\n  \"updatedBy\": {\n    \"id\": \"user\",\n    \"type\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19b044c5-65be-4da3-9517-04e97571c91a",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the alert"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8ea2b1b-4182-48df-9f5b-45c8a4c5f528",
+              "name": "not_found: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the alert"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60728e57-e6e1-4695-adee-925d6145d832",
+          "name": "Update the status, assignee, quality or contextTags of an alert",
+          "request": {
+            "name": "Update the status, assignee, quality or contextTags of an alert",
+            "description": {},
+            "url": {
+              "path": [
+                "alerts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the alert"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assignee\": \"<string>\",\n  \"contextTags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"quality\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "12f6bf12-057c-474f-bf22-eb1c64f03e2c",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the alert"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assignee\": \"<string>\",\n  \"contextTags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"quality\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "13440eca-25cd-4ab2-a74c-8b913867cc35",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the alert"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assignee\": \"<string>\",\n  \"contextTags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"quality\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29a5b906-a228-4d18-baec-37e526b9c590",
+              "name": "not_found: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the alert"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assignee\": \"<string>\",\n  \"contextTags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"quality\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0544ee29-5095-4aec-b877-2a24f52283c2",
+          "name": "List alert events",
+          "request": {
+            "name": "List alert events",
+            "description": {},
+            "url": {
+              "path": [
+                "alerts",
+                ":id",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "the pagination token"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "the maximum results to return"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The alert id"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e2b55aeb-5eaf-48d9-8bde-18b5ed0e0648",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The alert id"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [],\n  \"next\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "585652a0-efd2-4014-a93c-0cd6133d78b2",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The alert id"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "386c1321-61fc-4826-b1b8-e48065242775",
+              "name": "not_found: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The alert id"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-api-host",
+      "key": "api_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{api_host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "91b55f93-c505-4f28-97f2-6b3017fc8346",
+    "name": "Panther REST alert API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The alert api handles all operations for alerts",
+      "type": "text/plain"
+    }
+  }
+}

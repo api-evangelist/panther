@@ -1,0 +1,114 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Panther REST alert contexttag API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "contexttag",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all context tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/alert-context-tags",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token from a previous request"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "managed",
+                "value": "",
+                "type": "query",
+                "description": "Filter by tag type: true for managed tags only, false for custom tags only, omit for all tags"
+              }
+            ]
+          },
+          "docs": "Returns all context tags, both managed (system-defined) and custom (user-defined)"
+        },
+        {
+          "info": {
+            "name": "Create a custom context tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{api_host}/alert-context-tags",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new custom context tag. Returns 409 Conflict if the tag already exists."
+        },
+        {
+          "info": {
+            "name": "Rename a custom context tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{api_host}/alert-context-tags/:tag",
+            "params": [
+              {
+                "name": "tag",
+                "value": "",
+                "type": "path",
+                "description": "The current tag value to rename"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Atomically renames a custom context tag. Returns 404 if the tag doesn't exist, 409 if the target tag already exists."
+        },
+        {
+          "info": {
+            "name": "Delete a custom context tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{api_host}/alert-context-tags/:tag",
+            "params": [
+              {
+                "name": "tag",
+                "value": "",
+                "type": "path",
+                "description": "The tag value to delete"
+              }
+            ]
+          },
+          "docs": "Deletes a custom context tag. Managed tags cannot be deleted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

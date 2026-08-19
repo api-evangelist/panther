@@ -1,0 +1,1417 @@
+{
+  "item": [
+    {
+      "id": "ee494634-1c65-4945-9025-f079f1f17354",
+      "name": "policy",
+      "description": {
+        "content": "The policy api handles all operations for policies",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "43bb56b4-19e7-4336-a446-16f5080d63d3",
+          "name": "list policies",
+          "request": {
+            "name": "list policies",
+            "description": {},
+            "url": {
+              "path": [
+                "policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "the pagination token"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "the maximum results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "compliance-status",
+                  "value": "<string>",
+                  "description": "Only include policies with this compliance status"
+                },
+                {
+                  "disabled": false,
+                  "key": "name-contains",
+                  "value": "<string>",
+                  "description": "Substring search by name (case-insensitive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Only include policies in the given state"
+                },
+                {
+                  "disabled": false,
+                  "key": "resource-type",
+                  "value": "<string>",
+                  "description": "Only include policies which apply to one of the given resource types"
+                },
+                {
+                  "disabled": false,
+                  "key": "resource-type",
+                  "value": "<string>",
+                  "description": "Only include policies which apply to one of the given resource types"
+                },
+                {
+                  "disabled": false,
+                  "key": "severity",
+                  "value": "<string>",
+                  "description": "Only include policies with one of the given severities"
+                },
+                {
+                  "disabled": false,
+                  "key": "severity",
+                  "value": "<string>",
+                  "description": "Only include policies with one of the given severities"
+                },
+                {
+                  "disabled": false,
+                  "key": "tag",
+                  "value": "<string>",
+                  "description": "Only include policies with one of the given tags (case-insensitive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "tag",
+                  "value": "<string>",
+                  "description": "Only include policies with one of the given tags (case-insensitive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "created-by",
+                  "value": "<string>",
+                  "description": "Only include policies whose creator matches this user ID or actor ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "last-modified-by",
+                  "value": "<string>",
+                  "description": "Only include policies last modified by this user ID or actor ID"
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b3e990e-1a43-4de7-8ae1-da52c9ede4bf",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "compliance-status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name-contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resource-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resource-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created-by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last-modified-by",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": \"string\",\n  \"results\": [\n    {\n      \"body\": \"string\",\n      \"createdAt\": \"string\",\n      \"createdBy\": {\n        \"id\": \"system\",\n        \"type\": \"string\"\n      },\n      \"createdByExternal\": \"string\",\n      \"description\": \"string\",\n      \"displayName\": \"string\",\n      \"enabled\": true,\n      \"id\": \"string\",\n      \"lastModified\": \"string\",\n      \"managed\": true,\n      \"outputIDs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"reference\": \"string\",\n      \"reports\": {\n        \"key_0\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"resourceTypes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"severity\": \"HIGH\",\n      \"suppressions\": [\n        \"aws::s3::*\"\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tests\": [\n        {\n          \"name\": \"string\",\n          \"expectedResult\": false,\n          \"log\": {},\n          \"mocks\": [\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"resource\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"expectedResult\": false,\n          \"log\": {},\n          \"mocks\": [\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"resource\": \"string\"\n        }\n      ]\n    },\n    {\n      \"body\": \"string\",\n      \"createdAt\": \"string\",\n      \"createdBy\": {\n        \"id\": \"api-token\",\n        \"type\": \"string\"\n      },\n      \"createdByExternal\": \"string\",\n      \"description\": \"string\",\n      \"displayName\": \"string\",\n      \"enabled\": true,\n      \"id\": \"string\",\n      \"lastModified\": \"string\",\n      \"managed\": true,\n      \"outputIDs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"reference\": \"string\",\n      \"reports\": {\n        \"key_0\": [\n          \"string\",\n          \"string\"\n        ],\n        \"key_1\": [\n          \"string\",\n          \"string\"\n        ],\n        \"key_2\": [\n          \"string\",\n          \"string\"\n        ],\n        \"key_3\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"resourceTypes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"severity\": \"INFO\",\n      \"suppressions\": [\n        \"aws::s3::*\"\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tests\": [\n        {\n          \"name\": \"string\",\n          \"expectedResult\": false,\n          \"log\": {},\n          \"mocks\": [\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"resource\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"expectedResult\": true,\n          \"log\": {},\n          \"mocks\": [\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"resource\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74a43531-c9b9-4785-9f4c-4a7f62b6fe34",
+          "name": "create policy",
+          "request": {
+            "name": "create policy",
+            "description": {},
+            "url": {
+              "path": [
+                "policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "run-tests-first",
+                  "value": "true",
+                  "description": "set this field to false to exclude running tests prior to saving"
+                },
+                {
+                  "disabled": false,
+                  "key": "run-tests-only",
+                  "value": "false",
+                  "description": "set this field to true if you want to run tests without saving"
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"resourceTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"suppressions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ce1e3c82-c14c-4377-bcb5-0a884bad9867",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "run-tests-first",
+                      "value": "true"
+                    },
+                    {
+                      "key": "run-tests-only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"resourceTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"suppressions\": [\n    \"aws::s3::*\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": \"string\",\n  \"createdAt\": \"string\",\n  \"createdBy\": {\n    \"id\": \"api-token\",\n    \"type\": \"string\"\n  },\n  \"createdByExternal\": \"string\",\n  \"description\": \"string\",\n  \"displayName\": \"string\",\n  \"enabled\": false,\n  \"id\": \"string\",\n  \"lastModified\": \"string\",\n  \"managed\": false,\n  \"outputIDs\": [\n    \"string\",\n    \"string\"\n  ],\n  \"reference\": \"string\",\n  \"reports\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"resourceTypes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"severity\": \"CRITICAL\",\n  \"suppressions\": [\n    \"aws::s3::*\"\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "926a7563-aba0-425d-a4e4-309e4bc269c2",
+              "name": "No Content response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "run-tests-first",
+                      "value": "true"
+                    },
+                    {
+                      "key": "run-tests-only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"resourceTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"suppressions\": [\n    \"aws::s3::*\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "de273f5b-d8e1-4a17-b4b9-cc4daf951456",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "run-tests-first",
+                      "value": "true"
+                    },
+                    {
+                      "key": "run-tests-only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"resourceTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"suppressions\": [\n    \"aws::s3::*\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"testResults\": [\n    {\n      \"error\": {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      \"errored\": false,\n      \"functions\": {\n        \"alertContext\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"dedup\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"description\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"destinations\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"detection\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"reference\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"runbook\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"severity\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"title\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        }\n      },\n      \"name\": \"string\",\n      \"passed\": false,\n      \"triggerAlert\": false\n    },\n    {\n      \"error\": {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      \"errored\": true,\n      \"functions\": {\n        \"alertContext\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"dedup\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"description\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"destinations\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"detection\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"reference\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"runbook\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"severity\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"title\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        }\n      },\n      \"name\": \"string\",\n      \"passed\": false,\n      \"triggerAlert\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc1a64ed-6261-4461-a724-9452e36387df",
+              "name": "exists: Conflict response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "run-tests-first",
+                      "value": "true"
+                    },
+                    {
+                      "key": "run-tests-only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"resourceTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"suppressions\": [\n    \"aws::s3::*\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa0b96cb-076b-4d8a-8d91-bd8a8ec87bf7",
+          "name": "delete policy",
+          "request": {
+            "name": "delete policy",
+            "description": {},
+            "url": {
+              "path": [
+                "policies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the policy to delete"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12d6a6f7-7f71-4984-b571-e78795dde0d5",
+              "name": "No Content response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the policy to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3f8e6a30-664e-43db-9f85-584eb1f85503",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the policy to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"testResults\": [\n    {\n      \"error\": {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      \"errored\": true,\n      \"functions\": {\n        \"alertContext\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"dedup\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"description\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"destinations\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"detection\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"reference\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"runbook\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"severity\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"title\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        }\n      },\n      \"name\": \"string\",\n      \"passed\": false,\n      \"triggerAlert\": true\n    },\n    {\n      \"error\": {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      \"errored\": true,\n      \"functions\": {\n        \"alertContext\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"dedup\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"description\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"destinations\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"detection\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"reference\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"runbook\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"severity\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"title\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        }\n      },\n      \"name\": \"string\",\n      \"passed\": false,\n      \"triggerAlert\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0fd3562-5d62-4b4c-9769-a75fd1c42d3e",
+              "name": "not_found: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the policy to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0778c21-ebf7-4134-a576-b4b1efa1148e",
+          "name": "get policy",
+          "request": {
+            "name": "get policy",
+            "description": {},
+            "url": {
+              "path": [
+                "policies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) the id of the policy to fetch"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0aeb3e66-f232-4206-a7ce-9fb27fcd868d",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) the id of the policy to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": \"string\",\n  \"createdAt\": \"string\",\n  \"createdBy\": {\n    \"id\": \"api-token\",\n    \"type\": \"string\"\n  },\n  \"createdByExternal\": \"string\",\n  \"description\": \"string\",\n  \"displayName\": \"string\",\n  \"enabled\": false,\n  \"id\": \"string\",\n  \"lastModified\": \"string\",\n  \"managed\": false,\n  \"outputIDs\": [\n    \"string\",\n    \"string\"\n  ],\n  \"reference\": \"string\",\n  \"reports\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"resourceTypes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"severity\": \"CRITICAL\",\n  \"suppressions\": [\n    \"aws::s3::*\"\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e48b1d42-3dcf-4c3d-b1e5-a591733b1a2a",
+              "name": "not_found: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) the id of the policy to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2d1678e-c24c-4d39-9a6d-f05c894ceb27",
+          "name": "put policy",
+          "request": {
+            "name": "put policy",
+            "description": {
+              "content": "put creates or updates a policy",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "policies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "run-tests-first",
+                  "value": "true",
+                  "description": "set this field to false to exclude running tests prior to saving"
+                },
+                {
+                  "disabled": false,
+                  "key": "run-tests-only",
+                  "value": "false",
+                  "description": "set this field to true if you want to run tests without saving"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) the id of the policy"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"resourceTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"suppressions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3eef593f-c4f4-48e5-98e1-91db77ab8805",
+              "name": "200 returned if the item already existed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "run-tests-first",
+                      "value": "true"
+                    },
+                    {
+                      "key": "run-tests-only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) the id of the policy"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"resourceTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"suppressions\": [\n    \"aws::s3::*\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": \"string\",\n  \"createdAt\": \"string\",\n  \"createdBy\": {\n    \"id\": \"api-token\",\n    \"type\": \"string\"\n  },\n  \"createdByExternal\": \"string\",\n  \"description\": \"string\",\n  \"displayName\": \"string\",\n  \"enabled\": false,\n  \"id\": \"string\",\n  \"lastModified\": \"string\",\n  \"managed\": false,\n  \"outputIDs\": [\n    \"string\",\n    \"string\"\n  ],\n  \"reference\": \"string\",\n  \"reports\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"resourceTypes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"severity\": \"CRITICAL\",\n  \"suppressions\": [\n    \"aws::s3::*\"\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7c803ba-5384-4cdf-b21d-50893ae023bc",
+              "name": "201 returned if the item was created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "run-tests-first",
+                      "value": "true"
+                    },
+                    {
+                      "key": "run-tests-only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) the id of the policy"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"resourceTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"suppressions\": [\n    \"aws::s3::*\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": \"string\",\n  \"createdAt\": \"string\",\n  \"createdBy\": {\n    \"id\": \"api-token\",\n    \"type\": \"string\"\n  },\n  \"createdByExternal\": \"string\",\n  \"description\": \"string\",\n  \"displayName\": \"string\",\n  \"enabled\": false,\n  \"id\": \"string\",\n  \"lastModified\": \"string\",\n  \"managed\": false,\n  \"outputIDs\": [\n    \"string\",\n    \"string\"\n  ],\n  \"reference\": \"string\",\n  \"reports\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"resourceTypes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"severity\": \"CRITICAL\",\n  \"suppressions\": [\n    \"aws::s3::*\"\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11d405c5-a82d-4e25-b21c-5e1a857efa2d",
+              "name": "No Content response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "run-tests-first",
+                      "value": "true"
+                    },
+                    {
+                      "key": "run-tests-only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) the id of the policy"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"resourceTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"suppressions\": [\n    \"aws::s3::*\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0d26a9f8-b9b4-4805-9346-8b2556191fcf",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "run-tests-first",
+                      "value": "true"
+                    },
+                    {
+                      "key": "run-tests-only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) the id of the policy"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"body\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"outputIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reference\": \"<string>\",\n  \"reports\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"resourceTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"suppressions\": [\n    \"aws::s3::*\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tests\": [\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"expectedResult\": \"<boolean>\",\n      \"log\": {},\n      \"mocks\": [\n        {\n          \"key_0\": \"<string>\"\n        },\n        {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      ],\n      \"resource\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"testResults\": [\n    {\n      \"error\": {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      \"errored\": true,\n      \"functions\": {\n        \"alertContext\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"dedup\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"description\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"destinations\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"detection\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"reference\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"runbook\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"severity\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"title\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        }\n      },\n      \"name\": \"string\",\n      \"passed\": false,\n      \"triggerAlert\": true\n    },\n    {\n      \"error\": {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      \"errored\": true,\n      \"functions\": {\n        \"alertContext\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"dedup\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"description\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"destinations\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"detection\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"reference\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"runbook\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"severity\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        },\n        \"title\": {\n          \"error\": {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"message\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"output\": \"string\"\n        }\n      },\n      \"name\": \"string\",\n      \"passed\": false,\n      \"triggerAlert\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-api-host",
+      "key": "api_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{api_host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "10527afc-b114-44db-91dc-6ce24298d12f",
+    "name": "Panther REST alert policy API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The alert api handles all operations for alerts",
+      "type": "text/plain"
+    }
+  }
+}

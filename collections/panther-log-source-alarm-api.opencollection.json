@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Panther REST alert log source alarm API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "log source alarm",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "get log source alarm",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/log-source-alarms/:sourceId/:type",
+            "params": [
+              {
+                "name": "sourceId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the log source"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "The alarm type. Only SOURCE_NO_DATA is exposed."
+              }
+            ]
+          },
+          "docs": "Get a specific alarm for a log source"
+        },
+        {
+          "info": {
+            "name": "put log source alarm",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{api_host}/log-source-alarms/:sourceId/:type",
+            "params": [
+              {
+                "name": "sourceId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the log source"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "The alarm type. Only SOURCE_NO_DATA is supported on PUT."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update the drop-off threshold for a log source. Only the SOURCE_NO_DATA alarm type is user-configurable. Not supported for cloud-security sources (returns 400)."
+        },
+        {
+          "info": {
+            "name": "delete log source alarm",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{api_host}/log-source-alarms/:sourceId/:type",
+            "params": [
+              {
+                "name": "sourceId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the log source"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "The alarm type. Only SOURCE_NO_DATA is supported on DELETE."
+              }
+            ]
+          },
+          "docs": "Delete the drop-off alarm for a log source. Idempotent: returns 204 even if no alarm exists."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

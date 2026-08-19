@@ -1,0 +1,1311 @@
+{
+  "item": [
+    {
+      "id": "8285a1ef-61ee-4ca9-a6d8-4a7335642fcf",
+      "name": "http source",
+      "description": {
+        "content": "The http source api handles all operations for http sources",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6769b3bd-f838-4d8a-9e85-7cfffbf33f07",
+          "name": "create http source",
+          "request": {
+            "name": "create http source",
+            "description": {},
+            "url": {
+              "path": [
+                "log-sources",
+                "http"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"authMethod\": \"<string>\",\n  \"authBearerToken\": \"<string>\",\n  \"authHeaderKey\": \"<string>\",\n  \"authHmacAlg\": \"<string>\",\n  \"authPassword\": \"<string>\",\n  \"authSecretValue\": \"<string>\",\n  \"authUsername\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aa4db57c-7089-4a75-bd42-eb7886171fce",
+              "name": "Created response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "http"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"authMethod\": \"<string>\",\n  \"authBearerToken\": \"<string>\",\n  \"authHeaderKey\": \"<string>\",\n  \"authHmacAlg\": \"<string>\",\n  \"authPassword\": \"<string>\",\n  \"authSecretValue\": \"<string>\",\n  \"authUsername\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"authBearerToken\": \"string\",\n  \"authHeaderKey\": \"string\",\n  \"authHmacAlg\": \"string\",\n  \"authMethod\": \"None\",\n  \"authPassword\": \"string\",\n  \"authSecretValue\": \"string\",\n  \"authUsername\": \"string\",\n  \"integrationId\": \"string\",\n  \"integrationLabel\": \"string\",\n  \"logStreamType\": \"JsonArray\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"logTypes\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca4b527f-b3d6-49a6-8809-62e16d7f87a3",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "http"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"authMethod\": \"<string>\",\n  \"authBearerToken\": \"<string>\",\n  \"authHeaderKey\": \"<string>\",\n  \"authHmacAlg\": \"<string>\",\n  \"authPassword\": \"<string>\",\n  \"authSecretValue\": \"<string>\",\n  \"authUsername\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fa6bd8d-1e44-43e4-802d-2200194ac29e",
+              "name": "exists: Conflict response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "http"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"authMethod\": \"<string>\",\n  \"authBearerToken\": \"<string>\",\n  \"authHeaderKey\": \"<string>\",\n  \"authHmacAlg\": \"<string>\",\n  \"authPassword\": \"<string>\",\n  \"authSecretValue\": \"<string>\",\n  \"authUsername\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8762d08-085c-45fd-8376-22e229eccf3c",
+              "name": "service: Internal Server Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "http"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"authMethod\": \"<string>\",\n  \"authBearerToken\": \"<string>\",\n  \"authHeaderKey\": \"<string>\",\n  \"authHmacAlg\": \"<string>\",\n  \"authPassword\": \"<string>\",\n  \"authSecretValue\": \"<string>\",\n  \"authUsername\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3aa9a580-7692-4edb-a897-594bfdad9286",
+          "name": "delete http source",
+          "request": {
+            "name": "delete http source",
+            "description": {},
+            "url": {
+              "path": [
+                "log-sources",
+                "http",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the http source to delete"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "63b3b62c-6f89-4d84-ac9f-6f71aad11e6b",
+              "name": "No Content response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "http",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the http source to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "016ab3f4-70d5-4f79-9d7c-0da78efc65c2",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "http",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the http source to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2b0284d-a2d3-4be5-ad53-d5f012205086",
+              "name": "service: Internal Server Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "http",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the http source to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "db92801f-94b2-4f3d-ab13-9569c47afeb8",
+          "name": "get http source",
+          "request": {
+            "name": "get http source",
+            "description": {},
+            "url": {
+              "path": [
+                "log-sources",
+                "http",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the http source to fetch"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a9ec587-e809-4cba-8c64-27bb1de448a1",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "http",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the http source to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"authBearerToken\": \"string\",\n  \"authHeaderKey\": \"string\",\n  \"authHmacAlg\": \"string\",\n  \"authMethod\": \"SharedSecret\",\n  \"authPassword\": \"string\",\n  \"authSecretValue\": \"string\",\n  \"authUsername\": \"string\",\n  \"integrationId\": \"string\",\n  \"integrationLabel\": \"string\",\n  \"logStreamType\": \"JSON\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"logTypes\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "271615bf-c9d2-410f-a757-446a5c808449",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "http",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the http source to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de7d13e2-6c12-4dfb-add9-6fc4a558e6b0",
+              "name": "not_found: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "http",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the http source to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99ccedb7-be5f-49e7-8dbf-2a7be541803e",
+              "name": "service: Internal Server Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "http",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the http source to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "473c90fa-ae42-41f4-8d87-a7750b926766",
+          "name": "put http source",
+          "request": {
+            "name": "put http source",
+            "description": {
+              "content": "put updates an http source",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "log-sources",
+                "http",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the http source to update"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"authMethod\": \"<string>\",\n  \"authBearerToken\": \"<string>\",\n  \"authHeaderKey\": \"<string>\",\n  \"authHmacAlg\": \"<string>\",\n  \"authPassword\": \"<string>\",\n  \"authSecretValue\": \"<string>\",\n  \"authUsername\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "67662a69-9d10-4841-9c9b-3c9e0a8acf77",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "http",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the http source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"authMethod\": \"<string>\",\n  \"authBearerToken\": \"<string>\",\n  \"authHeaderKey\": \"<string>\",\n  \"authHmacAlg\": \"<string>\",\n  \"authPassword\": \"<string>\",\n  \"authSecretValue\": \"<string>\",\n  \"authUsername\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"authBearerToken\": \"string\",\n  \"authHeaderKey\": \"string\",\n  \"authHmacAlg\": \"string\",\n  \"authMethod\": \"SharedSecret\",\n  \"authPassword\": \"string\",\n  \"authSecretValue\": \"string\",\n  \"authUsername\": \"string\",\n  \"integrationId\": \"string\",\n  \"integrationLabel\": \"string\",\n  \"logStreamType\": \"JSON\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"logTypes\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c2532ef-fb62-4b26-a921-3dcca42d427f",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "http",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the http source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"authMethod\": \"<string>\",\n  \"authBearerToken\": \"<string>\",\n  \"authHeaderKey\": \"<string>\",\n  \"authHmacAlg\": \"<string>\",\n  \"authPassword\": \"<string>\",\n  \"authSecretValue\": \"<string>\",\n  \"authUsername\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5756a9db-82e8-4f10-a756-d4a2c029d3e2",
+              "name": "not_found: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "http",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the http source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"authMethod\": \"<string>\",\n  \"authBearerToken\": \"<string>\",\n  \"authHeaderKey\": \"<string>\",\n  \"authHmacAlg\": \"<string>\",\n  \"authPassword\": \"<string>\",\n  \"authSecretValue\": \"<string>\",\n  \"authUsername\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0617fb35-ec3a-4181-8aff-1c9f88e894c9",
+              "name": "exists: Conflict response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "http",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the http source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"authMethod\": \"<string>\",\n  \"authBearerToken\": \"<string>\",\n  \"authHeaderKey\": \"<string>\",\n  \"authHmacAlg\": \"<string>\",\n  \"authPassword\": \"<string>\",\n  \"authSecretValue\": \"<string>\",\n  \"authUsername\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af086189-a582-458b-bdd7-6c83ba0c3293",
+              "name": "service: Internal Server Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "http",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the http source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"logTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"logStreamType\": \"<string>\",\n  \"authMethod\": \"<string>\",\n  \"authBearerToken\": \"<string>\",\n  \"authHeaderKey\": \"<string>\",\n  \"authHmacAlg\": \"<string>\",\n  \"authPassword\": \"<string>\",\n  \"authSecretValue\": \"<string>\",\n  \"authUsername\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-api-host",
+      "key": "api_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{api_host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ce4b415d-cfd9-4040-abf0-af265b7ac212",
+    "name": "Panther REST alert http source API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The alert api handles all operations for alerts",
+      "type": "text/plain"
+    }
+  }
+}

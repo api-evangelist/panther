@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Panther REST alert query API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "query",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/queries",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "the pagination token"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "the maximum results to return"
+              }
+            ]
+          },
+          "docs": "list queries"
+        },
+        {
+          "info": {
+            "name": "create query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{api_host}/queries",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "create query"
+        },
+        {
+          "info": {
+            "name": "get query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/queries/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the query to fetch"
+              }
+            ]
+          },
+          "docs": "get query"
+        },
+        {
+          "info": {
+            "name": "update query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{api_host}/queries/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "updates a query"
+        },
+        {
+          "info": {
+            "name": "delete query",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{api_host}/queries/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the query to delete"
+              }
+            ]
+          },
+          "docs": "delete query"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

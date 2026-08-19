@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Panther REST alert api token API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "api token",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List api tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/api-tokens"
+          },
+          "docs": "List api tokens"
+        },
+        {
+          "info": {
+            "name": "Create an api token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{api_host}/api-tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an api token"
+        },
+        {
+          "info": {
+            "name": "Get an api token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/api-tokens/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the api token. Note: if self is provided, the current api token will be returned"
+              }
+            ]
+          },
+          "docs": "Get an api token"
+        },
+        {
+          "info": {
+            "name": "Update an api token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{api_host}/api-tokens/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the api token. Note: if self is provided, the current api token will be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an api token"
+        },
+        {
+          "info": {
+            "name": "delete api token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{api_host}/api-tokens/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the api token to delete. Note: if self is provided, the current api token will be deleted"
+              }
+            ]
+          },
+          "docs": "delete api token"
+        },
+        {
+          "info": {
+            "name": "Rotate an api token. If self is provided the current token will be rotated",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{api_host}/api-tokens/:id/rotate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the api token to rotate. Note: if self is provided, the current api token will be rotated"
+              }
+            ]
+          },
+          "docs": "Rotate an api token. If self is provided the current token will be rotated"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,201 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Panther REST alert policy API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "policy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/policies",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "the pagination token"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "the maximum results to return"
+              },
+              {
+                "name": "compliance-status",
+                "value": "",
+                "type": "query",
+                "description": "Only include policies with this compliance status"
+              },
+              {
+                "name": "name-contains",
+                "value": "",
+                "type": "query",
+                "description": "Substring search by name (case-insensitive)"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Only include policies in the given state"
+              },
+              {
+                "name": "resource-type",
+                "value": "",
+                "type": "query",
+                "description": "Only include policies which apply to one of the given resource types"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "Only include policies with one of the given severities"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Only include policies with one of the given tags (case-insensitive)"
+              },
+              {
+                "name": "created-by",
+                "value": "",
+                "type": "query",
+                "description": "Only include policies whose creator matches this user ID or actor ID"
+              },
+              {
+                "name": "last-modified-by",
+                "value": "",
+                "type": "query",
+                "description": "Only include policies last modified by this user ID or actor ID"
+              }
+            ]
+          },
+          "docs": "list policies"
+        },
+        {
+          "info": {
+            "name": "create policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{api_host}/policies",
+            "params": [
+              {
+                "name": "run-tests-first",
+                "value": "",
+                "type": "query",
+                "description": "set this field to false to exclude running tests prior to saving"
+              },
+              {
+                "name": "run-tests-only",
+                "value": "",
+                "type": "query",
+                "description": "set this field to true if you want to run tests without saving"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "create policy"
+        },
+        {
+          "info": {
+            "name": "get policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/policies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "the id of the policy to fetch"
+              }
+            ]
+          },
+          "docs": "get policy"
+        },
+        {
+          "info": {
+            "name": "put policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{api_host}/policies/:id",
+            "params": [
+              {
+                "name": "run-tests-first",
+                "value": "",
+                "type": "query",
+                "description": "set this field to false to exclude running tests prior to saving"
+              },
+              {
+                "name": "run-tests-only",
+                "value": "",
+                "type": "query",
+                "description": "set this field to true if you want to run tests without saving"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "the id of the policy"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "put creates or updates a policy"
+        },
+        {
+          "info": {
+            "name": "delete policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{api_host}/policies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the policy to delete"
+              }
+            ]
+          },
+          "docs": "delete policy"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

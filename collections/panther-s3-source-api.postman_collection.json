@@ -1,0 +1,1308 @@
+{
+  "item": [
+    {
+      "id": "4f28c292-d117-4436-a998-ccbe75393ef1",
+      "name": "s3 source",
+      "description": {
+        "content": "The S3 source API handles all operations for AWS S3 log sources",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0c1ad3b4-eb62-4a94-9417-6a8eb9708cf8",
+          "name": "create s3 source",
+          "request": {
+            "name": "create s3 source",
+            "description": {},
+            "url": {
+              "path": [
+                "log-sources",
+                "s3"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"awsAccountId\": \"<string>\",\n  \"s3Bucket\": \"<string>\",\n  \"integrationLabel\": \"<string>\",\n  \"s3PrefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"managedBucketNotifications\": \"<boolean>\",\n  \"logProcessingRole\": \"<string>\",\n  \"logStreamType\": \"<string>\",\n  \"kmsKey\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"retainEnvelopeFields\": \"<boolean>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec225cba-dc10-4b45-a43d-7d987b4330f2",
+              "name": "Created response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "s3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"awsAccountId\": \"<string>\",\n  \"s3Bucket\": \"<string>\",\n  \"integrationLabel\": \"<string>\",\n  \"s3PrefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"managedBucketNotifications\": \"<boolean>\",\n  \"logProcessingRole\": \"<string>\",\n  \"logStreamType\": \"<string>\",\n  \"kmsKey\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"retainEnvelopeFields\": \"<boolean>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"awsAccountId\": \"string\",\n  \"integrationId\": \"string\",\n  \"integrationLabel\": \"string\",\n  \"kmsKey\": \"string\",\n  \"logProcessingRole\": \"string\",\n  \"logStreamType\": \"XML\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"retainEnvelopeFields\": \"<boolean>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"managedBucketNotifications\": false,\n  \"s3Bucket\": \"string\",\n  \"s3PrefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3c8140f-6a03-47ca-ba00-9e067e85c7f2",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "s3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"awsAccountId\": \"<string>\",\n  \"s3Bucket\": \"<string>\",\n  \"integrationLabel\": \"<string>\",\n  \"s3PrefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"managedBucketNotifications\": \"<boolean>\",\n  \"logProcessingRole\": \"<string>\",\n  \"logStreamType\": \"<string>\",\n  \"kmsKey\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"retainEnvelopeFields\": \"<boolean>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0f940c4-6cf8-4e8e-b896-e91b5feaa0d0",
+              "name": "exists: Conflict response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "s3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"awsAccountId\": \"<string>\",\n  \"s3Bucket\": \"<string>\",\n  \"integrationLabel\": \"<string>\",\n  \"s3PrefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"managedBucketNotifications\": \"<boolean>\",\n  \"logProcessingRole\": \"<string>\",\n  \"logStreamType\": \"<string>\",\n  \"kmsKey\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"retainEnvelopeFields\": \"<boolean>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f691150-d6ad-4a13-bc30-69d97ce4f242",
+              "name": "service: Internal Server Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "s3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"awsAccountId\": \"<string>\",\n  \"s3Bucket\": \"<string>\",\n  \"integrationLabel\": \"<string>\",\n  \"s3PrefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"managedBucketNotifications\": \"<boolean>\",\n  \"logProcessingRole\": \"<string>\",\n  \"logStreamType\": \"<string>\",\n  \"kmsKey\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"retainEnvelopeFields\": \"<boolean>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32474c99-5b33-4c79-9bb1-1a62bacd7019",
+          "name": "delete s3 source",
+          "request": {
+            "name": "delete s3 source",
+            "description": {},
+            "url": {
+              "path": [
+                "log-sources",
+                "s3",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the S3 source to delete"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "046566e7-e403-467a-8616-7cf20729c05d",
+              "name": "No Content response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "s3",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the S3 source to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7208409f-7e9b-4e06-be57-5771e2059381",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "s3",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the S3 source to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34bd4721-1a02-4344-b0ca-b436c19f407e",
+              "name": "service: Internal Server Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "s3",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the S3 source to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a070cf1e-ace2-447d-a0e8-5c454cf402c6",
+          "name": "get s3 source",
+          "request": {
+            "name": "get s3 source",
+            "description": {},
+            "url": {
+              "path": [
+                "log-sources",
+                "s3",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the S3 source to fetch"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a0f332ce-2b09-4811-9e54-3a167043bed8",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "s3",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the S3 source to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"awsAccountId\": \"string\",\n  \"integrationId\": \"string\",\n  \"integrationLabel\": \"string\",\n  \"kmsKey\": \"string\",\n  \"logProcessingRole\": \"string\",\n  \"logStreamType\": \"Auto\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"retainEnvelopeFields\": \"<boolean>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"managedBucketNotifications\": false,\n  \"s3Bucket\": \"string\",\n  \"s3PrefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f076bbb9-fa25-4f7b-86af-b8a81c38579e",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "s3",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the S3 source to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "164ae213-65af-41cf-ac29-92f23f56da38",
+              "name": "not_found: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "s3",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the S3 source to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f95e971-dab4-4842-8677-49a36e219e34",
+              "name": "service: Internal Server Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "s3",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the S3 source to fetch"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5c45e489-87fd-4c3b-b166-3fae061e3608",
+          "name": "put s3 source",
+          "request": {
+            "name": "put s3 source",
+            "description": {},
+            "url": {
+              "path": [
+                "log-sources",
+                "s3",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the S3 source to update"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{api_host}}",
+                  "key": "api_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"s3PrefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"managedBucketNotifications\": \"<boolean>\",\n  \"logProcessingRole\": \"<string>\",\n  \"logStreamType\": \"<string>\",\n  \"kmsKey\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"retainEnvelopeFields\": \"<boolean>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b21659a0-63be-4f51-b9c0-e59237fead8f",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "s3",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the S3 source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"s3PrefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"managedBucketNotifications\": \"<boolean>\",\n  \"logProcessingRole\": \"<string>\",\n  \"logStreamType\": \"<string>\",\n  \"kmsKey\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"retainEnvelopeFields\": \"<boolean>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"awsAccountId\": \"string\",\n  \"integrationId\": \"string\",\n  \"integrationLabel\": \"string\",\n  \"kmsKey\": \"string\",\n  \"logProcessingRole\": \"string\",\n  \"logStreamType\": \"Auto\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"retainEnvelopeFields\": \"<boolean>\",\n    \"xmlRootElement\": \"<string>\"\n  },\n  \"managedBucketNotifications\": false,\n  \"s3Bucket\": \"string\",\n  \"s3PrefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f72a66e1-7e60-4594-815a-3c5d2aef7ce3",
+              "name": "bad_request: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "s3",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the S3 source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"s3PrefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"managedBucketNotifications\": \"<boolean>\",\n  \"logProcessingRole\": \"<string>\",\n  \"logStreamType\": \"<string>\",\n  \"kmsKey\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"retainEnvelopeFields\": \"<boolean>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8475e61-be8a-4d90-823f-55e62c572734",
+              "name": "not_found: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "s3",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the S3 source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"s3PrefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"managedBucketNotifications\": \"<boolean>\",\n  \"logProcessingRole\": \"<string>\",\n  \"logStreamType\": \"<string>\",\n  \"kmsKey\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"retainEnvelopeFields\": \"<boolean>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30b78938-5b75-42ab-b5fb-e100d10c5cc5",
+              "name": "exists: Conflict response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "s3",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the S3 source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"s3PrefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"managedBucketNotifications\": \"<boolean>\",\n  \"logProcessingRole\": \"<string>\",\n  \"logStreamType\": \"<string>\",\n  \"kmsKey\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"retainEnvelopeFields\": \"<boolean>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2146d4ec-c88f-4449-91cf-bb53f8ddda9e",
+              "name": "service: Internal Server Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log-sources",
+                    "s3",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the S3 source to update"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{api_host}}",
+                      "key": "api_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integrationLabel\": \"<string>\",\n  \"s3PrefixLogTypes\": [\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    },\n    {\n      \"excludedPrefixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"logTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"prefix\": \"<string>\"\n    }\n  ],\n  \"managedBucketNotifications\": \"<boolean>\",\n  \"logProcessingRole\": \"<string>\",\n  \"logStreamType\": \"<string>\",\n  \"kmsKey\": \"<string>\",\n  \"logStreamTypeOptions\": {\n    \"jsonArrayEnvelopeField\": \"<string>\",\n    \"retainEnvelopeFields\": \"<boolean>\",\n    \"xmlRootElement\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-api-host",
+      "key": "api_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{api_host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cbdf857b-6992-4897-b888-505cce913cef",
+    "name": "Panther REST alert s3 source API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The alert api handles all operations for alerts",
+      "type": "text/plain"
+    }
+  }
+}

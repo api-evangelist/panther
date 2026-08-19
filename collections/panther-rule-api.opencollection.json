@@ -1,0 +1,195 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Panther REST alert rule API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "rule",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/rules",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "the pagination token"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "the maximum results to return"
+              },
+              {
+                "name": "name-contains",
+                "value": "",
+                "type": "query",
+                "description": "Substring search by name (case-insensitive)"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Only include rules in the given state"
+              },
+              {
+                "name": "log-type",
+                "value": "",
+                "type": "query",
+                "description": "Only include rules which apply to one of the given log types"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "Only include rules with one of the given severities"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Only include rules with one of the given tags (case-insensitive)"
+              },
+              {
+                "name": "created-by",
+                "value": "",
+                "type": "query",
+                "description": "Only include rules whose creator matches this user ID or actor ID"
+              },
+              {
+                "name": "last-modified-by",
+                "value": "",
+                "type": "query",
+                "description": "Only include rules last modified by this user ID or actor ID"
+              }
+            ]
+          },
+          "docs": "list rules"
+        },
+        {
+          "info": {
+            "name": "create rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{api_host}/rules",
+            "params": [
+              {
+                "name": "run-tests-first",
+                "value": "",
+                "type": "query",
+                "description": "set this field to false to exclude running tests prior to saving"
+              },
+              {
+                "name": "run-tests-only",
+                "value": "",
+                "type": "query",
+                "description": "set this field to true if you want to run tests without saving"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "create rule"
+        },
+        {
+          "info": {
+            "name": "get rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/rules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the rule to fetch"
+              }
+            ]
+          },
+          "docs": "get rule"
+        },
+        {
+          "info": {
+            "name": "put rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{api_host}/rules/:id",
+            "params": [
+              {
+                "name": "run-tests-first",
+                "value": "",
+                "type": "query",
+                "description": "set this field to false to exclude running tests prior to saving"
+              },
+              {
+                "name": "run-tests-only",
+                "value": "",
+                "type": "query",
+                "description": "set this field to true if you want to run tests without saving"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "the id of the rule"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "put creates or updates a rule"
+        },
+        {
+          "info": {
+            "name": "delete rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{api_host}/rules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the rule to delete"
+              }
+            ]
+          },
+          "docs": "delete rule"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

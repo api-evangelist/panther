@@ -1,0 +1,240 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Panther REST alert API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "alert",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/alerts",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sub-type",
+                "value": "",
+                "type": "query",
+                "description": "The sub-type of the alert"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "the pagination token"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "the maximum results to return"
+              },
+              {
+                "name": "created-after",
+                "value": "",
+                "type": "query",
+                "description": "The date and time after which the alerts were created. If empty we default to 30 days ago"
+              },
+              {
+                "name": "created-before",
+                "value": "",
+                "type": "query",
+                "description": "The date and time before which the alerts were created. If empty we default to the current time"
+              },
+              {
+                "name": "detection-id",
+                "value": "",
+                "type": "query",
+                "description": "The detection ID to filter alerts by"
+              },
+              {
+                "name": "sort-dir",
+                "value": "",
+                "type": "query",
+                "description": "The sort direction of the results"
+              },
+              {
+                "name": "name-contains",
+                "value": "",
+                "type": "query",
+                "description": "A string to search for in the alert name"
+              },
+              {
+                "name": "log-source",
+                "value": "",
+                "type": "query",
+                "description": "The log source of the alert"
+              },
+              {
+                "name": "log-type",
+                "value": "",
+                "type": "query",
+                "description": "The log type of the alert"
+              },
+              {
+                "name": "resource-type",
+                "value": "",
+                "type": "query",
+                "description": "The resource type of the alert"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The status of the alert"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "The severity of the alert"
+              },
+              {
+                "name": "assignee",
+                "value": "",
+                "type": "query",
+                "description": "The assignee of the alert. This should be a user id"
+              },
+              {
+                "name": "event-count-min",
+                "value": "",
+                "type": "query",
+                "description": "The minimum number of events in the alert"
+              },
+              {
+                "name": "event-count-max",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of events in the alert"
+              },
+              {
+                "name": "quality",
+                "value": "",
+                "type": "query",
+                "description": "Filter by alert quality"
+              },
+              {
+                "name": "context-tag",
+                "value": "",
+                "type": "query",
+                "description": "Filter by context tags applied to alerts"
+              }
+            ]
+          },
+          "docs": "List alerts"
+        },
+        {
+          "info": {
+            "name": "Update the status, assignee, quality or contextTags of multiple alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{api_host}/alerts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the status, assignee, quality or contextTags of multiple alerts"
+        },
+        {
+          "info": {
+            "name": "Get an alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/alerts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the alert"
+              }
+            ]
+          },
+          "docs": "Get an alert"
+        },
+        {
+          "info": {
+            "name": "Update the status, assignee, quality or contextTags of an alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{api_host}/alerts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the alert"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the status, assignee, quality or contextTags of an alert"
+        },
+        {
+          "info": {
+            "name": "List alert events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/alerts/:id/events",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "the pagination token"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "the maximum results to return"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The alert id"
+              }
+            ]
+          },
+          "docs": "List alert events"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

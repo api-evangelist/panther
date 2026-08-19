@@ -1,0 +1,114 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Panther REST alert comment API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "comment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List alert comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/alert-comments",
+            "params": [
+              {
+                "name": "alert-id",
+                "value": "",
+                "type": "query",
+                "description": "The alert ID the comments are associated with"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "the pagination token"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "the maximum results to return"
+              }
+            ]
+          },
+          "docs": "List alert comments"
+        },
+        {
+          "info": {
+            "name": "Create a comment for an alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{api_host}/alert-comments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a comment for an alert"
+        },
+        {
+          "info": {
+            "name": "Get a comment for an alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api_host}/alert-comments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the comment"
+              }
+            ]
+          },
+          "docs": "Get a comment for an alert"
+        },
+        {
+          "info": {
+            "name": "Update a comment for an alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{api_host}/alert-comments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the comment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a comment for an alert"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
