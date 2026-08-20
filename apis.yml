@@ -52,6 +52,8 @@ apis:
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
   tags:
+  - Alert
+  tags_raw:
   - alert
   properties:
   - type: OpenAPI
@@ -74,6 +76,8 @@ apis:
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
   tags:
+  - API Token
+  tags_raw:
   - api token
   properties:
   - type: OpenAPI
@@ -119,6 +123,8 @@ apis:
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
   tags:
+  - Comment
+  tags_raw:
   - comment
   properties:
   - type: OpenAPI
@@ -185,6 +191,8 @@ apis:
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
   tags:
+  - Data Model
+  tags_raw:
   - data model
   properties:
   - type: OpenAPI
@@ -229,6 +237,8 @@ apis:
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
   tags:
+  - Global
+  tags_raw:
   - global
   properties:
   - type: OpenAPI
@@ -320,6 +330,8 @@ apis:
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
   tags:
+  - Policy
+  tags_raw:
   - policy
   properties:
   - type: OpenAPI
@@ -364,6 +376,8 @@ apis:
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
   tags:
+  - Query
+  tags_raw:
   - query
   properties:
   - type: OpenAPI
@@ -386,6 +400,8 @@ apis:
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
   tags:
+  - Role
+  tags_raw:
   - role
   properties:
   - type: OpenAPI
@@ -496,6 +512,8 @@ apis:
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
   tags:
+  - User
+  tags_raw:
   - user
   properties:
   - type: OpenAPI
