@@ -88,7 +88,7 @@ apis:
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
   tags:
-  - API Token
+  - api token
   tags_raw:
   - api token
   properties:
@@ -203,7 +203,7 @@ apis:
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
   tags:
-  - Data Model
+  - data model
   tags_raw:
   - data model
   properties:
