@@ -114,6 +114,8 @@ apis:
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
   tags:
+  - Aws  Cloud  Account
+  tags_raw:
   - aws cloud account
   properties:
   - type: OpenAPI
