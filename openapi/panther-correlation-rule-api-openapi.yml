@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Panther REST alert correlation rule API
+  title: Panther REST correlation rule API
   version: '1.0'
-  description: The alert api handles all operations for alerts
+  description: The correlation rule api handles all operations for correlation rules
 servers:
 - url: https://{api_host}
   variables:
@@ -262,16 +262,6 @@ paths:
                 $ref: '#/components/schemas/CorrelationRuleAPI.CorrelationBadRequestErr'
 components:
   schemas:
-    CorrelationRuleAPI.ListCorrelationRuleResp:
-      type: object
-      properties:
-        next:
-          type: string
-          description: pagination token for the next page of results
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/CorrelationRuleAPI.CorrelationRule'
     CorrelationRuleAPI.NotFoundError:
       type: object
       properties:
@@ -279,84 +269,6 @@ components:
           type: string
       required:
       - message
-    CorrelationRuleAPI.ModifyCorrelationRule:
-      type: object
-      properties:
-        createAlert:
-          type: boolean
-          description: Determines whether the rule should create alerts when it triggers
-        dedupPeriodMinutes:
-          type: integer
-          description: The amount of time in minutes for grouping alerts
-          default: 60
-          format: int64
-          minimum: 1
-        description:
-          type: string
-          description: The description of the correlation rule
-        detection:
-          type: string
-          description: The yaml representation of the correlation rule
-        displayName:
-          type: string
-          description: The display name of the correlation rule
-        enabled:
-          type: boolean
-          description: Determines whether or not the correlation rule is active
-        id:
-          type: string
-          description: The id of the correlation rule
-        outputIDs:
-          type: array
-          items:
-            type: string
-          description: Destination IDs that override default alert routing based on severity
-        reference:
-          type: string
-          description: A URL or note for additional reference material
-        reports:
-          type: object
-          description: reports
-          additionalProperties:
-            items:
-              type: string
-            type: array
-        runbook:
-          type: string
-          description: How to handle the generated alert
-        severity:
-          type: string
-          enum:
-          - INFO
-          - LOW
-          - MEDIUM
-          - HIGH
-          - CRITICAL
-        summaryAttributes:
-          type: array
-          items:
-            type: string
-          description: A list of fields in the event to create top 5 summaries for
-        tags:
-          type: array
-          items:
-            type: string
-          description: The tags for the correlation rule
-        tests:
-          type: array
-          items:
-            $ref: '#/components/schemas/CorrelationRuleAPI.CorrelationRuleUnitTest'
-          description: Unit tests for the correlation rule
-        threshold:
-          type: integer
-          description: the number of events that must match before an alert is triggered
-          default: 1
-          format: int64
-          minimum: 1
-      required:
-      - id
-      - detection
-      - severity
     CorrelationRuleAPI.CorrelationRuleUnitTest:
       type: object
       properties:
@@ -375,6 +287,13 @@ components:
       - name
       - expectedResult
       - ruleOutputs
+    CorrelationRuleAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     CorrelationRuleAPI.CorrelationRule:
       type: object
       properties:
@@ -496,41 +415,6 @@ components:
       required:
       - id
       - detection
-    CorrelationRuleAPI.CorrelationTestResult:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message if the test failed
-        name:
-          type: string
-          description: The name of the test
-        passed:
-          type: boolean
-          description: Whether the test passed
-    CorrelationRuleAPI.CorrelationRuleTestMatch:
-      type: object
-      additionalProperties:
-        items: {}
-        type: array
-    CorrelationRuleAPI.ExistsError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    CorrelationRuleAPI.CorrelationBadRequestErr:
-      type: object
-      properties:
-        message:
-          type: string
-        testResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/CorrelationRuleAPI.CorrelationTestResult'
-      required:
-      - message
     CorrelationRuleAPI.CorrelationRuleTestOutput:
       type: object
       properties:
@@ -544,6 +428,122 @@ components:
             $ref: '#/components/schemas/CorrelationRuleAPI.CorrelationRuleTestMatch'
       required:
       - id
+    CorrelationRuleAPI.CorrelationBadRequestErr:
+      type: object
+      properties:
+        message:
+          type: string
+        testResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/CorrelationRuleAPI.CorrelationTestResult'
+      required:
+      - message
+    CorrelationRuleAPI.ModifyCorrelationRule:
+      type: object
+      properties:
+        createAlert:
+          type: boolean
+          description: Determines whether the rule should create alerts when it triggers
+        dedupPeriodMinutes:
+          type: integer
+          description: The amount of time in minutes for grouping alerts
+          default: 60
+          format: int64
+          minimum: 1
+        description:
+          type: string
+          description: The description of the correlation rule
+        detection:
+          type: string
+          description: The yaml representation of the correlation rule
+        displayName:
+          type: string
+          description: The display name of the correlation rule
+        enabled:
+          type: boolean
+          description: Determines whether or not the correlation rule is active
+        id:
+          type: string
+          description: The id of the correlation rule
+        outputIDs:
+          type: array
+          items:
+            type: string
+          description: Destination IDs that override default alert routing based on severity
+        reference:
+          type: string
+          description: A URL or note for additional reference material
+        reports:
+          type: object
+          description: reports
+          additionalProperties:
+            items:
+              type: string
+            type: array
+        runbook:
+          type: string
+          description: How to handle the generated alert
+        severity:
+          type: string
+          enum:
+          - INFO
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        summaryAttributes:
+          type: array
+          items:
+            type: string
+          description: A list of fields in the event to create top 5 summaries for
+        tags:
+          type: array
+          items:
+            type: string
+          description: The tags for the correlation rule
+        tests:
+          type: array
+          items:
+            $ref: '#/components/schemas/CorrelationRuleAPI.CorrelationRuleUnitTest'
+          description: Unit tests for the correlation rule
+        threshold:
+          type: integer
+          description: the number of events that must match before an alert is triggered
+          default: 1
+          format: int64
+          minimum: 1
+      required:
+      - id
+      - detection
+      - severity
+    CorrelationRuleAPI.ListCorrelationRuleResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CorrelationRuleAPI.CorrelationRule'
+    CorrelationRuleAPI.CorrelationRuleTestMatch:
+      type: object
+      additionalProperties:
+        items: {}
+        type: array
+    CorrelationRuleAPI.CorrelationTestResult:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message if the test failed
+        name:
+          type: string
+          description: The name of the test
+        passed:
+          type: boolean
+          description: Whether the test passed
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

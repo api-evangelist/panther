@@ -1,0 +1,29 @@
+# Front Door AI Index — panther — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: panther
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.panther.com
+  final_host: panther.com
+  ownership: own
+  owner: panther
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 61
+  host_score: 61
+  density: 21.56
+  words: 2829
+  tiers:
+    agentic: 8
+    core: 52
+    model: 1
+  ambiguous: 21
+  top_terms:
+    AI: 52
+    agent: 17
+    agentic: 8
+    intelligence: 4
+    Bedrock: 1

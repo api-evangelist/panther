@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Panther REST alert pub/sub source API
+  title: Panther REST pub/sub source API
   version: '1.0'
-  description: The alert api handles all operations for alerts
+  description: The Pub/Sub source API handles all operations for GCP Pub/Sub log sources
 servers:
 - url: https://{api_host}
   variables:
@@ -171,6 +171,36 @@ paths:
                 $ref: '#/components/schemas/PubSubSourceAPI.ServiceError'
 components:
   schemas:
+    PubSubSourceAPI.LogStreamTypeOptions:
+      type: object
+      properties:
+        jsonArrayEnvelopeField:
+          type: string
+          description: Path to the array value to extract elements from, only applicable if logStreamType is JsonArray. Leave empty if the input JSON is an array itself
+        xmlRootElement:
+          type: string
+          description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
+    PubSubSourceAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    PubSubSourceAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    PubSubSourceAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     PubSubSourceAPI.PubSubSource:
       type: object
       properties:
@@ -215,20 +245,6 @@ components:
           type: string
           description: The GCP Pub/Sub subscription ID
     PubSubSourceAPI.ServiceError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    PubSubSourceAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    PubSubSourceAPI.BadRequestError:
       type: object
       properties:
         message:
@@ -281,22 +297,6 @@ components:
       - logTypes
       - logStreamType
       - credentialsType
-    PubSubSourceAPI.ExistsError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    PubSubSourceAPI.LogStreamTypeOptions:
-      type: object
-      properties:
-        jsonArrayEnvelopeField:
-          type: string
-          description: Path to the array value to extract elements from, only applicable if logStreamType is JsonArray. Leave empty if the input JSON is an array itself
-        xmlRootElement:
-          type: string
-          description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

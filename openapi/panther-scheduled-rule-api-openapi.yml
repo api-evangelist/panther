@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Panther REST alert scheduled rule API
+  title: Panther REST scheduled rule API
   version: '1.0'
-  description: The alert api handles all operations for alerts
+  description: The scheduled rule api handles all operations for scheduled rules
 servers:
 - url: https://{api_host}
   variables:
@@ -271,13 +271,13 @@ paths:
                 $ref: '#/components/schemas/ScheduledRuleAPI.BadRequestWithTestResultsErr'
 components:
   schemas:
-    ScheduledRuleAPI.TestErr:
+    ScheduledRuleAPI.ExistsError:
       type: object
       properties:
-        code:
-          type: string
         message:
           type: string
+      required:
+      - message
     ScheduledRuleAPI.ListResp:
       type: object
       properties:
@@ -288,27 +288,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ScheduledRuleAPI.ScheduledRule'
-    ScheduledRuleAPI.TestDetectionRecordFunctions:
-      type: object
-      properties:
-        alertContext:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
-        dedup:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
-        description:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
-        destinations:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
-        detection:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
-        reference:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
-        runbook:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
-        severity:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
-        title:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
     ScheduledRuleAPI.TestDetectionSubRecord:
       type: object
       properties:
@@ -316,13 +295,6 @@ components:
           $ref: '#/components/schemas/ScheduledRuleAPI.TestErr'
         output:
           type: string
-    ScheduledRuleAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     ScheduledRuleAPI.UnitTest:
       type: object
       properties:
@@ -345,25 +317,41 @@ components:
       required:
       - name
       - expectedResult
-    ScheduledRuleAPI.UnitTestMock:
-      type: object
-      additionalProperties:
-        type: string
-    ScheduledRuleAPI.TestDetectionRecord:
+    ScheduledRuleAPI.TestDetectionRecordFunctions:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestErr'
-        errored:
-          type: boolean
-        functions:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionRecordFunctions'
-        name:
+        alertContext:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        dedup:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        description:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        destinations:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        detection:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        reference:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        runbook:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        severity:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        title:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+    ScheduledRuleAPI.NotFoundError:
+      type: object
+      properties:
+        message:
           type: string
-        passed:
-          type: boolean
-        triggerAlert:
-          type: boolean
+      required:
+      - message
+    ScheduledRuleAPI.TestErr:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     ScheduledRuleAPI.ModifyRule:
       type: object
       properties:
@@ -450,13 +438,6 @@ components:
       - id
       - body
       - severity
-    ScheduledRuleAPI.ExistsError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     ScheduledRuleAPI.BadRequestWithTestResultsErr:
       type: object
       properties:
@@ -468,6 +449,10 @@ components:
             $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionRecord'
       required:
       - message
+    ScheduledRuleAPI.UnitTestMock:
+      type: object
+      additionalProperties:
+        type: string
     ScheduledRuleAPI.ScheduledRule:
       type: object
       properties:
@@ -569,6 +554,21 @@ components:
           default: 1
           format: int64
           minimum: 1
+    ScheduledRuleAPI.TestDetectionRecord:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestErr'
+        errored:
+          type: boolean
+        functions:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionRecordFunctions'
+        name:
+          type: string
+        passed:
+          type: boolean
+        triggerAlert:
+          type: boolean
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

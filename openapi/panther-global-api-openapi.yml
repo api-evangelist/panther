@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Panther REST alert global API
+  title: Panther REST Global API
   version: '1.0'
-  description: The alert api handles all operations for alerts
+  description: The global api handles all operations for globals
 servers:
 - url: https://{api_host}
   variables:
@@ -11,13 +11,13 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: global
+- name: Global
   description: The global api handles all operations for globals
 paths:
   /globals:
     get:
       tags:
-      - global
+      - Global
       summary: list globals
       operationId: global#list
       parameters:
@@ -67,7 +67,7 @@ paths:
                 $ref: '#/components/schemas/GlobalAPI.ListResp'
     post:
       tags:
-      - global
+      - Global
       summary: create global
       operationId: global#create
       requestBody:
@@ -98,7 +98,7 @@ paths:
   /globals/{id}:
     delete:
       tags:
-      - global
+      - Global
       summary: delete global
       operationId: global#delete
       parameters:
@@ -126,7 +126,7 @@ paths:
                 $ref: '#/components/schemas/GlobalAPI.NotFoundError'
     get:
       tags:
-      - global
+      - Global
       summary: get global
       operationId: global#get
       parameters:
@@ -152,7 +152,7 @@ paths:
                 $ref: '#/components/schemas/GlobalAPI.NotFoundError'
     put:
       tags:
-      - global
+      - Global
       summary: put global
       description: put creates or updates a global
       operationId: global#put
@@ -191,22 +191,23 @@ paths:
                 $ref: '#/components/schemas/GlobalAPI.BadRequestError'
 components:
   schemas:
-    GlobalAPI.ModifyGlobal2:
+    GlobalAPI.ExistsError:
       type: object
       properties:
-        body:
+        message:
           type: string
-          description: The python body of the global
-        description:
+      required:
+      - message
+    GlobalAPI.ListResp:
+      type: object
+      properties:
+        next:
           type: string
-          description: The description of the global
-        tags:
+          description: pagination token for the next page of results
+        results:
           type: array
           items:
-            type: string
-          description: The tags for the global
-      required:
-      - body
+            $ref: '#/components/schemas/GlobalAPI.Global'
     GlobalAPI.ModifyGlobal:
       type: object
       properties:
@@ -227,35 +228,6 @@ components:
       required:
       - id
       - body
-    GlobalAPI.BadRequestError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    GlobalAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    GlobalAPI.PutGlobalResp:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/GlobalAPI.Global'
-    GlobalAPI.ListResp:
-      type: object
-      properties:
-        next:
-          type: string
-          description: pagination token for the next page of results
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/GlobalAPI.Global'
     GlobalAPI.Global:
       type: object
       properties:
@@ -277,13 +249,41 @@ components:
           items:
             type: string
           description: The tags for the global
-    GlobalAPI.ExistsError:
+    GlobalAPI.PutGlobalResp:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GlobalAPI.Global'
+    GlobalAPI.NotFoundError:
       type: object
       properties:
         message:
           type: string
       required:
       - message
+    GlobalAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    GlobalAPI.ModifyGlobal2:
+      type: object
+      properties:
+        body:
+          type: string
+          description: The python body of the global
+        description:
+          type: string
+          description: The description of the global
+        tags:
+          type: array
+          items:
+            type: string
+          description: The tags for the global
+      required:
+      - body
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

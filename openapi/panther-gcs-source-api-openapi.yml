@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Panther REST alert gcs source API
+  title: Panther REST gcs source API
   version: '1.0'
-  description: The alert api handles all operations for alerts
+  description: The GCS source API handles all operations for Google Cloud Storage log sources
 servers:
 - url: https://{api_host}
   variables:
@@ -170,6 +170,88 @@ paths:
                 $ref: '#/components/schemas/GcsSourceAPI.ServiceError'
 components:
   schemas:
+    GcsSourceAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    GcsSourceAPI.PrefixLogTypesMapping:
+      type: object
+      properties:
+        excludedPrefixes:
+          type: array
+          items:
+            type: string
+          description: Prefixes to exclude from matching. Supports '*' as a wildcard for dynamic path segments.
+        logTypes:
+          type: array
+          items:
+            type: string
+          description: The log types (schemas) to apply for this prefix
+        prefix:
+          type: string
+          description: GCS prefix to match. Leave empty to match all files in the bucket.
+    GcsSourceAPI.ServiceError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    GcsSourceAPI.LogStreamTypeOptions:
+      type: object
+      properties:
+        jsonArrayEnvelopeField:
+          type: string
+          description: Path to the array value to extract elements from, only applicable if logStreamType is JsonArray. Leave empty if the input JSON is an array itself
+        xmlRootElement:
+          type: string
+          description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
+    GcsSourceAPI.GcsSource:
+      type: object
+      properties:
+        credentials:
+          type: string
+          description: The GCP credentials JSON content (service account key or WIF config). Required on create, optional on update.
+        credentialsType:
+          type: string
+          description: 'The type of credentials being used: service_account or wif (Workload Identity Federation).'
+          enum:
+          - service_account
+          - wif
+        gcsBucket:
+          type: string
+          description: The GCS bucket name
+        integrationId:
+          type: string
+          description: The id of the GCS source
+        integrationLabel:
+          type: string
+          description: The integration label (name)
+        logStreamType:
+          type: string
+          description: 'The log stream type. Supported log stream types: Auto, JSON, JsonArray, Lines, XML'
+          enum:
+          - Auto
+          - JSON
+          - JsonArray
+          - Lines
+          - XML
+        logStreamTypeOptions:
+          $ref: '#/components/schemas/GcsSourceAPI.LogStreamTypeOptions'
+        prefixLogTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/GcsSourceAPI.PrefixLogTypesMapping'
+          description: Prefix-based log type mappings for parsing ingested data
+        projectId:
+          type: string
+          description: The GCP project ID. Optional for service_account credentials. Required for WIF.
+        subscriptionId:
+          type: string
+          description: The GCP Pub/Sub subscription ID used to receive GCS bucket notifications
     GcsSourceAPI.ModifyGcsSource:
       type: object
       properties:
@@ -217,88 +299,6 @@ components:
       - prefixLogTypes
       - logStreamType
       - credentialsType
-    GcsSourceAPI.GcsSource:
-      type: object
-      properties:
-        credentials:
-          type: string
-          description: The GCP credentials JSON content (service account key or WIF config). Required on create, optional on update.
-        credentialsType:
-          type: string
-          description: 'The type of credentials being used: service_account or wif (Workload Identity Federation).'
-          enum:
-          - service_account
-          - wif
-        gcsBucket:
-          type: string
-          description: The GCS bucket name
-        integrationId:
-          type: string
-          description: The id of the GCS source
-        integrationLabel:
-          type: string
-          description: The integration label (name)
-        logStreamType:
-          type: string
-          description: 'The log stream type. Supported log stream types: Auto, JSON, JsonArray, Lines, XML'
-          enum:
-          - Auto
-          - JSON
-          - JsonArray
-          - Lines
-          - XML
-        logStreamTypeOptions:
-          $ref: '#/components/schemas/GcsSourceAPI.LogStreamTypeOptions'
-        prefixLogTypes:
-          type: array
-          items:
-            $ref: '#/components/schemas/GcsSourceAPI.PrefixLogTypesMapping'
-          description: Prefix-based log type mappings for parsing ingested data
-        projectId:
-          type: string
-          description: The GCP project ID. Optional for service_account credentials. Required for WIF.
-        subscriptionId:
-          type: string
-          description: The GCP Pub/Sub subscription ID used to receive GCS bucket notifications
-    GcsSourceAPI.ServiceError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    GcsSourceAPI.ExistsError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    GcsSourceAPI.PrefixLogTypesMapping:
-      type: object
-      properties:
-        excludedPrefixes:
-          type: array
-          items:
-            type: string
-          description: Prefixes to exclude from matching. Supports '*' as a wildcard for dynamic path segments.
-        logTypes:
-          type: array
-          items:
-            type: string
-          description: The log types (schemas) to apply for this prefix
-        prefix:
-          type: string
-          description: GCS prefix to match. Leave empty to match all files in the bucket.
-    GcsSourceAPI.LogStreamTypeOptions:
-      type: object
-      properties:
-        jsonArrayEnvelopeField:
-          type: string
-          description: Path to the array value to extract elements from, only applicable if logStreamType is JsonArray. Leave empty if the input JSON is an array itself
-        xmlRootElement:
-          type: string
-          description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
     GcsSourceAPI.BadRequestError:
       type: object
       properties:
@@ -306,7 +306,7 @@ components:
           type: string
       required:
       - message
-    GcsSourceAPI.NotFoundError:
+    GcsSourceAPI.ExistsError:
       type: object
       properties:
         message:

@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Panther REST alert contexttag API
+  title: Panther REST Contexttag API
   version: '1.0'
-  description: The alert api handles all operations for alerts
+  description: The context tag API handles all operations for alert context tags
 servers:
 - url: https://{api_host}
   variables:
@@ -160,18 +160,6 @@ paths:
                 $ref: '#/components/schemas/contexttagAPI.ExistsError'
 components:
   schemas:
-    contexttagAPI.UpdateContextTagReq:
-      type: object
-      properties:
-        tag:
-          type: string
-          description: The new tag value
-          pattern: ^[a-z0-9_-]+$
-          minLength: 1
-          maxLength: 30
-      description: Request to rename a custom context tag
-      required:
-      - tag
     contexttagAPI.ContextTag:
       type: object
       properties:
@@ -192,6 +180,32 @@ components:
       - tag
       - category
       - managed
+    contexttagAPI.UpdateContextTagReq:
+      type: object
+      properties:
+        tag:
+          type: string
+          description: The new tag value
+          pattern: ^[a-z0-9_-]+$
+          minLength: 1
+          maxLength: 30
+      description: Request to rename a custom context tag
+      required:
+      - tag
+    contexttagAPI.ListContextTagsResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: Pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/contexttagAPI.ContextTag'
+          description: The list of context tags
+      description: Response for listing context tags
+      required:
+      - results
     contexttagAPI.NotFoundError:
       type: object
       properties:
@@ -199,14 +213,14 @@ components:
           type: string
       required:
       - message
-    contexttagAPI.ExistsError:
+    contexttagAPI.BadRequestError:
       type: object
       properties:
         message:
           type: string
       required:
       - message
-    contexttagAPI.BadRequestError:
+    contexttagAPI.ExistsError:
       type: object
       properties:
         message:
@@ -225,20 +239,6 @@ components:
       description: Request to create a custom context tag
       required:
       - tag
-    contexttagAPI.ListContextTagsResp:
-      type: object
-      properties:
-        next:
-          type: string
-          description: Pagination token for the next page of results
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/contexttagAPI.ContextTag'
-          description: The list of context tags
-      description: Response for listing context tags
-      required:
-      - results
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

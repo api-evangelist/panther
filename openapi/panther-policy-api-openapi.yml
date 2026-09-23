@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Panther REST alert policy API
+  title: Panther REST Policy API
   version: '1.0'
-  description: The alert api handles all operations for alerts
+  description: The policy api handles all operations for policies
 servers:
 - url: https://{api_host}
   variables:
@@ -11,13 +11,13 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: policy
+- name: Policy
   description: The policy api handles all operations for policies
 paths:
   /policies:
     get:
       tags:
-      - policy
+      - Policy
       summary: list policies
       operationId: policy#list
       parameters:
@@ -121,7 +121,7 @@ paths:
                 $ref: '#/components/schemas/PolicyAPI.ListResp'
     post:
       tags:
-      - policy
+      - Policy
       summary: create policy
       operationId: policy#create
       parameters:
@@ -171,7 +171,7 @@ paths:
   /policies/{id}:
     delete:
       tags:
-      - policy
+      - Policy
       summary: delete policy
       operationId: policy#delete
       parameters:
@@ -199,7 +199,7 @@ paths:
                 $ref: '#/components/schemas/PolicyAPI.NotFoundError'
     get:
       tags:
-      - policy
+      - Policy
       summary: get policy
       operationId: policy#get
       parameters:
@@ -225,7 +225,7 @@ paths:
                 $ref: '#/components/schemas/PolicyAPI.NotFoundError'
     put:
       tags:
-      - policy
+      - Policy
       summary: put policy
       description: put creates or updates a policy
       operationId: policy#put
@@ -282,6 +282,54 @@ paths:
                 $ref: '#/components/schemas/PolicyAPI.BadRequestWithTestResultsErr'
 components:
   schemas:
+    PolicyAPI.BadRequestWithTestResultsErr:
+      type: object
+      properties:
+        message:
+          type: string
+        testResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyAPI.TestDetectionRecord'
+      required:
+      - message
+    PolicyAPI.UnitTest:
+      type: object
+      properties:
+        expectedResult:
+          type: boolean
+          description: The expected result
+        log:
+          description: A test event object that your detection will receive as input.
+        mocks:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyAPI.UnitTestMock'
+          description: mocks
+        name:
+          type: string
+          description: name
+        resource:
+          type: string
+          description: A test event object that your detection will receive as input, JSON-encoded. Prefer `log`.
+      required:
+      - name
+      - expectedResult
+    PolicyAPI.TestDetectionRecord:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/PolicyAPI.TestErr'
+        errored:
+          type: boolean
+        functions:
+          $ref: '#/components/schemas/PolicyAPI.TestDetectionRecordFunctions'
+        name:
+          type: string
+        passed:
+          type: boolean
+        triggerAlert:
+          type: boolean
     PolicyAPI.ListResp:
       type: object
       properties:
@@ -292,91 +340,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PolicyAPI.Policy'
-    PolicyAPI.ModifyPolicy:
-      type: object
-      properties:
-        body:
-          type: string
-          description: The python body of the policy
-        description:
-          type: string
-          description: The description of the policy
-        displayName:
-          type: string
-          description: The display name of the policy
-        enabled:
-          type: boolean
-          description: Determines whether or not the policy is active
-        id:
-          type: string
-          description: The id of the policy
-        managed:
-          type: boolean
-          description: Determines if the policy is managed by panther
-        outputIDs:
-          type: array
-          items:
-            type: string
-          description: Destination IDs that override default alert routing based on severity
-        reference:
-          type: string
-          description: A URL or note for additional reference material
-        reports:
-          type: object
-          description: Reports
-          additionalProperties:
-            items:
-              type: string
-            type: array
-        resourceTypes:
-          type: array
-          items:
-            type: string
-          description: Resource types
-        severity:
-          type: string
-          enum:
-          - INFO
-          - LOW
-          - MEDIUM
-          - HIGH
-          - CRITICAL
-        suppressions:
-          type: array
-          items:
-            type: string
-          description: Resources to ignore via a pattern that matches the resource id
-          example:
-          - aws::s3::*
-        tags:
-          type: array
-          items:
-            type: string
-          description: The tags for the policy
-        tests:
-          type: array
-          items:
-            $ref: '#/components/schemas/PolicyAPI.UnitTest'
-          description: Unit tests for the Policy. Best practice is to include a positive and negative case
-      required:
-      - id
-      - body
-      - severity
-    PolicyAPI.TestErr:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    PolicyAPI.TestDetectionSubRecord:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/PolicyAPI.TestErr'
-        output:
-          type: string
-    PolicyAPI.ExistsError:
+    PolicyAPI.NotFoundError:
       type: object
       properties:
         message:
@@ -468,10 +432,94 @@ components:
           items:
             $ref: '#/components/schemas/PolicyAPI.UnitTest'
           description: Unit tests for the Policy. Best practice is to include a positive and negative case
+    PolicyAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     PolicyAPI.UnitTestMock:
       type: object
       additionalProperties:
         type: string
+    PolicyAPI.TestDetectionSubRecord:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/PolicyAPI.TestErr'
+        output:
+          type: string
+    PolicyAPI.ModifyPolicy:
+      type: object
+      properties:
+        body:
+          type: string
+          description: The python body of the policy
+        description:
+          type: string
+          description: The description of the policy
+        displayName:
+          type: string
+          description: The display name of the policy
+        enabled:
+          type: boolean
+          description: Determines whether or not the policy is active
+        id:
+          type: string
+          description: The id of the policy
+        managed:
+          type: boolean
+          description: Determines if the policy is managed by panther
+        outputIDs:
+          type: array
+          items:
+            type: string
+          description: Destination IDs that override default alert routing based on severity
+        reference:
+          type: string
+          description: A URL or note for additional reference material
+        reports:
+          type: object
+          description: Reports
+          additionalProperties:
+            items:
+              type: string
+            type: array
+        resourceTypes:
+          type: array
+          items:
+            type: string
+          description: Resource types
+        severity:
+          type: string
+          enum:
+          - INFO
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        suppressions:
+          type: array
+          items:
+            type: string
+          description: Resources to ignore via a pattern that matches the resource id
+          example:
+          - aws::s3::*
+        tags:
+          type: array
+          items:
+            type: string
+          description: The tags for the policy
+        tests:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyAPI.UnitTest'
+          description: Unit tests for the Policy. Best practice is to include a positive and negative case
+      required:
+      - id
+      - body
+      - severity
     PolicyAPI.TestDetectionRecordFunctions:
       type: object
       properties:
@@ -493,61 +541,13 @@ components:
           $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
         title:
           $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
-    PolicyAPI.TestDetectionRecord:
+    PolicyAPI.TestErr:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/PolicyAPI.TestErr'
-        errored:
-          type: boolean
-        functions:
-          $ref: '#/components/schemas/PolicyAPI.TestDetectionRecordFunctions'
-        name:
+        code:
           type: string
-        passed:
-          type: boolean
-        triggerAlert:
-          type: boolean
-    PolicyAPI.NotFoundError:
-      type: object
-      properties:
         message:
           type: string
-      required:
-      - message
-    PolicyAPI.UnitTest:
-      type: object
-      properties:
-        expectedResult:
-          type: boolean
-          description: The expected result
-        log:
-          description: A test event object that your detection will receive as input.
-        mocks:
-          type: array
-          items:
-            $ref: '#/components/schemas/PolicyAPI.UnitTestMock'
-          description: mocks
-        name:
-          type: string
-          description: name
-        resource:
-          type: string
-          description: A test event object that your detection will receive as input, JSON-encoded. Prefer `log`.
-      required:
-      - name
-      - expectedResult
-    PolicyAPI.BadRequestWithTestResultsErr:
-      type: object
-      properties:
-        message:
-          type: string
-        testResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/PolicyAPI.TestDetectionRecord'
-      required:
-      - message
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

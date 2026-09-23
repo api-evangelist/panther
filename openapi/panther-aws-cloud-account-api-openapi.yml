@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Panther REST alert aws cloud account API
+  title: Panther REST aws cloud account API
   version: '1.0'
-  description: The alert api handles all operations for alerts
+  description: The AWS Cloud Account API handles all operations for AWS Cloud Account scanner integrations
 servers:
 - url: https://{api_host}
   variables:
@@ -11,13 +11,13 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: aws cloud account
+- name: Aws Cloud Account
   description: The AWS Cloud Account API handles all operations for AWS Cloud Account scanner integrations
 paths:
   /cloud-accounts/aws:
     post:
       tags:
-      - aws cloud account
+      - Aws Cloud Account
       summary: create aws cloud account
       operationId: aws cloud account#create
       requestBody:
@@ -54,7 +54,7 @@ paths:
   /cloud-accounts/aws/{id}:
     delete:
       tags:
-      - aws cloud account
+      - Aws Cloud Account
       summary: delete aws cloud account
       operationId: aws cloud account#delete
       parameters:
@@ -82,7 +82,7 @@ paths:
                 $ref: '#/components/schemas/AWSCloudAccountAPI.ServiceError'
     get:
       tags:
-      - aws cloud account
+      - Aws Cloud Account
       summary: get aws cloud account
       operationId: aws cloud account#get
       parameters:
@@ -120,7 +120,7 @@ paths:
                 $ref: '#/components/schemas/AWSCloudAccountAPI.ServiceError'
     put:
       tags:
-      - aws cloud account
+      - Aws Cloud Account
       summary: put aws cloud account
       operationId: aws cloud account#put
       parameters:
@@ -164,33 +164,6 @@ paths:
                 $ref: '#/components/schemas/AWSCloudAccountAPI.ServiceError'
 components:
   schemas:
-    AWSCloudAccountAPI.ServiceError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    AWSCloudAccountAPI.ExistsError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    AWSCloudAccountAPI.AWSScanConfig:
-      type: object
-      properties:
-        auditRole:
-          type: string
-          description: The IAM role ARN that Panther assumes to scan the AWS account
-    AWSCloudAccountAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     AWSCloudAccountAPI.BadRequestError:
       type: object
       properties:
@@ -198,9 +171,20 @@ components:
           type: string
       required:
       - message
-    AWSCloudAccountAPI.ModifyAWSCloudAccount:
+    AWSCloudAccountAPI.NotFoundError:
       type: object
       properties:
+        message:
+          type: string
+      required:
+      - message
+    AWSCloudAccountAPI.CreateAWSCloudAccount:
+      type: object
+      properties:
+        awsAccountId:
+          type: string
+          description: The 12-digit AWS account ID
+          pattern: ^[0-9]{12}$
         awsScanConfig:
           $ref: '#/components/schemas/AWSCloudAccountAPI.AWSScanConfig'
         integrationLabel:
@@ -225,8 +209,16 @@ components:
             type: string
           description: Resource types to exclude from scanning (e.g. AWS.S3.Bucket)
       required:
+      - awsAccountId
       - integrationLabel
       - awsScanConfig
+    AWSCloudAccountAPI.ServiceError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     AWSCloudAccountAPI.AWSCloudAccount:
       type: object
       properties:
@@ -263,13 +255,22 @@ components:
       - regionIgnoreList
       - resourceTypeIgnoreList
       - resourceRegexIgnoreList
-    AWSCloudAccountAPI.CreateAWSCloudAccount:
+    AWSCloudAccountAPI.AWSScanConfig:
       type: object
       properties:
-        awsAccountId:
+        auditRole:
           type: string
-          description: The 12-digit AWS account ID
-          pattern: ^[0-9]{12}$
+          description: The IAM role ARN that Panther assumes to scan the AWS account
+    AWSCloudAccountAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    AWSCloudAccountAPI.ModifyAWSCloudAccount:
+      type: object
+      properties:
         awsScanConfig:
           $ref: '#/components/schemas/AWSCloudAccountAPI.AWSScanConfig'
         integrationLabel:
@@ -294,7 +295,6 @@ components:
             type: string
           description: Resource types to exclude from scanning (e.g. AWS.S3.Bucket)
       required:
-      - awsAccountId
       - integrationLabel
       - awsScanConfig
   securitySchemes:

@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Panther REST alert s3 source API
+  title: Panther REST s3 source API
   version: '1.0'
-  description: The alert api handles all operations for alerts
+  description: The S3 source API handles all operations for AWS S3 log sources
 servers:
 - url: https://{api_host}
   variables:
@@ -170,13 +170,25 @@ paths:
                 $ref: '#/components/schemas/S3SourceAPI.ServiceError'
 components:
   schemas:
-    S3SourceAPI.ServiceError:
+    S3SourceAPI.BadRequestError:
       type: object
       properties:
         message:
           type: string
       required:
       - message
+    S3SourceAPI.S3LogStreamTypeOptions:
+      type: object
+      properties:
+        jsonArrayEnvelopeField:
+          type: string
+          description: Path to the JSON array field to extract records from. Only applicable when logStreamType is JsonArray. Omit if the input is already a top-level array.
+        retainEnvelopeFields:
+          type: boolean
+          description: Preserve CloudWatch Logs envelope metadata (accountId, logGroup, subscriptionFilters) in a p_header column. Only applicable when logStreamType is CloudWatchLogs.
+        xmlRootElement:
+          type: string
+          description: Root element wrapping XML events. Only applicable when logStreamType is XML. Omit if events are not enclosed in a root element.
     S3SourceAPI.ModifyS3Source:
       type: object
       properties:
@@ -215,61 +227,6 @@ components:
       - managedBucketNotifications
       - logProcessingRole
       - logStreamType
-    S3SourceAPI.BadRequestError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    S3SourceAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    S3SourceAPI.S3Source:
-      type: object
-      properties:
-        awsAccountId:
-          type: string
-          description: The AWS account ID where the S3 bucket resides
-        integrationId:
-          type: string
-          description: The unique ID of the S3 log source
-        integrationLabel:
-          type: string
-          description: The integration label (name)
-        kmsKey:
-          type: string
-          description: KMS key ARN for server-side encryption. Omit if the bucket is not KMS-encrypted.
-        logProcessingRole:
-          type: string
-          description: The IAM role ARN that Panther assumes to read from the S3 bucket
-        logStreamType:
-          type: string
-          description: 'The log stream type. Supported: Auto, JSON, JsonArray, Lines, XML, CloudWatchLogs'
-          enum:
-          - Auto
-          - JSON
-          - JsonArray
-          - Lines
-          - XML
-          - CloudWatchLogs
-        logStreamTypeOptions:
-          $ref: '#/components/schemas/S3SourceAPI.S3LogStreamTypeOptions'
-        managedBucketNotifications:
-          type: boolean
-          description: Whether Panther should configure the S3 bucket notifications automatically
-        s3Bucket:
-          type: string
-          description: The S3 bucket name
-        s3PrefixLogTypes:
-          type: array
-          items:
-            $ref: '#/components/schemas/S3SourceAPI.PrefixLogTypesMapping'
-          description: Prefix-based log type mappings for parsing ingested data
     S3SourceAPI.CreateS3Source:
       type: object
       properties:
@@ -323,6 +280,54 @@ components:
           type: string
       required:
       - message
+    S3SourceAPI.S3Source:
+      type: object
+      properties:
+        awsAccountId:
+          type: string
+          description: The AWS account ID where the S3 bucket resides
+        integrationId:
+          type: string
+          description: The unique ID of the S3 log source
+        integrationLabel:
+          type: string
+          description: The integration label (name)
+        kmsKey:
+          type: string
+          description: KMS key ARN for server-side encryption. Omit if the bucket is not KMS-encrypted.
+        logProcessingRole:
+          type: string
+          description: The IAM role ARN that Panther assumes to read from the S3 bucket
+        logStreamType:
+          type: string
+          description: 'The log stream type. Supported: Auto, JSON, JsonArray, Lines, XML, CloudWatchLogs'
+          enum:
+          - Auto
+          - JSON
+          - JsonArray
+          - Lines
+          - XML
+          - CloudWatchLogs
+        logStreamTypeOptions:
+          $ref: '#/components/schemas/S3SourceAPI.S3LogStreamTypeOptions'
+        managedBucketNotifications:
+          type: boolean
+          description: Whether Panther should configure the S3 bucket notifications automatically
+        s3Bucket:
+          type: string
+          description: The S3 bucket name
+        s3PrefixLogTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/S3SourceAPI.PrefixLogTypesMapping'
+          description: Prefix-based log type mappings for parsing ingested data
+    S3SourceAPI.ServiceError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     S3SourceAPI.PrefixLogTypesMapping:
       type: object
       properties:
@@ -339,18 +344,13 @@ components:
         prefix:
           type: string
           description: S3 prefix to match. Leave empty to match all objects in the bucket.
-    S3SourceAPI.S3LogStreamTypeOptions:
+    S3SourceAPI.NotFoundError:
       type: object
       properties:
-        jsonArrayEnvelopeField:
+        message:
           type: string
-          description: Path to the JSON array field to extract records from. Only applicable when logStreamType is JsonArray. Omit if the input is already a top-level array.
-        retainEnvelopeFields:
-          type: boolean
-          description: Preserve CloudWatch Logs envelope metadata (accountId, logGroup, subscriptionFilters) in a p_header column. Only applicable when logStreamType is CloudWatchLogs.
-        xmlRootElement:
-          type: string
-          description: Root element wrapping XML events. Only applicable when logStreamType is XML. Omit if events are not enclosed in a root element.
+      required:
+      - message
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Panther REST alert API
+  title: Panther REST Alert API
   version: '1.0'
   description: The alert api handles all operations for alerts
 servers:
@@ -11,13 +11,13 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: alert
+- name: Alert
   description: The alert api handles all operations for alerts
 paths:
   /alerts:
     get:
       tags:
-      - alert
+      - Alert
       summary: List alerts
       operationId: alert#list
       parameters:
@@ -254,7 +254,7 @@ paths:
                 $ref: '#/components/schemas/AlertAPI.BadRequestError'
     patch:
       tags:
-      - alert
+      - Alert
       summary: Update the status, assignee, quality or contextTags of multiple alerts
       operationId: alert#bulkPatch
       requestBody:
@@ -281,7 +281,7 @@ paths:
   /alerts/{id}:
     get:
       tags:
-      - alert
+      - Alert
       summary: Get an alert
       operationId: alert#get
       parameters:
@@ -313,7 +313,7 @@ paths:
                 $ref: '#/components/schemas/AlertAPI.NotFoundError'
     patch:
       tags:
-      - alert
+      - Alert
       summary: Update the status, assignee, quality or contextTags of an alert
       operationId: alert#patch
       parameters:
@@ -348,7 +348,7 @@ paths:
   /alerts/{id}/events:
     get:
       tags:
-      - alert
+      - Alert
       summary: List alert events
       operationId: alert#events
       parameters:
@@ -397,20 +397,13 @@ paths:
                 $ref: '#/components/schemas/AlertAPI.NotFoundError'
 components:
   schemas:
-    AlertAPI.SystemError:
+    AlertAPI.BadRequestError:
       type: object
       properties:
-        detection:
-          $ref: '#/components/schemas/AlertAPI.DetectionInfo'
-        sourceId:
+        message:
           type: string
-          description: The source ID of this SystemError
-        sourceType:
-          type: string
-          description: The source type of this SystemError
-        type:
-          type: string
-          description: The type of this SystemError
+      required:
+      - message
     AlertAPI.PatchAlertReq:
       type: object
       properties:
@@ -442,69 +435,6 @@ components:
           - CLOSED
           - TRIAGED
           - RESOLVED
-    AlertAPI.ListEventsResp:
-      type: object
-      properties:
-        next:
-          type: string
-          description: Pagination token for the next page of results
-        results:
-          type: array
-          items: {}
-      required:
-      - results
-    AlertAPI.Delivery:
-      type: object
-      properties:
-        dispatchedAt:
-          type: string
-        label:
-          type: string
-          description: The label of the alert at where it was delivered (channel name/ID, jira ticket, asana issue, etc)
-        message:
-          type: string
-        outputId:
-          type: string
-        statusCode:
-          type: integer
-          format: int64
-        success:
-          type: boolean
-      required:
-      - dispatchedAt
-      - label
-      - message
-      - statusCode
-      - success
-      - outputId
-    AlertAPI.BadRequestError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    AlertAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    AlertAPI.DetectionInfo:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of this Detection
-        type:
-          type: string
-          description: The type of this Detection
-          enum:
-          - RULE
-          - CORRELATION_RULE
-          - POLICY
-          - SCHEDULED_RULE
     AlertAPI.BulkPatchAlertReq2:
       type: object
       properties:
@@ -542,6 +472,50 @@ components:
           - RESOLVED
       required:
       - ids
+    AlertAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    AlertAPI.DetectionInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of this Detection
+        type:
+          type: string
+          description: The type of this Detection
+          enum:
+          - RULE
+          - CORRELATION_RULE
+          - POLICY
+          - SCHEDULED_RULE
+    AlertAPI.ListEventsResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: Pagination token for the next page of results
+        results:
+          type: array
+          items: {}
+      required:
+      - results
+    AlertAPI.ListResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: Pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertAPI.Alert'
+      required:
+      - results
     AlertAPI.Alert:
       type: object
       properties:
@@ -642,18 +616,44 @@ components:
       - id
       - type
       - status
-    AlertAPI.ListResp:
+    AlertAPI.SystemError:
       type: object
       properties:
-        next:
+        detection:
+          $ref: '#/components/schemas/AlertAPI.DetectionInfo'
+        sourceId:
           type: string
-          description: Pagination token for the next page of results
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/AlertAPI.Alert'
+          description: The source ID of this SystemError
+        sourceType:
+          type: string
+          description: The source type of this SystemError
+        type:
+          type: string
+          description: The type of this SystemError
+    AlertAPI.Delivery:
+      type: object
+      properties:
+        dispatchedAt:
+          type: string
+        label:
+          type: string
+          description: The label of the alert at where it was delivered (channel name/ID, jira ticket, asana issue, etc)
+        message:
+          type: string
+        outputId:
+          type: string
+        statusCode:
+          type: integer
+          format: int64
+        success:
+          type: boolean
       required:
-      - results
+      - dispatchedAt
+      - label
+      - message
+      - statusCode
+      - success
+      - outputId
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

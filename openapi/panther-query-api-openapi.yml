@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Panther REST alert query API
+  title: Panther REST Query API
   version: '1.0'
-  description: The alert api handles all operations for alerts
+  description: The query api handles operations for queries
 servers:
 - url: https://{api_host}
   variables:
@@ -11,13 +11,13 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: query
+- name: Query
   description: The query api handles operations for queries
 paths:
   /queries:
     get:
       tags:
-      - query
+      - Query
       summary: list queries
       operationId: query#list
       parameters:
@@ -46,7 +46,7 @@ paths:
                 $ref: '#/components/schemas/QueryAPI.ListResp'
     post:
       tags:
-      - query
+      - Query
       summary: create query
       operationId: query#create
       requestBody:
@@ -77,7 +77,7 @@ paths:
   /queries/{id}:
     delete:
       tags:
-      - query
+      - Query
       summary: delete query
       operationId: query#delete
       parameters:
@@ -105,7 +105,7 @@ paths:
                 $ref: '#/components/schemas/QueryAPI.NotFoundError'
     get:
       tags:
-      - query
+      - Query
       summary: get query
       operationId: query#get
       parameters:
@@ -131,7 +131,7 @@ paths:
                 $ref: '#/components/schemas/QueryAPI.NotFoundError'
     post:
       tags:
-      - query
+      - Query
       summary: update query
       description: updates a query
       operationId: query#update
@@ -168,6 +168,39 @@ paths:
                 $ref: '#/components/schemas/QueryAPI.NotFoundError'
 components:
   schemas:
+    QueryAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    QueryAPI.ListResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: Pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryAPI.Query'
+    QueryAPI.EmailConfig:
+      type: object
+      properties:
+        preferAttachment:
+          type: boolean
+          description: If true, prefer sending query results as attachment (if possible within 10MB limit). Otherwise results will be sent via link
+          default: false
+        recipients:
+          type: array
+          items:
+            type: string
+          description: List of email addresses to send the query results to
+        sendEmpty:
+          type: boolean
+          description: If true, sends an email even if the query returned no rows
+          default: false
     QueryAPI.BadRequestError:
       type: object
       properties:
@@ -175,6 +208,40 @@ components:
           type: string
       required:
       - message
+    QueryAPI.Schedule:
+      type: object
+      properties:
+        cron:
+          type: string
+          description: The cron expression
+        disabled:
+          type: boolean
+          description: Disable the schedule
+        rateMinutes:
+          type: integer
+          format: int64
+        timeoutMinutes:
+          type: integer
+          format: int64
+    QueryAPI.ModifyQuery:
+      type: object
+      properties:
+        description:
+          type: string
+          description: The description of the query
+        emailConfig:
+          $ref: '#/components/schemas/QueryAPI.EmailConfig'
+        name:
+          type: string
+          description: The name of the query
+        schedule:
+          $ref: '#/components/schemas/QueryAPI.Schedule'
+        sql:
+          type: string
+          description: The raw sql of the query
+      required:
+      - sql
+      - name
     QueryAPI.Query:
       type: object
       properties:
@@ -201,73 +268,6 @@ components:
           description: The raw sql of the query
         updatedAt:
           type: string
-    QueryAPI.EmailConfig:
-      type: object
-      properties:
-        preferAttachment:
-          type: boolean
-          description: If true, prefer sending query results as attachment (if possible within 10MB limit). Otherwise results will be sent via link
-          default: false
-        recipients:
-          type: array
-          items:
-            type: string
-          description: List of email addresses to send the query results to
-        sendEmpty:
-          type: boolean
-          description: If true, sends an email even if the query returned no rows
-          default: false
-    QueryAPI.ModifyQuery:
-      type: object
-      properties:
-        description:
-          type: string
-          description: The description of the query
-        emailConfig:
-          $ref: '#/components/schemas/QueryAPI.EmailConfig'
-        name:
-          type: string
-          description: The name of the query
-        schedule:
-          $ref: '#/components/schemas/QueryAPI.Schedule'
-        sql:
-          type: string
-          description: The raw sql of the query
-      required:
-      - sql
-      - name
-    QueryAPI.ListResp:
-      type: object
-      properties:
-        next:
-          type: string
-          description: Pagination token for the next page of results
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/QueryAPI.Query'
-    QueryAPI.ExistsError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    QueryAPI.Schedule:
-      type: object
-      properties:
-        cron:
-          type: string
-          description: The cron expression
-        disabled:
-          type: boolean
-          description: Disable the schedule
-        rateMinutes:
-          type: integer
-          format: int64
-        timeoutMinutes:
-          type: integer
-          format: int64
     QueryAPI.NotFoundError:
       type: object
       properties:

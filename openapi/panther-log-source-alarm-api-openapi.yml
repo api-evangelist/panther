@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Panther REST alert log source alarm API
+  title: Panther REST log source alarm API
   version: '1.0'
-  description: The alert api handles all operations for alerts
+  description: Manage the drop-off alarm (SOURCE_NO_DATA) for log source integrations. Other alarm types shown in the Panther UI (permissions checks, classification failures, log-processing errors, scanning errors) are system-managed and not exposed via this API.
 servers:
 - url: https://{api_host}
   variables:
@@ -187,13 +187,6 @@ components:
           format: int32
       required:
       - minutesThreshold
-    LogSourceAlarmAPI.BadRequestError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     LogSourceAlarmAPI.SourceAlarm:
       type: object
       properties:
@@ -215,29 +208,7 @@ components:
           - SOURCE_NO_DATA
       required:
       - type
-    LogSourceAlarmAPI.PutSourceAlarmResp:
-      type: object
-      properties:
-        minutesThreshold:
-          type: integer
-          description: The configured no-data evaluation period in minutes
-          format: int32
-        type:
-          type: string
-          description: The alarm type
-          enum:
-          - SOURCE_NO_DATA
-      required:
-      - type
-      - minutesThreshold
-    LogSourceAlarmAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    LogSourceAlarmAPI.ServiceError:
+    LogSourceAlarmAPI.BadRequestError:
       type: object
       properties:
         message:
@@ -275,6 +246,35 @@ components:
       - temporary
       - timeout
       - fault
+    LogSourceAlarmAPI.ServiceError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    LogSourceAlarmAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    LogSourceAlarmAPI.PutSourceAlarmResp:
+      type: object
+      properties:
+        minutesThreshold:
+          type: integer
+          description: The configured no-data evaluation period in minutes
+          format: int32
+        type:
+          type: string
+          description: The alarm type
+          enum:
+          - SOURCE_NO_DATA
+      required:
+      - type
+      - minutesThreshold
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

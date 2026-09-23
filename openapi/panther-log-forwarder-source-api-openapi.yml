@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Panther REST alert log forwarder source API
+  title: Panther REST log forwarder source API
   version: '1.0'
-  description: The alert api handles all operations for alerts
+  description: The log forwarder source api handles all operations for log forwarder sources
 servers:
 - url: https://{api_host}
   variables:
@@ -171,33 +171,7 @@ paths:
                 $ref: '#/components/schemas/LogForwarderSourceAPI.ServiceError'
 components:
   schemas:
-    LogForwarderSourceAPI.ModifyLogForwarderSource:
-      type: object
-      properties:
-        integrationLabel:
-          type: string
-          description: The integration label (name)
-        logStreamType:
-          type: string
-          description: 'The log stream type. Supported log stream types: Auto, JSON, JsonArray, Lines, XML'
-          enum:
-          - Auto
-          - JSON
-          - JsonArray
-          - Lines
-          - XML
-        logStreamTypeOptions:
-          $ref: '#/components/schemas/LogForwarderSourceAPI.LogStreamTypeOptions'
-        logTypes:
-          type: array
-          items:
-            type: string
-          description: The log types of the integration
-      required:
-      - integrationLabel
-      - logTypes
-      - logStreamType
-    LogForwarderSourceAPI.BadRequestError:
+    LogForwarderSourceAPI.NotFoundError:
       type: object
       properties:
         message:
@@ -236,6 +210,13 @@ components:
           items:
             type: string
           description: The log types of the integration
+    LogForwarderSourceAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     LogForwarderSourceAPI.LogStreamTypeOptions:
       type: object
       properties:
@@ -245,14 +226,33 @@ components:
         xmlRootElement:
           type: string
           description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
-    LogForwarderSourceAPI.ExistsError:
+    LogForwarderSourceAPI.ModifyLogForwarderSource:
       type: object
       properties:
-        message:
+        integrationLabel:
           type: string
+          description: The integration label (name)
+        logStreamType:
+          type: string
+          description: 'The log stream type. Supported log stream types: Auto, JSON, JsonArray, Lines, XML'
+          enum:
+          - Auto
+          - JSON
+          - JsonArray
+          - Lines
+          - XML
+        logStreamTypeOptions:
+          $ref: '#/components/schemas/LogForwarderSourceAPI.LogStreamTypeOptions'
+        logTypes:
+          type: array
+          items:
+            type: string
+          description: The log types of the integration
       required:
-      - message
-    LogForwarderSourceAPI.NotFoundError:
+      - integrationLabel
+      - logTypes
+      - logStreamType
+    LogForwarderSourceAPI.BadRequestError:
       type: object
       properties:
         message:

@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Panther REST alert simple rule API
+  title: Panther REST simple rule API
   version: '1.0'
-  description: The alert api handles all operations for alerts
+  description: The simple rule api handles all operations for simple rules
 servers:
 - url: https://{api_host}
   variables:
@@ -287,71 +287,13 @@ paths:
                 $ref: '#/components/schemas/SimpleRuleAPI.BadRequestWithTestResultsErr'
 components:
   schemas:
-    SimpleRuleAPI.TestDetectionRecordFunctions:
-      type: object
-      properties:
-        alertContext:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        dedup:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        description:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        destinations:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        detection:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        reference:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        runbook:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        severity:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        title:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-    SimpleRuleAPI.UnitTestMock:
-      type: object
-      additionalProperties:
-        type: string
-    SimpleRuleAPI.UnitTest:
-      type: object
-      properties:
-        expectedResult:
-          type: boolean
-          description: The expected result
-        log:
-          description: A test event object that your detection will receive as input.
-        mocks:
-          type: array
-          items:
-            $ref: '#/components/schemas/SimpleRuleAPI.UnitTestMock'
-          description: mocks
-        name:
-          type: string
-          description: name
-        resource:
-          type: string
-          description: A test event object that your detection will receive as input, JSON-encoded. Prefer `log`.
-      required:
-      - name
-      - expectedResult
-    SimpleRuleAPI.BadRequestWithTestResultsErr:
+    SimpleRuleAPI.ExistsError:
       type: object
       properties:
         message:
           type: string
-        testResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionRecord'
       required:
       - message
-    SimpleRuleAPI.TestDetectionSubRecord:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestErr'
-        output:
-          type: string
     SimpleRuleAPI.TestErr:
       type: object
       properties:
@@ -374,6 +316,13 @@ components:
           type: boolean
         triggerAlert:
           type: boolean
+    SimpleRuleAPI.TestDetectionSubRecord:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestErr'
+        output:
+          type: string
     SimpleRuleAPI.SimpleRule:
       type: object
       properties:
@@ -493,6 +442,42 @@ components:
           default: 1
           format: int64
           minimum: 1
+    SimpleRuleAPI.ListResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleRuleAPI.SimpleRule'
+    SimpleRuleAPI.UnitTest:
+      type: object
+      properties:
+        expectedResult:
+          type: boolean
+          description: The expected result
+        log:
+          description: A test event object that your detection will receive as input.
+        mocks:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleRuleAPI.UnitTestMock'
+          description: mocks
+        name:
+          type: string
+          description: name
+        resource:
+          type: string
+          description: A test event object that your detection will receive as input, JSON-encoded. Prefer `log`.
+      required:
+      - name
+      - expectedResult
+    SimpleRuleAPI.UnitTestMock:
+      type: object
+      additionalProperties:
+        type: string
     SimpleRuleAPI.NotFoundError:
       type: object
       properties:
@@ -604,23 +589,38 @@ components:
       - id
       - detection
       - severity
-    SimpleRuleAPI.ExistsError:
+    SimpleRuleAPI.TestDetectionRecordFunctions:
+      type: object
+      properties:
+        alertContext:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        dedup:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        description:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        destinations:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        detection:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        reference:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        runbook:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        severity:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        title:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+    SimpleRuleAPI.BadRequestWithTestResultsErr:
       type: object
       properties:
         message:
           type: string
-      required:
-      - message
-    SimpleRuleAPI.ListResp:
-      type: object
-      properties:
-        next:
-          type: string
-          description: pagination token for the next page of results
-        results:
+        testResults:
           type: array
           items:
-            $ref: '#/components/schemas/SimpleRuleAPI.SimpleRule'
+            $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionRecord'
+      required:
+      - message
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

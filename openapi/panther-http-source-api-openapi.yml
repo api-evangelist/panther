@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Panther REST alert http source API
+  title: Panther REST http source API
   version: '1.0'
-  description: The alert api handles all operations for alerts
+  description: The http source api handles all operations for http sources
 servers:
 - url: https://{api_host}
   variables:
@@ -171,6 +171,13 @@ paths:
                 $ref: '#/components/schemas/HttpSourceAPI.ServiceError'
 components:
   schemas:
+    HttpSourceAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     HttpSourceAPI.NotFoundError:
       type: object
       properties:
@@ -230,13 +237,6 @@ components:
           items:
             type: string
           description: The log types of the integration
-    HttpSourceAPI.ExistsError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     HttpSourceAPI.LogStreamTypeOptions:
       type: object
       properties:
@@ -307,7 +307,7 @@ components:
       - logTypes
       - logStreamType
       - authMethod
-    HttpSourceAPI.BadRequestError:
+    HttpSourceAPI.ExistsError:
       type: object
       properties:
         message:

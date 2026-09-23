@@ -1,27 +1,7 @@
 {
   "provider": "panther",
   "sources": [
-    "panther-alert-api-openapi.yml",
-    "panther-api-token-api-openapi.yml",
-    "panther-aws-cloud-account-api-openapi.yml",
-    "panther-comment-api-openapi.yml",
-    "panther-contexttag-api-openapi.yml",
-    "panther-correlation-rule-api-openapi.yml",
-    "panther-data-model-api-openapi.yml",
-    "panther-gcs-source-api-openapi.yml",
-    "panther-global-api-openapi.yml",
-    "panther-http-source-api-openapi.yml",
-    "panther-log-forwarder-source-api-openapi.yml",
-    "panther-log-source-alarm-api-openapi.yml",
-    "panther-policy-api-openapi.yml",
-    "panther-pub-sub-source-api-openapi.yml",
-    "panther-query-api-openapi.yml",
-    "panther-role-api-openapi.yml",
-    "panther-rule-api-openapi.yml",
-    "panther-s3-source-api-openapi.yml",
-    "panther-scheduled-rule-api-openapi.yml",
-    "panther-simple-rule-api-openapi.yml",
-    "panther-user-api-openapi.yml"
+    "_original/panther-rest-openapi.yml"
   ],
   "outputs": [
     "panther-alert-api-openapi.yml",
@@ -49,6 +29,32 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "panther-rest-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "panther-alert-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-api-token-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-aws-cloud-account-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-comment-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-contexttag-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-correlation-rule-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-data-model-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-gcs-source-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-global-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-http-source-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-log-forwarder-source-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-log-source-alarm-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-policy-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-pub-sub-source-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-query-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-role-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-rule-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-s3-source-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-scheduled-rule-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-simple-rule-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "panther-user-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

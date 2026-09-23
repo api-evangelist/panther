@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Panther REST alert rule API
+  title: Panther REST Rule API
   version: '1.0'
-  description: The alert api handles all operations for alerts
+  description: The rule api handles all operations for rules
 servers:
 - url: https://{api_host}
   variables:
@@ -11,13 +11,13 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: rule
+- name: Rule
   description: The rule api handles all operations for rules
 paths:
   /rules:
     get:
       tags:
-      - rule
+      - Rule
       summary: list rules
       operationId: rule#list
       parameters:
@@ -110,7 +110,7 @@ paths:
                 $ref: '#/components/schemas/RuleAPI.ListResp'
     post:
       tags:
-      - rule
+      - Rule
       summary: create rule
       operationId: rule#create
       parameters:
@@ -160,7 +160,7 @@ paths:
   /rules/{id}:
     delete:
       tags:
-      - rule
+      - Rule
       summary: delete rule
       operationId: rule#delete
       parameters:
@@ -188,7 +188,7 @@ paths:
                 $ref: '#/components/schemas/RuleAPI.NotFoundError'
     get:
       tags:
-      - rule
+      - Rule
       summary: get rule
       operationId: rule#get
       parameters:
@@ -214,7 +214,7 @@ paths:
                 $ref: '#/components/schemas/RuleAPI.NotFoundError'
     put:
       tags:
-      - rule
+      - Rule
       summary: put rule
       description: put creates or updates a rule
       operationId: rule#put
@@ -271,110 +271,6 @@ paths:
                 $ref: '#/components/schemas/RuleAPI.BadRequestWithTestResultsErr'
 components:
   schemas:
-    RuleAPI.Rule:
-      type: object
-      properties:
-        body:
-          type: string
-          description: The python body of the rule
-        createAlert:
-          type: boolean
-          description: Determines whether the rule should create alerts when it triggers
-        createdAt:
-          type: string
-        createdBy:
-          type: object
-          properties:
-            id:
-              type: string
-              enum:
-              - user
-              - api-token
-              - system
-            type:
-              type: string
-          description: The actor who created the rule
-        createdByExternal:
-          type: string
-          description: The text of the user-provided CreatedBy field when uploaded via CI/CD
-        dedupPeriodMinutes:
-          type: integer
-          description: The amount of time in minutes for grouping alerts
-          default: 60
-          format: int64
-          minimum: 1
-        description:
-          type: string
-          description: The description of the rule
-        displayName:
-          type: string
-          description: The display name of the rule
-        enabled:
-          type: boolean
-          description: Determines whether or not the rule is active
-        id:
-          type: string
-          description: The id of the rule
-        inlineFilters:
-          type: string
-          description: The filter for the rule represented in YAML
-        lastModified:
-          type: string
-        logTypes:
-          type: array
-          items:
-            type: string
-          description: log types
-        managed:
-          type: boolean
-          description: Determines if the rule is managed by panther
-        outputIDs:
-          type: array
-          items:
-            type: string
-          description: Destination IDs that override default alert routing based on severity
-        reference:
-          type: string
-          description: A URL or note for additional reference material
-        reports:
-          type: object
-          description: reports
-          additionalProperties:
-            items:
-              type: string
-            type: array
-        runbook:
-          type: string
-          description: How to handle the generated alert
-        severity:
-          type: string
-          enum:
-          - INFO
-          - LOW
-          - MEDIUM
-          - HIGH
-          - CRITICAL
-        summaryAttributes:
-          type: array
-          items:
-            type: string
-          description: A list of fields in the event to create top 5 summaries for
-        tags:
-          type: array
-          items:
-            type: string
-          description: The tags for the rule
-        tests:
-          type: array
-          items:
-            $ref: '#/components/schemas/RuleAPI.UnitTest'
-          description: Unit tests for the Rule. Best practice is to include a positive and negative case
-        threshold:
-          type: integer
-          description: the number of events that must match before an alert is triggered
-          default: 1
-          format: int64
-          minimum: 1
     RuleAPI.BadRequestWithTestResultsErr:
       type: object
       properties:
@@ -386,24 +282,28 @@ components:
             $ref: '#/components/schemas/RuleAPI.TestDetectionRecord'
       required:
       - message
-    RuleAPI.TestErr:
+    RuleAPI.NotFoundError:
       type: object
       properties:
-        code:
-          type: string
         message:
           type: string
-    RuleAPI.TestDetectionSubRecord:
+      required:
+      - message
+    RuleAPI.TestDetectionRecord:
       type: object
       properties:
         error:
           $ref: '#/components/schemas/RuleAPI.TestErr'
-        output:
+        errored:
+          type: boolean
+        functions:
+          $ref: '#/components/schemas/RuleAPI.TestDetectionRecordFunctions'
+        name:
           type: string
-    RuleAPI.UnitTestMock:
-      type: object
-      additionalProperties:
-        type: string
+        passed:
+          type: boolean
+        triggerAlert:
+          type: boolean
     RuleAPI.ListResp:
       type: object
       properties:
@@ -414,13 +314,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RuleAPI.Rule'
-    RuleAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     RuleAPI.TestDetectionRecordFunctions:
       type: object
       properties:
@@ -442,13 +335,20 @@ components:
           $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
         title:
           $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
-    RuleAPI.ExistsError:
+    RuleAPI.TestDetectionSubRecord:
       type: object
       properties:
+        error:
+          $ref: '#/components/schemas/RuleAPI.TestErr'
+        output:
+          type: string
+    RuleAPI.TestErr:
+      type: object
+      properties:
+        code:
+          type: string
         message:
           type: string
-      required:
-      - message
     RuleAPI.UnitTest:
       type: object
       properties:
@@ -560,21 +460,121 @@ components:
       - id
       - body
       - severity
-    RuleAPI.TestDetectionRecord:
+    RuleAPI.UnitTestMock:
+      type: object
+      additionalProperties:
+        type: string
+    RuleAPI.ExistsError:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/RuleAPI.TestErr'
-        errored:
-          type: boolean
-        functions:
-          $ref: '#/components/schemas/RuleAPI.TestDetectionRecordFunctions'
-        name:
+        message:
           type: string
-        passed:
+      required:
+      - message
+    RuleAPI.Rule:
+      type: object
+      properties:
+        body:
+          type: string
+          description: The python body of the rule
+        createAlert:
           type: boolean
-        triggerAlert:
+          description: Determines whether the rule should create alerts when it triggers
+        createdAt:
+          type: string
+        createdBy:
+          type: object
+          properties:
+            id:
+              type: string
+              enum:
+              - user
+              - api-token
+              - system
+            type:
+              type: string
+          description: The actor who created the rule
+        createdByExternal:
+          type: string
+          description: The text of the user-provided CreatedBy field when uploaded via CI/CD
+        dedupPeriodMinutes:
+          type: integer
+          description: The amount of time in minutes for grouping alerts
+          default: 60
+          format: int64
+          minimum: 1
+        description:
+          type: string
+          description: The description of the rule
+        displayName:
+          type: string
+          description: The display name of the rule
+        enabled:
           type: boolean
+          description: Determines whether or not the rule is active
+        id:
+          type: string
+          description: The id of the rule
+        inlineFilters:
+          type: string
+          description: The filter for the rule represented in YAML
+        lastModified:
+          type: string
+        logTypes:
+          type: array
+          items:
+            type: string
+          description: log types
+        managed:
+          type: boolean
+          description: Determines if the rule is managed by panther
+        outputIDs:
+          type: array
+          items:
+            type: string
+          description: Destination IDs that override default alert routing based on severity
+        reference:
+          type: string
+          description: A URL or note for additional reference material
+        reports:
+          type: object
+          description: reports
+          additionalProperties:
+            items:
+              type: string
+            type: array
+        runbook:
+          type: string
+          description: How to handle the generated alert
+        severity:
+          type: string
+          enum:
+          - INFO
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        summaryAttributes:
+          type: array
+          items:
+            type: string
+          description: A list of fields in the event to create top 5 summaries for
+        tags:
+          type: array
+          items:
+            type: string
+          description: The tags for the rule
+        tests:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleAPI.UnitTest'
+          description: Unit tests for the Rule. Best practice is to include a positive and negative case
+        threshold:
+          type: integer
+          description: the number of events that must match before an alert is triggered
+          default: 1
+          format: int64
+          minimum: 1
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

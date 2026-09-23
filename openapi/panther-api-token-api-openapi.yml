@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Panther REST alert api token API
+  title: Panther REST api token API
   version: '1.0'
-  description: The alert api handles all operations for alerts
+  description: The api token api handles all operations for api tokens
 servers:
 - url: https://{api_host}
   variables:
@@ -11,13 +11,13 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: api token
+- name: API Token
   description: The api token api handles all operations for api tokens
 paths:
   /api-tokens:
     get:
       tags:
-      - api token
+      - API Token
       summary: List api tokens
       operationId: api token#list
       responses:
@@ -29,7 +29,7 @@ paths:
                 $ref: '#/components/schemas/APITokenAPI.ListResp'
     post:
       tags:
-      - api token
+      - API Token
       summary: Create an api token
       operationId: api token#create
       requestBody:
@@ -54,7 +54,7 @@ paths:
   /api-tokens/{id}:
     delete:
       tags:
-      - api token
+      - API Token
       summary: delete api token
       operationId: api token#delete
       parameters:
@@ -82,7 +82,7 @@ paths:
                 $ref: '#/components/schemas/APITokenAPI.NotFoundError'
     get:
       tags:
-      - api token
+      - API Token
       summary: Get an api token
       operationId: api token#get
       parameters:
@@ -114,7 +114,7 @@ paths:
                 $ref: '#/components/schemas/APITokenAPI.NotFoundError'
     post:
       tags:
-      - api token
+      - API Token
       summary: Update an api token
       operationId: api token#update
       parameters:
@@ -153,7 +153,7 @@ paths:
   /api-tokens/{id}/rotate:
     post:
       tags:
-      - api token
+      - API Token
       summary: Rotate an api token. If self is provided the current token will be rotated
       operationId: api token#rotate
       parameters:
@@ -191,25 +191,6 @@ paths:
                 $ref: '#/components/schemas/APITokenAPI.NotFoundError'
 components:
   schemas:
-    APITokenAPI.ListResp:
-      type: object
-      properties:
-        next:
-          type: string
-          description: Pagination token for the next page of results
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/APITokenAPI.APIToken'
-      required:
-      - results
-    APITokenAPI.BadRequestError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     APITokenAPI.APIToken:
       type: object
       properties:
@@ -322,6 +303,18 @@ components:
           type: string
       required:
       - message
+    APITokenAPI.ListResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: Pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/APITokenAPI.APIToken'
+      required:
+      - results
     APITokenAPI.ModifyAPIToken:
       type: object
       properties:
@@ -380,6 +373,13 @@ components:
       required:
       - name
       - permissions
+    APITokenAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     APITokenAPI.NotFoundError:
       type: object
       properties:
