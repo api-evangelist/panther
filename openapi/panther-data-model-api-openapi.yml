@@ -19,7 +19,7 @@ paths:
       tags:
       - Data Model
       summary: list data models
-      operationId: data model#list
+      operationId: dataModel#list
       parameters:
       - name: cursor
         in: query
@@ -44,11 +44,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DataModelAPI.ListResp'
+      x-operation-id-source: normalized
+      x-operation-id-original: data model#list
     post:
       tags:
       - Data Model
       summary: create data model
-      operationId: data model#create
+      operationId: dataModel#create
       requestBody:
         required: true
         content:
@@ -74,12 +76,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DataModelAPI.ExistsError'
+      x-operation-id-source: normalized
+      x-operation-id-original: data model#create
   /data-models/{id}:
     delete:
       tags:
       - Data Model
       summary: delete data model
-      operationId: data model#delete
+      operationId: dataModel#delete
       parameters:
       - name: id
         in: path
@@ -103,11 +107,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DataModelAPI.NotFoundError'
+      x-operation-id-source: normalized
+      x-operation-id-original: data model#delete
     get:
       tags:
       - Data Model
       summary: get data model
-      operationId: data model#get
+      operationId: dataModel#get
       parameters:
       - name: id
         in: path
@@ -129,12 +135,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DataModelAPI.NotFoundError'
+      x-operation-id-source: normalized
+      x-operation-id-original: data model#get
     put:
       tags:
       - Data Model
       summary: put data model
       description: put creates or updates a data model
-      operationId: data model#put
+      operationId: dataModel#put
       parameters:
       - name: id
         in: path
@@ -168,37 +176,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DataModelAPI.BadRequestError'
+      x-operation-id-source: normalized
+      x-operation-id-original: data model#put
 components:
   schemas:
-    DataModelAPI.ModifyDataModel:
+    DataModelAPI.BadRequestError:
       type: object
       properties:
-        body:
+        message:
           type: string
-          description: The python body of the data model
-        description:
-          type: string
-          description: The description of the data model
-        displayName:
-          type: string
-          description: The name used for the data model
-        enabled:
-          type: boolean
-          description: enables/disables a data model
-        id:
-          type: string
-          description: The id of the data model
-        logTypes:
-          type: array
-          items:
-            type: string
-          description: 'The log type this data model should associate to. NOTE: only one data model can be assigned to a log type'
-        mappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataModelAPI.DataModelMapping'
       required:
-      - id
+      - message
+    DataModelAPI.ListResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataModelAPI.DataModel'
+    DataModelAPI.DataModelMapping:
+      type: object
+      properties:
+        method:
+          type: string
+          description: the python function name that should be called
+        name:
+          type: string
+          description: the name of the mapping
+        path:
+          type: string
+          description: the json path
+      required:
+      - name
+    DataModelAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    DataModelAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     DataModelAPI.DataModel:
       type: object
       properties:
@@ -230,51 +256,35 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DataModelAPI.DataModelMapping'
-    DataModelAPI.NotFoundError:
+    DataModelAPI.ModifyDataModel:
       type: object
       properties:
-        message:
+        body:
           type: string
-      required:
-      - message
-    DataModelAPI.ListResp:
-      type: object
-      properties:
-        next:
+          description: The python body of the data model
+        description:
           type: string
-          description: pagination token for the next page of results
-        results:
+          description: The description of the data model
+        displayName:
+          type: string
+          description: The name used for the data model
+        enabled:
+          type: boolean
+          description: enables/disables a data model
+        id:
+          type: string
+          description: The id of the data model
+        logTypes:
           type: array
           items:
-            $ref: '#/components/schemas/DataModelAPI.DataModel'
-    DataModelAPI.DataModelMapping:
-      type: object
-      properties:
-        method:
-          type: string
-          description: the python function name that should be called
-        name:
-          type: string
-          description: the name of the mapping
-        path:
-          type: string
-          description: the json path
+            type: string
+          description: 'The log type this data model should associate to. NOTE: only one data model can be assigned to a log type'
+        mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataModelAPI.DataModelMapping'
       required:
-      - name
-    DataModelAPI.BadRequestError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    DataModelAPI.ExistsError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
+      - id
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -60,7 +60,7 @@ tags:
 - Developer Tools
 apis:
 - aid: panther:panther-alert-api
-  name: Panther alert API
+  name: Panther Alert API
   description: The alert api handles all operations for alerts
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
@@ -133,7 +133,7 @@ apis:
   - type: Sandbox
     url: https://docs.panther.com/panther-developer-workflows/api/api-playground
 - aid: panther:panther-comment-api
-  name: Panther comment API
+  name: Panther Comment API
   description: The comment api handles all operations for alerts comments
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
@@ -157,7 +157,7 @@ apis:
   - type: Sandbox
     url: https://docs.panther.com/panther-developer-workflows/api/api-playground
 - aid: panther:panther-contexttag-api
-  name: Panther contexttag API
+  name: Panther Contexttag API
   description: The context tag API handles all operations for alert context tags
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
@@ -247,7 +247,7 @@ apis:
   - type: Sandbox
     url: https://docs.panther.com/panther-developer-workflows/api/api-playground
 - aid: panther:panther-global-api
-  name: Panther global API
+  name: Panther Global API
   description: The global api handles all operations for globals
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
@@ -340,7 +340,7 @@ apis:
   - type: Sandbox
     url: https://docs.panther.com/panther-developer-workflows/api/api-playground
 - aid: panther:panther-policy-api
-  name: Panther policy API
+  name: Panther Policy API
   description: The policy api handles all operations for policies
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
@@ -386,7 +386,7 @@ apis:
   - type: Sandbox
     url: https://docs.panther.com/panther-developer-workflows/api/api-playground
 - aid: panther:panther-query-api
-  name: Panther query API
+  name: Panther Query API
   description: The query api handles operations for queries
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
@@ -410,7 +410,7 @@ apis:
   - type: Sandbox
     url: https://docs.panther.com/panther-developer-workflows/api/api-playground
 - aid: panther:panther-role-api
-  name: Panther role API
+  name: Panther Role API
   description: The role api handles all operations for roles
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
@@ -434,7 +434,7 @@ apis:
   - type: Sandbox
     url: https://docs.panther.com/panther-developer-workflows/api/api-playground
 - aid: panther:panther-rule-api
-  name: Panther rule API
+  name: Panther Rule API
   description: The rule api handles all operations for rules
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host
@@ -522,7 +522,7 @@ apis:
   - type: Sandbox
     url: https://docs.panther.com/panther-developer-workflows/api/api-playground
 - aid: panther:panther-user-api
-  name: Panther user API
+  name: Panther User API
   description: The user api handles all operations for users
   humanURL: https://docs.panther.com/panther-developer-workflows/api/rest
   baseURL: https://api.your-panther-host

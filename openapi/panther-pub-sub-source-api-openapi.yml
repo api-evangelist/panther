@@ -19,7 +19,7 @@ paths:
       tags:
       - pub/sub source
       summary: create pub/sub source
-      operationId: pub/sub source#create
+      operationId: pub/subSource#create
       requestBody:
         required: true
         content:
@@ -51,12 +51,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PubSubSourceAPI.ServiceError'
+      x-operation-id-source: normalized
+      x-operation-id-original: pub/sub source#create
   /log-sources/pubsub/{id}:
     delete:
       tags:
       - pub/sub source
       summary: delete pub/sub source
-      operationId: pub/sub source#delete
+      operationId: pub/subSource#delete
       parameters:
       - name: id
         in: path
@@ -80,11 +82,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PubSubSourceAPI.ServiceError'
+      x-operation-id-source: normalized
+      x-operation-id-original: pub/sub source#delete
     get:
       tags:
       - pub/sub source
       summary: get pub/sub source
-      operationId: pub/sub source#get
+      operationId: pub/subSource#get
       parameters:
       - name: id
         in: path
@@ -118,12 +122,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PubSubSourceAPI.ServiceError'
+      x-operation-id-source: normalized
+      x-operation-id-original: pub/sub source#get
     put:
       tags:
       - pub/sub source
       summary: put pub/sub source
       description: put updates a pubsub source
-      operationId: pub/sub source#put
+      operationId: pub/subSource#put
       parameters:
       - name: id
         in: path
@@ -169,17 +175,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PubSubSourceAPI.ServiceError'
+      x-operation-id-source: normalized
+      x-operation-id-original: pub/sub source#put
 components:
   schemas:
-    PubSubSourceAPI.LogStreamTypeOptions:
-      type: object
-      properties:
-        jsonArrayEnvelopeField:
-          type: string
-          description: Path to the array value to extract elements from, only applicable if logStreamType is JsonArray. Leave empty if the input JSON is an array itself
-        xmlRootElement:
-          type: string
-          description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
     PubSubSourceAPI.BadRequestError:
       type: object
       properties:
@@ -187,14 +186,7 @@ components:
           type: string
       required:
       - message
-    PubSubSourceAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    PubSubSourceAPI.ExistsError:
+    PubSubSourceAPI.ServiceError:
       type: object
       properties:
         message:
@@ -244,7 +236,23 @@ components:
         subscriptionId:
           type: string
           description: The GCP Pub/Sub subscription ID
-    PubSubSourceAPI.ServiceError:
+    PubSubSourceAPI.LogStreamTypeOptions:
+      type: object
+      properties:
+        jsonArrayEnvelopeField:
+          type: string
+          description: Path to the array value to extract elements from, only applicable if logStreamType is JsonArray. Leave empty if the input JSON is an array itself
+        xmlRootElement:
+          type: string
+          description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
+    PubSubSourceAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    PubSubSourceAPI.ExistsError:
       type: object
       properties:
         message:

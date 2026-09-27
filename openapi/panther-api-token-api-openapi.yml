@@ -19,7 +19,7 @@ paths:
       tags:
       - API Token
       summary: List api tokens
-      operationId: api token#list
+      operationId: apiToken#list
       responses:
         '200':
           description: OK response.
@@ -27,11 +27,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APITokenAPI.ListResp'
+      x-operation-id-source: normalized
+      x-operation-id-original: api token#list
     post:
       tags:
       - API Token
       summary: Create an api token
-      operationId: api token#create
+      operationId: apiToken#create
       requestBody:
         required: true
         content:
@@ -51,12 +53,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APITokenAPI.BadRequestError'
+      x-operation-id-source: normalized
+      x-operation-id-original: api token#create
   /api-tokens/{id}:
     delete:
       tags:
       - API Token
       summary: delete api token
-      operationId: api token#delete
+      operationId: apiToken#delete
       parameters:
       - name: id
         in: path
@@ -80,11 +84,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APITokenAPI.NotFoundError'
+      x-operation-id-source: normalized
+      x-operation-id-original: api token#delete
     get:
       tags:
       - API Token
       summary: Get an api token
-      operationId: api token#get
+      operationId: apiToken#get
       parameters:
       - name: id
         in: path
@@ -112,11 +118,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APITokenAPI.NotFoundError'
+      x-operation-id-source: normalized
+      x-operation-id-original: api token#get
     post:
       tags:
       - API Token
       summary: Update an api token
-      operationId: api token#update
+      operationId: apiToken#update
       parameters:
       - name: id
         in: path
@@ -150,12 +158,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APITokenAPI.NotFoundError'
+      x-operation-id-source: normalized
+      x-operation-id-original: api token#update
   /api-tokens/{id}/rotate:
     post:
       tags:
       - API Token
       summary: Rotate an api token. If self is provided the current token will be rotated
-      operationId: api token#rotate
+      operationId: apiToken#rotate
       parameters:
       - name: id
         in: path
@@ -189,8 +199,68 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APITokenAPI.NotFoundError'
+      x-operation-id-source: normalized
+      x-operation-id-original: api token#rotate
 components:
   schemas:
+    APITokenAPI.ModifyAPIToken:
+      type: object
+      properties:
+        allowedCIDRBlocks:
+          type: array
+          items:
+            type: string
+          description: The set of CIDR blocks that are allowed to use this API token. If empty, all CIDR blocks are allowed
+        name:
+          type: string
+          description: The name of the token
+        permissions:
+          type: array
+          items:
+            type: string
+            enum:
+            - AIRunAsModify
+            - AlertModify
+            - AlertRead
+            - BulkUpload
+            - BulkUploadValidate
+            - CloudsecSourceModify
+            - CloudsecSourceRead
+            - DataAnalyticsModify
+            - DataAnalyticsRead
+            - DestinationModify
+            - DestinationRead
+            - GeneralSettingsModify
+            - GeneralSettingsRead
+            - LogSourceModify
+            - LogSourceRawDataRead
+            - LogSourceRead
+            - LookupModify
+            - LookupRead
+            - ManageAIResponses
+            - ManageAISkills
+            - ManageScheduledPrompts
+            - McpServerModify
+            - McpServerRead
+            - NotificationsSend
+            - OrganizationAPITokenModify
+            - OrganizationAPITokenRead
+            - PolicyModify
+            - PolicyRead
+            - ResourceModify
+            - ResourceRead
+            - RuleModify
+            - RuleRead
+            - RunPantherAI
+            - SummaryRead
+            - UserModify
+            - UserRead
+            - ViewAIPrivateResponses
+            - ViewAISkills
+            - ViewScheduledPrompts
+      required:
+      - name
+      - permissions
     APITokenAPI.APIToken:
       type: object
       properties:
@@ -296,13 +366,6 @@ components:
       - permissions
       - id
       - createdAt
-    APITokenAPI.ForbiddenErr:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     APITokenAPI.ListResp:
       type: object
       properties:
@@ -315,65 +378,14 @@ components:
             $ref: '#/components/schemas/APITokenAPI.APIToken'
       required:
       - results
-    APITokenAPI.ModifyAPIToken:
+    APITokenAPI.BadRequestError:
       type: object
       properties:
-        allowedCIDRBlocks:
-          type: array
-          items:
-            type: string
-          description: The set of CIDR blocks that are allowed to use this API token. If empty, all CIDR blocks are allowed
-        name:
+        message:
           type: string
-          description: The name of the token
-        permissions:
-          type: array
-          items:
-            type: string
-            enum:
-            - AIRunAsModify
-            - AlertModify
-            - AlertRead
-            - BulkUpload
-            - BulkUploadValidate
-            - CloudsecSourceModify
-            - CloudsecSourceRead
-            - DataAnalyticsModify
-            - DataAnalyticsRead
-            - DestinationModify
-            - DestinationRead
-            - GeneralSettingsModify
-            - GeneralSettingsRead
-            - LogSourceModify
-            - LogSourceRawDataRead
-            - LogSourceRead
-            - LookupModify
-            - LookupRead
-            - ManageAIResponses
-            - ManageAISkills
-            - ManageScheduledPrompts
-            - McpServerModify
-            - McpServerRead
-            - NotificationsSend
-            - OrganizationAPITokenModify
-            - OrganizationAPITokenRead
-            - PolicyModify
-            - PolicyRead
-            - ResourceModify
-            - ResourceRead
-            - RuleModify
-            - RuleRead
-            - RunPantherAI
-            - SummaryRead
-            - UserModify
-            - UserRead
-            - ViewAIPrivateResponses
-            - ViewAISkills
-            - ViewScheduledPrompts
       required:
-      - name
-      - permissions
-    APITokenAPI.BadRequestError:
+      - message
+    APITokenAPI.ForbiddenErr:
       type: object
       properties:
         message:

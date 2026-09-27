@@ -397,13 +397,6 @@ paths:
                 $ref: '#/components/schemas/AlertAPI.NotFoundError'
 components:
   schemas:
-    AlertAPI.BadRequestError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     AlertAPI.PatchAlertReq:
       type: object
       properties:
@@ -435,87 +428,20 @@ components:
           - CLOSED
           - TRIAGED
           - RESOLVED
-    AlertAPI.BulkPatchAlertReq2:
+    AlertAPI.SystemError:
       type: object
       properties:
-        assignee:
+        detection:
+          $ref: '#/components/schemas/AlertAPI.DetectionInfo'
+        sourceId:
           type: string
-          description: The ID of the assignee for this alert
-        contextTags:
-          type: array
-          items:
-            type: string
-            pattern: ^[a-z0-9_-]+$
-            minLength: 1
-            maxLength: 30
-          description: the context tags for the alert
-          maxItems: 10
-        ids:
-          type: array
-          items:
-            type: string
-          description: The IDs of the alerts to patch
-        quality:
+          description: The source ID of this SystemError
+        sourceType:
           type: string
-          description: The quality of this Alert
-          enum:
-          - NOISE
-          - USEFUL
-          - ''
-        status:
-          type: string
-          description: The status of this Alert
-          enum:
-          - OPEN
-          - CLOSED
-          - TRIAGED
-          - RESOLVED
-      required:
-      - ids
-    AlertAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    AlertAPI.DetectionInfo:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of this Detection
+          description: The source type of this SystemError
         type:
           type: string
-          description: The type of this Detection
-          enum:
-          - RULE
-          - CORRELATION_RULE
-          - POLICY
-          - SCHEDULED_RULE
-    AlertAPI.ListEventsResp:
-      type: object
-      properties:
-        next:
-          type: string
-          description: Pagination token for the next page of results
-        results:
-          type: array
-          items: {}
-      required:
-      - results
-    AlertAPI.ListResp:
-      type: object
-      properties:
-        next:
-          type: string
-          description: Pagination token for the next page of results
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/AlertAPI.Alert'
-      required:
-      - results
+          description: The type of this SystemError
     AlertAPI.Alert:
       type: object
       properties:
@@ -616,20 +542,24 @@ components:
       - id
       - type
       - status
-    AlertAPI.SystemError:
+    AlertAPI.BadRequestError:
       type: object
       properties:
-        detection:
-          $ref: '#/components/schemas/AlertAPI.DetectionInfo'
-        sourceId:
+        message:
           type: string
-          description: The source ID of this SystemError
-        sourceType:
+      required:
+      - message
+    AlertAPI.ListEventsResp:
+      type: object
+      properties:
+        next:
           type: string
-          description: The source type of this SystemError
-        type:
-          type: string
-          description: The type of this SystemError
+          description: Pagination token for the next page of results
+        results:
+          type: array
+          items: {}
+      required:
+      - results
     AlertAPI.Delivery:
       type: object
       properties:
@@ -654,6 +584,76 @@ components:
       - statusCode
       - success
       - outputId
+    AlertAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    AlertAPI.BulkPatchAlertReq2:
+      type: object
+      properties:
+        assignee:
+          type: string
+          description: The ID of the assignee for this alert
+        contextTags:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z0-9_-]+$
+            minLength: 1
+            maxLength: 30
+          description: the context tags for the alert
+          maxItems: 10
+        ids:
+          type: array
+          items:
+            type: string
+          description: The IDs of the alerts to patch
+        quality:
+          type: string
+          description: The quality of this Alert
+          enum:
+          - NOISE
+          - USEFUL
+          - ''
+        status:
+          type: string
+          description: The status of this Alert
+          enum:
+          - OPEN
+          - CLOSED
+          - TRIAGED
+          - RESOLVED
+      required:
+      - ids
+    AlertAPI.ListResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: Pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertAPI.Alert'
+      required:
+      - results
+    AlertAPI.DetectionInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of this Detection
+        type:
+          type: string
+          description: The type of this Detection
+          enum:
+          - RULE
+          - CORRELATION_RULE
+          - POLICY
+          - SCHEDULED_RULE
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

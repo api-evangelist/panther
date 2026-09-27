@@ -19,7 +19,7 @@ paths:
       tags:
       - s3 source
       summary: create s3 source
-      operationId: s3 source#create
+      operationId: s3Source#create
       requestBody:
         required: true
         content:
@@ -51,12 +51,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/S3SourceAPI.ServiceError'
+      x-operation-id-source: normalized
+      x-operation-id-original: s3 source#create
   /log-sources/s3/{id}:
     delete:
       tags:
       - s3 source
       summary: delete s3 source
-      operationId: s3 source#delete
+      operationId: s3Source#delete
       parameters:
       - name: id
         in: path
@@ -80,11 +82,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/S3SourceAPI.ServiceError'
+      x-operation-id-source: normalized
+      x-operation-id-original: s3 source#delete
     get:
       tags:
       - s3 source
       summary: get s3 source
-      operationId: s3 source#get
+      operationId: s3Source#get
       parameters:
       - name: id
         in: path
@@ -118,11 +122,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/S3SourceAPI.ServiceError'
+      x-operation-id-source: normalized
+      x-operation-id-original: s3 source#get
     put:
       tags:
       - s3 source
       summary: put s3 source
-      operationId: s3 source#put
+      operationId: s3Source#put
       parameters:
       - name: id
         in: path
@@ -168,27 +174,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/S3SourceAPI.ServiceError'
+      x-operation-id-source: normalized
+      x-operation-id-original: s3 source#put
 components:
   schemas:
-    S3SourceAPI.BadRequestError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    S3SourceAPI.S3LogStreamTypeOptions:
-      type: object
-      properties:
-        jsonArrayEnvelopeField:
-          type: string
-          description: Path to the JSON array field to extract records from. Only applicable when logStreamType is JsonArray. Omit if the input is already a top-level array.
-        retainEnvelopeFields:
-          type: boolean
-          description: Preserve CloudWatch Logs envelope metadata (accountId, logGroup, subscriptionFilters) in a p_header column. Only applicable when logStreamType is CloudWatchLogs.
-        xmlRootElement:
-          type: string
-          description: Root element wrapping XML events. Only applicable when logStreamType is XML. Omit if events are not enclosed in a root element.
     S3SourceAPI.ModifyS3Source:
       type: object
       properties:
@@ -227,53 +216,7 @@ components:
       - managedBucketNotifications
       - logProcessingRole
       - logStreamType
-    S3SourceAPI.CreateS3Source:
-      type: object
-      properties:
-        awsAccountId:
-          type: string
-          description: The 12-digit AWS account ID where the S3 bucket resides
-        integrationLabel:
-          type: string
-          description: The integration label (name)
-        kmsKey:
-          type: string
-          description: KMS key ARN for server-side encryption. Omit if the bucket is not KMS-encrypted.
-        logProcessingRole:
-          type: string
-          description: The IAM role ARN that Panther assumes to read from the S3 bucket
-        logStreamType:
-          type: string
-          description: 'The log stream type. Supported: Auto, JSON, JsonArray, Lines, XML, CloudWatchLogs'
-          enum:
-          - Auto
-          - JSON
-          - JsonArray
-          - Lines
-          - XML
-          - CloudWatchLogs
-        logStreamTypeOptions:
-          $ref: '#/components/schemas/S3SourceAPI.S3LogStreamTypeOptions'
-        managedBucketNotifications:
-          type: boolean
-          description: Whether Panther should configure the S3 bucket notifications automatically
-        s3Bucket:
-          type: string
-          description: The S3 bucket name
-        s3PrefixLogTypes:
-          type: array
-          items:
-            $ref: '#/components/schemas/S3SourceAPI.PrefixLogTypesMapping'
-          description: Prefix-based log type mappings for parsing ingested data
-      required:
-      - awsAccountId
-      - s3Bucket
-      - integrationLabel
-      - s3PrefixLogTypes
-      - managedBucketNotifications
-      - logProcessingRole
-      - logStreamType
-    S3SourceAPI.ExistsError:
+    S3SourceAPI.NotFoundError:
       type: object
       properties:
         message:
@@ -321,13 +264,18 @@ components:
           items:
             $ref: '#/components/schemas/S3SourceAPI.PrefixLogTypesMapping'
           description: Prefix-based log type mappings for parsing ingested data
-    S3SourceAPI.ServiceError:
+    S3SourceAPI.S3LogStreamTypeOptions:
       type: object
       properties:
-        message:
+        jsonArrayEnvelopeField:
           type: string
-      required:
-      - message
+          description: Path to the JSON array field to extract records from. Only applicable when logStreamType is JsonArray. Omit if the input is already a top-level array.
+        retainEnvelopeFields:
+          type: boolean
+          description: Preserve CloudWatch Logs envelope metadata (accountId, logGroup, subscriptionFilters) in a p_header column. Only applicable when logStreamType is CloudWatchLogs.
+        xmlRootElement:
+          type: string
+          description: Root element wrapping XML events. Only applicable when logStreamType is XML. Omit if events are not enclosed in a root element.
     S3SourceAPI.PrefixLogTypesMapping:
       type: object
       properties:
@@ -344,13 +292,73 @@ components:
         prefix:
           type: string
           description: S3 prefix to match. Leave empty to match all objects in the bucket.
-    S3SourceAPI.NotFoundError:
+    S3SourceAPI.ExistsError:
       type: object
       properties:
         message:
           type: string
       required:
       - message
+    S3SourceAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    S3SourceAPI.ServiceError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    S3SourceAPI.CreateS3Source:
+      type: object
+      properties:
+        awsAccountId:
+          type: string
+          description: The 12-digit AWS account ID where the S3 bucket resides
+        integrationLabel:
+          type: string
+          description: The integration label (name)
+        kmsKey:
+          type: string
+          description: KMS key ARN for server-side encryption. Omit if the bucket is not KMS-encrypted.
+        logProcessingRole:
+          type: string
+          description: The IAM role ARN that Panther assumes to read from the S3 bucket
+        logStreamType:
+          type: string
+          description: 'The log stream type. Supported: Auto, JSON, JsonArray, Lines, XML, CloudWatchLogs'
+          enum:
+          - Auto
+          - JSON
+          - JsonArray
+          - Lines
+          - XML
+          - CloudWatchLogs
+        logStreamTypeOptions:
+          $ref: '#/components/schemas/S3SourceAPI.S3LogStreamTypeOptions'
+        managedBucketNotifications:
+          type: boolean
+          description: Whether Panther should configure the S3 bucket notifications automatically
+        s3Bucket:
+          type: string
+          description: The S3 bucket name
+        s3PrefixLogTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/S3SourceAPI.PrefixLogTypesMapping'
+          description: Prefix-based log type mappings for parsing ingested data
+      required:
+      - awsAccountId
+      - s3Bucket
+      - integrationLabel
+      - s3PrefixLogTypes
+      - managedBucketNotifications
+      - logProcessingRole
+      - logStreamType
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

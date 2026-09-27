@@ -234,6 +234,22 @@ components:
       - givenName
       - familyName
       - role
+    UserAPI.Role:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'The id of the role. Note: id should be excluded if name is provided during a modify operation'
+        name:
+          type: string
+          description: 'The name of the role. Note: name should be excluded if id is provided during a modify operation'
+    UserAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     UserAPI.User:
       type: object
       properties:
@@ -267,22 +283,6 @@ components:
       - familyName
       - role
       - enabled
-    UserAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    UserAPI.Role:
-      type: object
-      properties:
-        id:
-          type: string
-          description: 'The id of the role. Note: id should be excluded if name is provided during a modify operation'
-        name:
-          type: string
-          description: 'The name of the role. Note: name should be excluded if id is provided during a modify operation'
     UserAPI.BadRequestError:
       type: object
       properties:

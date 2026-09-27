@@ -168,6 +168,13 @@ paths:
                 $ref: '#/components/schemas/QueryAPI.NotFoundError'
 components:
   schemas:
+    QueryAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     QueryAPI.ExistsError:
       type: object
       properties:
@@ -175,32 +182,6 @@ components:
           type: string
       required:
       - message
-    QueryAPI.ListResp:
-      type: object
-      properties:
-        next:
-          type: string
-          description: Pagination token for the next page of results
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/QueryAPI.Query'
-    QueryAPI.EmailConfig:
-      type: object
-      properties:
-        preferAttachment:
-          type: boolean
-          description: If true, prefer sending query results as attachment (if possible within 10MB limit). Otherwise results will be sent via link
-          default: false
-        recipients:
-          type: array
-          items:
-            type: string
-          description: List of email addresses to send the query results to
-        sendEmpty:
-          type: boolean
-          description: If true, sends an email even if the query returned no rows
-          default: false
     QueryAPI.BadRequestError:
       type: object
       properties:
@@ -223,6 +204,22 @@ components:
         timeoutMinutes:
           type: integer
           format: int64
+    QueryAPI.EmailConfig:
+      type: object
+      properties:
+        preferAttachment:
+          type: boolean
+          description: If true, prefer sending query results as attachment (if possible within 10MB limit). Otherwise results will be sent via link
+          default: false
+        recipients:
+          type: array
+          items:
+            type: string
+          description: List of email addresses to send the query results to
+        sendEmpty:
+          type: boolean
+          description: If true, sends an email even if the query returned no rows
+          default: false
     QueryAPI.ModifyQuery:
       type: object
       properties:
@@ -268,13 +265,16 @@ components:
           description: The raw sql of the query
         updatedAt:
           type: string
-    QueryAPI.NotFoundError:
+    QueryAPI.ListResp:
       type: object
       properties:
-        message:
+        next:
           type: string
-      required:
-      - message
+          description: Pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryAPI.Query'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

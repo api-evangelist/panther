@@ -20,7 +20,7 @@ paths:
       - log source alarm
       summary: delete log source alarm
       description: 'Delete the drop-off alarm for a log source. Idempotent: returns 204 even if no alarm exists.'
-      operationId: log source alarm#delete
+      operationId: logSourceAlarm#delete
       parameters:
       - name: sourceId
         in: path
@@ -60,12 +60,14 @@ paths:
             application/vnd.goa.error:
               schema:
                 $ref: '#/components/schemas/LogSourceAlarmAPI.Error'
+      x-operation-id-source: normalized
+      x-operation-id-original: log source alarm#delete
     get:
       tags:
       - log source alarm
       summary: get log source alarm
       description: Get a specific alarm for a log source
-      operationId: log source alarm#get
+      operationId: logSourceAlarm#get
       parameters:
       - name: sourceId
         in: path
@@ -115,12 +117,14 @@ paths:
             application/vnd.goa.error:
               schema:
                 $ref: '#/components/schemas/LogSourceAlarmAPI.Error'
+      x-operation-id-source: normalized
+      x-operation-id-original: log source alarm#get
     put:
       tags:
       - log source alarm
       summary: put log source alarm
       description: Create or update the drop-off threshold for a log source. Only the SOURCE_NO_DATA alarm type is user-configurable. Not supported for cloud-security sources (returns 400).
-      operationId: log source alarm#put
+      operationId: logSourceAlarm#put
       parameters:
       - name: sourceId
         in: path
@@ -176,6 +180,8 @@ paths:
             application/vnd.goa.error:
               schema:
                 $ref: '#/components/schemas/LogSourceAlarmAPI.Error'
+      x-operation-id-source: normalized
+      x-operation-id-original: log source alarm#put
 components:
   schemas:
     LogSourceAlarmAPI.PutSourceAlarmData:
@@ -187,20 +193,13 @@ components:
           format: int32
       required:
       - minutesThreshold
-    LogSourceAlarmAPI.SourceAlarm:
+    LogSourceAlarmAPI.PutSourceAlarmResp:
       type: object
       properties:
         minutesThreshold:
           type: integer
-          description: The no-data evaluation period in minutes.
+          description: The configured no-data evaluation period in minutes
           format: int32
-        state:
-          type: string
-          description: The current CloudWatch state of the alarm
-          enum:
-          - OK
-          - ALARM
-          - INSUFFICIENT_DATA
         type:
           type: string
           description: The alarm type
@@ -208,13 +207,7 @@ components:
           - SOURCE_NO_DATA
       required:
       - type
-    LogSourceAlarmAPI.BadRequestError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
+      - minutesThreshold
     LogSourceAlarmAPI.Error:
       type: object
       properties:
@@ -246,7 +239,7 @@ components:
       - temporary
       - timeout
       - fault
-    LogSourceAlarmAPI.ServiceError:
+    LogSourceAlarmAPI.BadRequestError:
       type: object
       properties:
         message:
@@ -260,13 +253,27 @@ components:
           type: string
       required:
       - message
-    LogSourceAlarmAPI.PutSourceAlarmResp:
+    LogSourceAlarmAPI.ServiceError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    LogSourceAlarmAPI.SourceAlarm:
       type: object
       properties:
         minutesThreshold:
           type: integer
-          description: The configured no-data evaluation period in minutes
+          description: The no-data evaluation period in minutes.
           format: int32
+        state:
+          type: string
+          description: The current CloudWatch state of the alarm
+          enum:
+          - OK
+          - ALARM
+          - INSUFFICIENT_DATA
         type:
           type: string
           description: The alarm type
@@ -274,7 +281,6 @@ components:
           - SOURCE_NO_DATA
       required:
       - type
-      - minutesThreshold
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

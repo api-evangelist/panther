@@ -162,7 +162,7 @@ paths:
                 $ref: '#/components/schemas/CommentAPI.NotFoundError'
 components:
   schemas:
-    CommentAPI.NotFoundError:
+    CommentAPI.BadRequestError:
       type: object
       properties:
         message:
@@ -235,7 +235,7 @@ components:
       - alertId
       - body
       - format
-    CommentAPI.BadRequestError:
+    CommentAPI.NotFoundError:
       type: object
       properties:
         message:

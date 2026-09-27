@@ -191,23 +191,6 @@ paths:
                 $ref: '#/components/schemas/GlobalAPI.BadRequestError'
 components:
   schemas:
-    GlobalAPI.ExistsError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    GlobalAPI.ListResp:
-      type: object
-      properties:
-        next:
-          type: string
-          description: pagination token for the next page of results
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/GlobalAPI.Global'
     GlobalAPI.ModifyGlobal:
       type: object
       properties:
@@ -228,40 +211,24 @@ components:
       required:
       - id
       - body
-    GlobalAPI.Global:
-      type: object
-      properties:
-        body:
-          type: string
-          description: The python body of the global
-        createdAt:
-          type: string
-        description:
-          type: string
-          description: The description of the global
-        id:
-          type: string
-          description: The id of the global
-        lastModified:
-          type: string
-        tags:
-          type: array
-          items:
-            type: string
-          description: The tags for the global
-    GlobalAPI.PutGlobalResp:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/GlobalAPI.Global'
-    GlobalAPI.NotFoundError:
+    GlobalAPI.BadRequestError:
       type: object
       properties:
         message:
           type: string
       required:
       - message
-    GlobalAPI.BadRequestError:
+    GlobalAPI.ListResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalAPI.Global'
+    GlobalAPI.NotFoundError:
       type: object
       properties:
         message:
@@ -284,6 +251,39 @@ components:
           description: The tags for the global
       required:
       - body
+    GlobalAPI.PutGlobalResp:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GlobalAPI.Global'
+    GlobalAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    GlobalAPI.Global:
+      type: object
+      properties:
+        body:
+          type: string
+          description: The python body of the global
+        createdAt:
+          type: string
+        description:
+          type: string
+          description: The description of the global
+        id:
+          type: string
+          description: The id of the global
+        lastModified:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+          description: The tags for the global
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

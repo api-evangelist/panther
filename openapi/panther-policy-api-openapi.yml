@@ -293,6 +293,13 @@ components:
             $ref: '#/components/schemas/PolicyAPI.TestDetectionRecord'
       required:
       - message
+    PolicyAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     PolicyAPI.UnitTest:
       type: object
       properties:
@@ -315,6 +322,76 @@ components:
       required:
       - name
       - expectedResult
+    PolicyAPI.ModifyPolicy:
+      type: object
+      properties:
+        body:
+          type: string
+          description: The python body of the policy
+        description:
+          type: string
+          description: The description of the policy
+        displayName:
+          type: string
+          description: The display name of the policy
+        enabled:
+          type: boolean
+          description: Determines whether or not the policy is active
+        id:
+          type: string
+          description: The id of the policy
+        managed:
+          type: boolean
+          description: Determines if the policy is managed by panther
+        outputIDs:
+          type: array
+          items:
+            type: string
+          description: Destination IDs that override default alert routing based on severity
+        reference:
+          type: string
+          description: A URL or note for additional reference material
+        reports:
+          type: object
+          description: Reports
+          additionalProperties:
+            items:
+              type: string
+            type: array
+        resourceTypes:
+          type: array
+          items:
+            type: string
+          description: Resource types
+        severity:
+          type: string
+          enum:
+          - INFO
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        suppressions:
+          type: array
+          items:
+            type: string
+          description: Resources to ignore via a pattern that matches the resource id
+          example:
+          - aws::s3::*
+        tags:
+          type: array
+          items:
+            type: string
+          description: The tags for the policy
+        tests:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyAPI.UnitTest'
+          description: Unit tests for the Policy. Best practice is to include a positive and negative case
+      required:
+      - id
+      - body
+      - severity
     PolicyAPI.TestDetectionRecord:
       type: object
       properties:
@@ -330,17 +407,11 @@ components:
           type: boolean
         triggerAlert:
           type: boolean
-    PolicyAPI.ListResp:
+    PolicyAPI.UnitTestMock:
       type: object
-      properties:
-        next:
-          type: string
-          description: pagination token for the next page of results
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PolicyAPI.Policy'
-    PolicyAPI.NotFoundError:
+      additionalProperties:
+        type: string
+    PolicyAPI.ExistsError:
       type: object
       properties:
         message:
@@ -432,17 +503,16 @@ components:
           items:
             $ref: '#/components/schemas/PolicyAPI.UnitTest'
           description: Unit tests for the Policy. Best practice is to include a positive and negative case
-    PolicyAPI.ExistsError:
+    PolicyAPI.ListResp:
       type: object
       properties:
-        message:
+        next:
           type: string
-      required:
-      - message
-    PolicyAPI.UnitTestMock:
-      type: object
-      additionalProperties:
-        type: string
+          description: pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyAPI.Policy'
     PolicyAPI.TestDetectionSubRecord:
       type: object
       properties:
@@ -450,76 +520,6 @@ components:
           $ref: '#/components/schemas/PolicyAPI.TestErr'
         output:
           type: string
-    PolicyAPI.ModifyPolicy:
-      type: object
-      properties:
-        body:
-          type: string
-          description: The python body of the policy
-        description:
-          type: string
-          description: The description of the policy
-        displayName:
-          type: string
-          description: The display name of the policy
-        enabled:
-          type: boolean
-          description: Determines whether or not the policy is active
-        id:
-          type: string
-          description: The id of the policy
-        managed:
-          type: boolean
-          description: Determines if the policy is managed by panther
-        outputIDs:
-          type: array
-          items:
-            type: string
-          description: Destination IDs that override default alert routing based on severity
-        reference:
-          type: string
-          description: A URL or note for additional reference material
-        reports:
-          type: object
-          description: Reports
-          additionalProperties:
-            items:
-              type: string
-            type: array
-        resourceTypes:
-          type: array
-          items:
-            type: string
-          description: Resource types
-        severity:
-          type: string
-          enum:
-          - INFO
-          - LOW
-          - MEDIUM
-          - HIGH
-          - CRITICAL
-        suppressions:
-          type: array
-          items:
-            type: string
-          description: Resources to ignore via a pattern that matches the resource id
-          example:
-          - aws::s3::*
-        tags:
-          type: array
-          items:
-            type: string
-          description: The tags for the policy
-        tests:
-          type: array
-          items:
-            $ref: '#/components/schemas/PolicyAPI.UnitTest'
-          description: Unit tests for the Policy. Best practice is to include a positive and negative case
-      required:
-      - id
-      - body
-      - severity
     PolicyAPI.TestDetectionRecordFunctions:
       type: object
       properties:

@@ -19,7 +19,7 @@ paths:
       tags:
       - http source
       summary: create http source
-      operationId: http source#create
+      operationId: httpSource#create
       requestBody:
         required: true
         content:
@@ -51,12 +51,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HttpSourceAPI.ServiceError'
+      x-operation-id-source: normalized
+      x-operation-id-original: http source#create
   /log-sources/http/{id}:
     delete:
       tags:
       - http source
       summary: delete http source
-      operationId: http source#delete
+      operationId: httpSource#delete
       parameters:
       - name: id
         in: path
@@ -80,11 +82,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HttpSourceAPI.ServiceError'
+      x-operation-id-source: normalized
+      x-operation-id-original: http source#delete
     get:
       tags:
       - http source
       summary: get http source
-      operationId: http source#get
+      operationId: httpSource#get
       parameters:
       - name: id
         in: path
@@ -118,12 +122,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HttpSourceAPI.ServiceError'
+      x-operation-id-source: normalized
+      x-operation-id-original: http source#get
     put:
       tags:
       - http source
       summary: put http source
       description: put updates an http source
-      operationId: http source#put
+      operationId: httpSource#put
       parameters:
       - name: id
         in: path
@@ -169,16 +175,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HttpSourceAPI.ServiceError'
+      x-operation-id-source: normalized
+      x-operation-id-original: http source#put
 components:
   schemas:
-    HttpSourceAPI.BadRequestError:
+    HttpSourceAPI.LogStreamTypeOptions:
       type: object
       properties:
-        message:
+        jsonArrayEnvelopeField:
           type: string
-      required:
-      - message
-    HttpSourceAPI.NotFoundError:
+          description: Path to the array value to extract elements from, only applicable if logStreamType is JsonArray. Leave empty if the input JSON is an array itself
+        xmlRootElement:
+          type: string
+          description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
+    HttpSourceAPI.BadRequestError:
       type: object
       properties:
         message:
@@ -237,22 +247,6 @@ components:
           items:
             type: string
           description: The log types of the integration
-    HttpSourceAPI.LogStreamTypeOptions:
-      type: object
-      properties:
-        jsonArrayEnvelopeField:
-          type: string
-          description: Path to the array value to extract elements from, only applicable if logStreamType is JsonArray. Leave empty if the input JSON is an array itself
-        xmlRootElement:
-          type: string
-          description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
-    HttpSourceAPI.ServiceError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     HttpSourceAPI.ModifyHTTPSource:
       type: object
       properties:
@@ -307,7 +301,21 @@ components:
       - logTypes
       - logStreamType
       - authMethod
+    HttpSourceAPI.ServiceError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     HttpSourceAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    HttpSourceAPI.NotFoundError:
       type: object
       properties:
         message:

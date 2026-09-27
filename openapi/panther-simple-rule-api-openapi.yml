@@ -19,7 +19,7 @@ paths:
       tags:
       - simple rule
       summary: list simple rules
-      operationId: simple rule#list
+      operationId: simpleRule#list
       parameters:
       - name: cursor
         in: query
@@ -116,11 +116,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SimpleRuleAPI.ListResp'
+      x-operation-id-source: normalized
+      x-operation-id-original: simple rule#list
     post:
       tags:
       - simple rule
       summary: create simple rule
-      operationId: simple rule#create
+      operationId: simpleRule#create
       parameters:
       - name: run-tests-first
         in: query
@@ -165,12 +167,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SimpleRuleAPI.ExistsError'
+      x-operation-id-source: normalized
+      x-operation-id-original: simple rule#create
   /simple-rules/{id}:
     delete:
       tags:
       - simple rule
       summary: delete simple rule
-      operationId: simple rule#delete
+      operationId: simpleRule#delete
       parameters:
       - name: id
         in: path
@@ -194,11 +198,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SimpleRuleAPI.NotFoundError'
+      x-operation-id-source: normalized
+      x-operation-id-original: simple rule#delete
     get:
       tags:
       - simple rule
       summary: get a simple rule
-      operationId: simple rule#get
+      operationId: simpleRule#get
       parameters:
       - name: include-python
         in: query
@@ -228,12 +234,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SimpleRuleAPI.NotFoundError'
+      x-operation-id-source: normalized
+      x-operation-id-original: simple rule#get
     put:
       tags:
       - simple rule
       summary: put simple rule
       description: put creates or updates a rule
-      operationId: simple rule#put
+      operationId: simpleRule#put
       parameters:
       - name: run-tests-first
         in: query
@@ -285,22 +293,135 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SimpleRuleAPI.BadRequestWithTestResultsErr'
+      x-operation-id-source: normalized
+      x-operation-id-original: simple rule#put
 components:
   schemas:
-    SimpleRuleAPI.ExistsError:
+    SimpleRuleAPI.TestDetectionRecordFunctions:
       type: object
       properties:
-        message:
+        alertContext:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        dedup:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        description:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        destinations:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        detection:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        reference:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        runbook:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        severity:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        title:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+    SimpleRuleAPI.ModifyRule:
+      type: object
+      properties:
+        alertContext:
           type: string
+          description: The alert context represented in YAML
+        alertTitle:
+          type: string
+          description: The alert title represented in YAML
+        createAlert:
+          type: boolean
+          description: Determines whether the rule should create alerts when it triggers
+        dedupPeriodMinutes:
+          type: integer
+          description: The amount of time in minutes for grouping alerts
+          default: 60
+          format: int64
+          minimum: 1
+        description:
+          type: string
+          description: The description of the rule
+        detection:
+          type: string
+          description: The yaml representation of the rule
+        displayName:
+          type: string
+          description: The display name of the rule
+        dynamicSeverities:
+          type: string
+          description: The dynamic severity represented in YAML
+        enabled:
+          type: boolean
+          description: Determines whether or not the rule is active
+        groupBy:
+          type: string
+          description: The key on an event to group by represented in YAML
+        id:
+          type: string
+          description: The id of the rule
+        inlineFilters:
+          type: string
+          description: The filter for the rule represented in YAML
+        logTypes:
+          type: array
+          items:
+            type: string
+          description: log types
+        managed:
+          type: boolean
+          description: Determines if the simple rule is managed by panther
+        outputIDs:
+          type: array
+          items:
+            type: string
+          description: Destination IDs that override default alert routing based on severity
+        pythonBody:
+          type: string
+          description: The python body of the rule
+        reference:
+          type: string
+          description: A URL or note for additional reference material
+        reports:
+          type: object
+          description: reports
+          additionalProperties:
+            items:
+              type: string
+            type: array
+        runbook:
+          type: string
+          description: How to handle the generated alert
+        severity:
+          type: string
+          enum:
+          - INFO
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        summaryAttributes:
+          type: array
+          items:
+            type: string
+          description: A list of fields in the event to create top 5 summaries for
+        tags:
+          type: array
+          items:
+            type: string
+          description: The tags for the simple rule
+        tests:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleRuleAPI.UnitTest'
+          description: Unit tests for the Rule. Best practice is to include a positive and negative case
+        threshold:
+          type: integer
+          description: the number of events that must match before an alert is triggered
+          default: 1
+          format: int64
+          minimum: 1
       required:
-      - message
-    SimpleRuleAPI.TestErr:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
+      - id
+      - detection
+      - severity
     SimpleRuleAPI.TestDetectionRecord:
       type: object
       properties:
@@ -323,6 +444,41 @@ components:
           $ref: '#/components/schemas/SimpleRuleAPI.TestErr'
         output:
           type: string
+    SimpleRuleAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    SimpleRuleAPI.ListResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleRuleAPI.SimpleRule'
+    SimpleRuleAPI.BadRequestWithTestResultsErr:
+      type: object
+      properties:
+        message:
+          type: string
+        testResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionRecord'
+      required:
+      - message
+    SimpleRuleAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     SimpleRuleAPI.SimpleRule:
       type: object
       properties:
@@ -442,16 +598,6 @@ components:
           default: 1
           format: int64
           minimum: 1
-    SimpleRuleAPI.ListResp:
-      type: object
-      properties:
-        next:
-          type: string
-          description: pagination token for the next page of results
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SimpleRuleAPI.SimpleRule'
     SimpleRuleAPI.UnitTest:
       type: object
       properties:
@@ -478,149 +624,13 @@ components:
       type: object
       additionalProperties:
         type: string
-    SimpleRuleAPI.NotFoundError:
+    SimpleRuleAPI.TestErr:
       type: object
       properties:
+        code:
+          type: string
         message:
           type: string
-      required:
-      - message
-    SimpleRuleAPI.ModifyRule:
-      type: object
-      properties:
-        alertContext:
-          type: string
-          description: The alert context represented in YAML
-        alertTitle:
-          type: string
-          description: The alert title represented in YAML
-        createAlert:
-          type: boolean
-          description: Determines whether the rule should create alerts when it triggers
-        dedupPeriodMinutes:
-          type: integer
-          description: The amount of time in minutes for grouping alerts
-          default: 60
-          format: int64
-          minimum: 1
-        description:
-          type: string
-          description: The description of the rule
-        detection:
-          type: string
-          description: The yaml representation of the rule
-        displayName:
-          type: string
-          description: The display name of the rule
-        dynamicSeverities:
-          type: string
-          description: The dynamic severity represented in YAML
-        enabled:
-          type: boolean
-          description: Determines whether or not the rule is active
-        groupBy:
-          type: string
-          description: The key on an event to group by represented in YAML
-        id:
-          type: string
-          description: The id of the rule
-        inlineFilters:
-          type: string
-          description: The filter for the rule represented in YAML
-        logTypes:
-          type: array
-          items:
-            type: string
-          description: log types
-        managed:
-          type: boolean
-          description: Determines if the simple rule is managed by panther
-        outputIDs:
-          type: array
-          items:
-            type: string
-          description: Destination IDs that override default alert routing based on severity
-        pythonBody:
-          type: string
-          description: The python body of the rule
-        reference:
-          type: string
-          description: A URL or note for additional reference material
-        reports:
-          type: object
-          description: reports
-          additionalProperties:
-            items:
-              type: string
-            type: array
-        runbook:
-          type: string
-          description: How to handle the generated alert
-        severity:
-          type: string
-          enum:
-          - INFO
-          - LOW
-          - MEDIUM
-          - HIGH
-          - CRITICAL
-        summaryAttributes:
-          type: array
-          items:
-            type: string
-          description: A list of fields in the event to create top 5 summaries for
-        tags:
-          type: array
-          items:
-            type: string
-          description: The tags for the simple rule
-        tests:
-          type: array
-          items:
-            $ref: '#/components/schemas/SimpleRuleAPI.UnitTest'
-          description: Unit tests for the Rule. Best practice is to include a positive and negative case
-        threshold:
-          type: integer
-          description: the number of events that must match before an alert is triggered
-          default: 1
-          format: int64
-          minimum: 1
-      required:
-      - id
-      - detection
-      - severity
-    SimpleRuleAPI.TestDetectionRecordFunctions:
-      type: object
-      properties:
-        alertContext:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        dedup:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        description:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        destinations:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        detection:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        reference:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        runbook:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        severity:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        title:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-    SimpleRuleAPI.BadRequestWithTestResultsErr:
-      type: object
-      properties:
-        message:
-          type: string
-        testResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionRecord'
-      required:
-      - message
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

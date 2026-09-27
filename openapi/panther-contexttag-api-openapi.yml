@@ -160,6 +160,27 @@ paths:
                 $ref: '#/components/schemas/contexttagAPI.ExistsError'
 components:
   schemas:
+    contexttagAPI.ListContextTagsResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: Pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/contexttagAPI.ContextTag'
+          description: The list of context tags
+      description: Response for listing context tags
+      required:
+      - results
+    contexttagAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     contexttagAPI.ContextTag:
       type: object
       properties:
@@ -192,34 +213,6 @@ components:
       description: Request to rename a custom context tag
       required:
       - tag
-    contexttagAPI.ListContextTagsResp:
-      type: object
-      properties:
-        next:
-          type: string
-          description: Pagination token for the next page of results
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/contexttagAPI.ContextTag'
-          description: The list of context tags
-      description: Response for listing context tags
-      required:
-      - results
-    contexttagAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    contexttagAPI.BadRequestError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     contexttagAPI.ExistsError:
       type: object
       properties:
@@ -239,6 +232,13 @@ components:
       description: Request to create a custom context tag
       required:
       - tag
+    contexttagAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
