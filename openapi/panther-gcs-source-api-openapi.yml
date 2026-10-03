@@ -178,49 +178,29 @@ paths:
       x-operation-id-original: gcs source#put
 components:
   schemas:
-    GcsSourceAPI.GcsSource:
+    GcsSourceAPI.BadRequestError:
       type: object
       properties:
-        credentials:
+        message:
           type: string
-          description: The GCP credentials JSON content (service account key or WIF config). Required on create, optional on update.
-        credentialsType:
+      required:
+      - message
+    GcsSourceAPI.ServiceError:
+      type: object
+      properties:
+        message:
           type: string
-          description: 'The type of credentials being used: service_account or wif (Workload Identity Federation).'
-          enum:
-          - service_account
-          - wif
-        gcsBucket:
+      required:
+      - message
+    GcsSourceAPI.LogStreamTypeOptions:
+      type: object
+      properties:
+        jsonArrayEnvelopeField:
           type: string
-          description: The GCS bucket name
-        integrationId:
+          description: Path to the array value to extract elements from, only applicable if logStreamType is JsonArray. Leave empty if the input JSON is an array itself
+        xmlRootElement:
           type: string
-          description: The id of the GCS source
-        integrationLabel:
-          type: string
-          description: The integration label (name)
-        logStreamType:
-          type: string
-          description: 'The log stream type. Supported log stream types: Auto, JSON, JsonArray, Lines, XML'
-          enum:
-          - Auto
-          - JSON
-          - JsonArray
-          - Lines
-          - XML
-        logStreamTypeOptions:
-          $ref: '#/components/schemas/GcsSourceAPI.LogStreamTypeOptions'
-        prefixLogTypes:
-          type: array
-          items:
-            $ref: '#/components/schemas/GcsSourceAPI.PrefixLogTypesMapping'
-          description: Prefix-based log type mappings for parsing ingested data
-        projectId:
-          type: string
-          description: The GCP project ID. Optional for service_account credentials. Required for WIF.
-        subscriptionId:
-          type: string
-          description: The GCP Pub/Sub subscription ID used to receive GCS bucket notifications
+          description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
     GcsSourceAPI.PrefixLogTypesMapping:
       type: object
       properties:
@@ -237,15 +217,20 @@ components:
         prefix:
           type: string
           description: GCS prefix to match. Leave empty to match all files in the bucket.
-    GcsSourceAPI.LogStreamTypeOptions:
+    GcsSourceAPI.ExistsError:
       type: object
       properties:
-        jsonArrayEnvelopeField:
+        message:
           type: string
-          description: Path to the array value to extract elements from, only applicable if logStreamType is JsonArray. Leave empty if the input JSON is an array itself
-        xmlRootElement:
+      required:
+      - message
+    GcsSourceAPI.NotFoundError:
+      type: object
+      properties:
+        message:
           type: string
-          description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
+      required:
+      - message
     GcsSourceAPI.ModifyGcsSource:
       type: object
       properties:
@@ -293,34 +278,49 @@ components:
       - prefixLogTypes
       - logStreamType
       - credentialsType
-    GcsSourceAPI.ServiceError:
+    GcsSourceAPI.GcsSource:
       type: object
       properties:
-        message:
+        credentials:
           type: string
-      required:
-      - message
-    GcsSourceAPI.NotFoundError:
-      type: object
-      properties:
-        message:
+          description: The GCP credentials JSON content (service account key or WIF config). Required on create, optional on update.
+        credentialsType:
           type: string
-      required:
-      - message
-    GcsSourceAPI.ExistsError:
-      type: object
-      properties:
-        message:
+          description: 'The type of credentials being used: service_account or wif (Workload Identity Federation).'
+          enum:
+          - service_account
+          - wif
+        gcsBucket:
           type: string
-      required:
-      - message
-    GcsSourceAPI.BadRequestError:
-      type: object
-      properties:
-        message:
+          description: The GCS bucket name
+        integrationId:
           type: string
-      required:
-      - message
+          description: The id of the GCS source
+        integrationLabel:
+          type: string
+          description: The integration label (name)
+        logStreamType:
+          type: string
+          description: 'The log stream type. Supported log stream types: Auto, JSON, JsonArray, Lines, XML'
+          enum:
+          - Auto
+          - JSON
+          - JsonArray
+          - Lines
+          - XML
+        logStreamTypeOptions:
+          $ref: '#/components/schemas/GcsSourceAPI.LogStreamTypeOptions'
+        prefixLogTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/GcsSourceAPI.PrefixLogTypesMapping'
+          description: Prefix-based log type mappings for parsing ingested data
+        projectId:
+          type: string
+          description: The GCP project ID. Optional for service_account credentials. Required for WIF.
+        subscriptionId:
+          type: string
+          description: The GCP Pub/Sub subscription ID used to receive GCS bucket notifications
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

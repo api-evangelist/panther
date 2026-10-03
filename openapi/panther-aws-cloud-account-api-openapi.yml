@@ -172,13 +172,19 @@ paths:
       x-operation-id-original: aws cloud account#put
 components:
   schemas:
-    AWSCloudAccountAPI.ServiceError:
+    AWSCloudAccountAPI.ExistsError:
       type: object
       properties:
         message:
           type: string
       required:
       - message
+    AWSCloudAccountAPI.AWSScanConfig:
+      type: object
+      properties:
+        auditRole:
+          type: string
+          description: The IAM role ARN that Panther assumes to scan the AWS account
     AWSCloudAccountAPI.CreateAWSCloudAccount:
       type: object
       properties:
@@ -213,12 +219,20 @@ components:
       - awsAccountId
       - integrationLabel
       - awsScanConfig
-    AWSCloudAccountAPI.AWSScanConfig:
+    AWSCloudAccountAPI.BadRequestError:
       type: object
       properties:
-        auditRole:
+        message:
           type: string
-          description: The IAM role ARN that Panther assumes to scan the AWS account
+      required:
+      - message
+    AWSCloudAccountAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     AWSCloudAccountAPI.AWSCloudAccount:
       type: object
       properties:
@@ -255,14 +269,7 @@ components:
       - regionIgnoreList
       - resourceTypeIgnoreList
       - resourceRegexIgnoreList
-    AWSCloudAccountAPI.ExistsError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    AWSCloudAccountAPI.BadRequestError:
+    AWSCloudAccountAPI.ServiceError:
       type: object
       properties:
         message:
@@ -298,13 +305,6 @@ components:
       required:
       - integrationLabel
       - awsScanConfig
-    AWSCloudAccountAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -428,20 +428,6 @@ components:
           - CLOSED
           - TRIAGED
           - RESOLVED
-    AlertAPI.SystemError:
-      type: object
-      properties:
-        detection:
-          $ref: '#/components/schemas/AlertAPI.DetectionInfo'
-        sourceId:
-          type: string
-          description: The source ID of this SystemError
-        sourceType:
-          type: string
-          description: The source type of this SystemError
-        type:
-          type: string
-          description: The type of this SystemError
     AlertAPI.Alert:
       type: object
       properties:
@@ -542,55 +528,20 @@ components:
       - id
       - type
       - status
-    AlertAPI.BadRequestError:
+    AlertAPI.DetectionInfo:
       type: object
       properties:
-        message:
+        id:
           type: string
-      required:
-      - message
-    AlertAPI.ListEventsResp:
-      type: object
-      properties:
-        next:
+          description: The unique identifier of this Detection
+        type:
           type: string
-          description: Pagination token for the next page of results
-        results:
-          type: array
-          items: {}
-      required:
-      - results
-    AlertAPI.Delivery:
-      type: object
-      properties:
-        dispatchedAt:
-          type: string
-        label:
-          type: string
-          description: The label of the alert at where it was delivered (channel name/ID, jira ticket, asana issue, etc)
-        message:
-          type: string
-        outputId:
-          type: string
-        statusCode:
-          type: integer
-          format: int64
-        success:
-          type: boolean
-      required:
-      - dispatchedAt
-      - label
-      - message
-      - statusCode
-      - success
-      - outputId
-    AlertAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
+          description: The type of this Detection
+          enum:
+          - RULE
+          - CORRELATION_RULE
+          - POLICY
+          - SCHEDULED_RULE
     AlertAPI.BulkPatchAlertReq2:
       type: object
       properties:
@@ -628,6 +579,62 @@ components:
           - RESOLVED
       required:
       - ids
+    AlertAPI.ListEventsResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: Pagination token for the next page of results
+        results:
+          type: array
+          items: {}
+      required:
+      - results
+    AlertAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    AlertAPI.SystemError:
+      type: object
+      properties:
+        detection:
+          $ref: '#/components/schemas/AlertAPI.DetectionInfo'
+        sourceId:
+          type: string
+          description: The source ID of this SystemError
+        sourceType:
+          type: string
+          description: The source type of this SystemError
+        type:
+          type: string
+          description: The type of this SystemError
+    AlertAPI.Delivery:
+      type: object
+      properties:
+        dispatchedAt:
+          type: string
+        label:
+          type: string
+          description: The label of the alert at where it was delivered (channel name/ID, jira ticket, asana issue, etc)
+        message:
+          type: string
+        outputId:
+          type: string
+        statusCode:
+          type: integer
+          format: int64
+        success:
+          type: boolean
+      required:
+      - dispatchedAt
+      - label
+      - message
+      - statusCode
+      - success
+      - outputId
     AlertAPI.ListResp:
       type: object
       properties:
@@ -640,20 +647,13 @@ components:
             $ref: '#/components/schemas/AlertAPI.Alert'
       required:
       - results
-    AlertAPI.DetectionInfo:
+    AlertAPI.NotFoundError:
       type: object
       properties:
-        id:
+        message:
           type: string
-          description: The unique identifier of this Detection
-        type:
-          type: string
-          description: The type of this Detection
-          enum:
-          - RULE
-          - CORRELATION_RULE
-          - POLICY
-          - SCHEDULED_RULE
+      required:
+      - message
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

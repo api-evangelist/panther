@@ -215,25 +215,6 @@ paths:
                 $ref: '#/components/schemas/UserAPI.NotFoundError'
 components:
   schemas:
-    UserAPI.ModifyUser:
-      type: object
-      properties:
-        email:
-          type: string
-          description: The email address of the user
-        familyName:
-          type: string
-          description: The family/last name of the user
-        givenName:
-          type: string
-          description: The given/first name of the user
-        role:
-          $ref: '#/components/schemas/UserAPI.Role'
-      required:
-      - email
-      - givenName
-      - familyName
-      - role
     UserAPI.Role:
       type: object
       properties:
@@ -243,7 +224,7 @@ components:
         name:
           type: string
           description: 'The name of the role. Note: name should be excluded if id is provided during a modify operation'
-    UserAPI.NotFoundError:
+    UserAPI.BadRequestError:
       type: object
       properties:
         message:
@@ -283,7 +264,26 @@ components:
       - familyName
       - role
       - enabled
-    UserAPI.BadRequestError:
+    UserAPI.ModifyUser:
+      type: object
+      properties:
+        email:
+          type: string
+          description: The email address of the user
+        familyName:
+          type: string
+          description: The family/last name of the user
+        givenName:
+          type: string
+          description: The given/first name of the user
+        role:
+          $ref: '#/components/schemas/UserAPI.Role'
+      required:
+      - email
+      - givenName
+      - familyName
+      - role
+    UserAPI.NotFoundError:
       type: object
       properties:
         message:

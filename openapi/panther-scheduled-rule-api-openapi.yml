@@ -281,27 +281,21 @@ paths:
       x-operation-id-original: scheduled rule#put
 components:
   schemas:
-    ScheduledRuleAPI.TestDetectionRecordFunctions:
+    ScheduledRuleAPI.TestDetectionRecord:
       type: object
       properties:
-        alertContext:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
-        dedup:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
-        description:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
-        destinations:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
-        detection:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
-        reference:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
-        runbook:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
-        severity:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
-        title:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        error:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestErr'
+        errored:
+          type: boolean
+        functions:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionRecordFunctions'
+        name:
+          type: string
+        passed:
+          type: boolean
+        triggerAlert:
+          type: boolean
     ScheduledRuleAPI.TestErr:
       type: object
       properties:
@@ -309,6 +303,10 @@ components:
           type: string
         message:
           type: string
+    ScheduledRuleAPI.UnitTestMock:
+      type: object
+      additionalProperties:
+        type: string
     ScheduledRuleAPI.TestDetectionSubRecord:
       type: object
       properties:
@@ -316,131 +314,6 @@ components:
           $ref: '#/components/schemas/ScheduledRuleAPI.TestErr'
         output:
           type: string
-    ScheduledRuleAPI.BadRequestWithTestResultsErr:
-      type: object
-      properties:
-        message:
-          type: string
-        testResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionRecord'
-      required:
-      - message
-    ScheduledRuleAPI.ListResp:
-      type: object
-      properties:
-        next:
-          type: string
-          description: pagination token for the next page of results
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScheduledRuleAPI.ScheduledRule'
-    ScheduledRuleAPI.UnitTestMock:
-      type: object
-      additionalProperties:
-        type: string
-    ScheduledRuleAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    ScheduledRuleAPI.ModifyRule:
-      type: object
-      properties:
-        body:
-          type: string
-          description: The python body of the scheduled rule
-        createAlert:
-          type: boolean
-          description: Determines whether the scheduled rule should create alerts when it triggers
-        dedupPeriodMinutes:
-          type: integer
-          description: The amount of time in minutes for grouping alerts
-          default: 60
-          format: int64
-          minimum: 1
-        description:
-          type: string
-          description: The description of the scheduled rule
-        displayName:
-          type: string
-          description: The display name of the scheduled rule
-        enabled:
-          type: boolean
-          description: Determines whether or not the scheduled rule is active
-        id:
-          type: string
-          description: The id of the scheduled rule
-        managed:
-          type: boolean
-          description: Determines if the scheduled rule is managed by panther
-        outputIDs:
-          type: array
-          items:
-            type: string
-          description: Destination IDs that override default alert routing based on severity
-        reference:
-          type: string
-          description: A URL or note for additional reference material
-        reports:
-          type: object
-          description: reports
-          additionalProperties:
-            items:
-              type: string
-            type: array
-        runbook:
-          type: string
-          description: How to handle the generated alert
-        scheduledQueries:
-          type: array
-          items:
-            type: string
-          description: the queries that this scheduled rule utilizes
-        severity:
-          type: string
-          enum:
-          - INFO
-          - LOW
-          - MEDIUM
-          - HIGH
-          - CRITICAL
-        summaryAttributes:
-          type: array
-          items:
-            type: string
-          description: A list of fields in the event to create top 5 summaries for
-        tags:
-          type: array
-          items:
-            type: string
-          description: The tags for the scheduled rule
-        tests:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScheduledRuleAPI.UnitTest'
-          description: Unit tests for the Rule. Best practice is to include a positive and negative case
-        threshold:
-          type: integer
-          description: the number of events that must match before an alert is triggered
-          default: 1
-          format: int64
-          minimum: 1
-      required:
-      - id
-      - body
-      - severity
-    ScheduledRuleAPI.ExistsError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     ScheduledRuleAPI.ScheduledRule:
       type: object
       properties:
@@ -542,6 +415,130 @@ components:
           default: 1
           format: int64
           minimum: 1
+    ScheduledRuleAPI.ListResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduledRuleAPI.ScheduledRule'
+    ScheduledRuleAPI.ModifyRule:
+      type: object
+      properties:
+        body:
+          type: string
+          description: The python body of the scheduled rule
+        createAlert:
+          type: boolean
+          description: Determines whether the scheduled rule should create alerts when it triggers
+        dedupPeriodMinutes:
+          type: integer
+          description: The amount of time in minutes for grouping alerts
+          default: 60
+          format: int64
+          minimum: 1
+        description:
+          type: string
+          description: The description of the scheduled rule
+        displayName:
+          type: string
+          description: The display name of the scheduled rule
+        enabled:
+          type: boolean
+          description: Determines whether or not the scheduled rule is active
+        id:
+          type: string
+          description: The id of the scheduled rule
+        managed:
+          type: boolean
+          description: Determines if the scheduled rule is managed by panther
+        outputIDs:
+          type: array
+          items:
+            type: string
+          description: Destination IDs that override default alert routing based on severity
+        reference:
+          type: string
+          description: A URL or note for additional reference material
+        reports:
+          type: object
+          description: reports
+          additionalProperties:
+            items:
+              type: string
+            type: array
+        runbook:
+          type: string
+          description: How to handle the generated alert
+        scheduledQueries:
+          type: array
+          items:
+            type: string
+          description: the queries that this scheduled rule utilizes
+        severity:
+          type: string
+          enum:
+          - INFO
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        summaryAttributes:
+          type: array
+          items:
+            type: string
+          description: A list of fields in the event to create top 5 summaries for
+        tags:
+          type: array
+          items:
+            type: string
+          description: The tags for the scheduled rule
+        tests:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduledRuleAPI.UnitTest'
+          description: Unit tests for the Rule. Best practice is to include a positive and negative case
+        threshold:
+          type: integer
+          description: the number of events that must match before an alert is triggered
+          default: 1
+          format: int64
+          minimum: 1
+      required:
+      - id
+      - body
+      - severity
+    ScheduledRuleAPI.TestDetectionRecordFunctions:
+      type: object
+      properties:
+        alertContext:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        dedup:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        description:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        destinations:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        detection:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        reference:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        runbook:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        severity:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+        title:
+          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionSubRecord'
+    ScheduledRuleAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     ScheduledRuleAPI.UnitTest:
       type: object
       properties:
@@ -564,21 +561,24 @@ components:
       required:
       - name
       - expectedResult
-    ScheduledRuleAPI.TestDetectionRecord:
+    ScheduledRuleAPI.ExistsError:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestErr'
-        errored:
-          type: boolean
-        functions:
-          $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionRecordFunctions'
-        name:
+        message:
           type: string
-        passed:
-          type: boolean
-        triggerAlert:
-          type: boolean
+      required:
+      - message
+    ScheduledRuleAPI.BadRequestWithTestResultsErr:
+      type: object
+      properties:
+        message:
+          type: string
+        testResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduledRuleAPI.TestDetectionRecord'
+      required:
+      - message
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -297,27 +297,10 @@ paths:
       x-operation-id-original: simple rule#put
 components:
   schemas:
-    SimpleRuleAPI.TestDetectionRecordFunctions:
+    SimpleRuleAPI.UnitTestMock:
       type: object
-      properties:
-        alertContext:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        dedup:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        description:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        destinations:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        detection:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        reference:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        runbook:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        severity:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        title:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+      additionalProperties:
+        type: string
     SimpleRuleAPI.ModifyRule:
       type: object
       properties:
@@ -422,6 +405,76 @@ components:
       - id
       - detection
       - severity
+    SimpleRuleAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    SimpleRuleAPI.TestDetectionRecordFunctions:
+      type: object
+      properties:
+        alertContext:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        dedup:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        description:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        destinations:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        detection:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        reference:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        runbook:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        severity:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        title:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+    SimpleRuleAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    SimpleRuleAPI.TestDetectionSubRecord:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestErr'
+        output:
+          type: string
+    SimpleRuleAPI.TestErr:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    SimpleRuleAPI.BadRequestWithTestResultsErr:
+      type: object
+      properties:
+        message:
+          type: string
+        testResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionRecord'
+      required:
+      - message
+    SimpleRuleAPI.ListResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleRuleAPI.SimpleRule'
     SimpleRuleAPI.TestDetectionRecord:
       type: object
       properties:
@@ -437,48 +490,6 @@ components:
           type: boolean
         triggerAlert:
           type: boolean
-    SimpleRuleAPI.TestDetectionSubRecord:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestErr'
-        output:
-          type: string
-    SimpleRuleAPI.ExistsError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    SimpleRuleAPI.ListResp:
-      type: object
-      properties:
-        next:
-          type: string
-          description: pagination token for the next page of results
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SimpleRuleAPI.SimpleRule'
-    SimpleRuleAPI.BadRequestWithTestResultsErr:
-      type: object
-      properties:
-        message:
-          type: string
-        testResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionRecord'
-      required:
-      - message
-    SimpleRuleAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     SimpleRuleAPI.SimpleRule:
       type: object
       properties:
@@ -620,17 +631,6 @@ components:
       required:
       - name
       - expectedResult
-    SimpleRuleAPI.UnitTestMock:
-      type: object
-      additionalProperties:
-        type: string
-    SimpleRuleAPI.TestErr:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

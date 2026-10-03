@@ -160,6 +160,26 @@ paths:
                 $ref: '#/components/schemas/contexttagAPI.ExistsError'
 components:
   schemas:
+    contexttagAPI.ContextTag:
+      type: object
+      properties:
+        category:
+          type: string
+          description: The category of the tag
+        managed:
+          type: boolean
+          description: Whether the tag is managed by Panther
+        tag:
+          type: string
+          description: The tag value
+          pattern: ^[a-z0-9_-]+$
+          minLength: 1
+          maxLength: 30
+      description: A context tag that can be applied to alerts
+      required:
+      - tag
+      - category
+      - managed
     contexttagAPI.ListContextTagsResp:
       type: object
       properties:
@@ -181,45 +201,6 @@ components:
           type: string
       required:
       - message
-    contexttagAPI.ContextTag:
-      type: object
-      properties:
-        category:
-          type: string
-          description: The category of the tag
-        managed:
-          type: boolean
-          description: Whether the tag is managed by Panther
-        tag:
-          type: string
-          description: The tag value
-          pattern: ^[a-z0-9_-]+$
-          minLength: 1
-          maxLength: 30
-      description: A context tag that can be applied to alerts
-      required:
-      - tag
-      - category
-      - managed
-    contexttagAPI.UpdateContextTagReq:
-      type: object
-      properties:
-        tag:
-          type: string
-          description: The new tag value
-          pattern: ^[a-z0-9_-]+$
-          minLength: 1
-          maxLength: 30
-      description: Request to rename a custom context tag
-      required:
-      - tag
-    contexttagAPI.ExistsError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     contexttagAPI.CreateContextTagReq:
       type: object
       properties:
@@ -233,6 +214,25 @@ components:
       required:
       - tag
     contexttagAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    contexttagAPI.UpdateContextTagReq:
+      type: object
+      properties:
+        tag:
+          type: string
+          description: The new tag value
+          pattern: ^[a-z0-9_-]+$
+          minLength: 1
+          maxLength: 30
+      description: Request to rename a custom context tag
+      required:
+      - tag
+    contexttagAPI.ExistsError:
       type: object
       properties:
         message:

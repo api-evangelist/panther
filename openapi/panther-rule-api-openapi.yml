@@ -271,29 +271,34 @@ paths:
                 $ref: '#/components/schemas/RuleAPI.BadRequestWithTestResultsErr'
 components:
   schemas:
-    RuleAPI.ListResp:
+    RuleAPI.UnitTest:
       type: object
       properties:
-        next:
-          type: string
-          description: pagination token for the next page of results
-        results:
+        expectedResult:
+          type: boolean
+          description: The expected result
+        log:
+          description: A test event object that your detection will receive as input.
+        mocks:
           type: array
           items:
-            $ref: '#/components/schemas/RuleAPI.Rule'
-    RuleAPI.NotFoundError:
-      type: object
-      properties:
-        message:
+            $ref: '#/components/schemas/RuleAPI.UnitTestMock'
+          description: mocks
+        name:
           type: string
+          description: name
+        resource:
+          type: string
+          description: A test event object that your detection will receive as input, JSON-encoded. Prefer `log`.
       required:
-      - message
-    RuleAPI.TestDetectionSubRecord:
+      - name
+      - expectedResult
+    RuleAPI.TestErr:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/RuleAPI.TestErr'
-        output:
+        code:
+          type: string
+        message:
           type: string
     RuleAPI.Rule:
       type: object
@@ -399,6 +404,71 @@ components:
           default: 1
           format: int64
           minimum: 1
+    RuleAPI.TestDetectionRecordFunctions:
+      type: object
+      properties:
+        alertContext:
+          $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
+        dedup:
+          $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
+        description:
+          $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
+        destinations:
+          $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
+        detection:
+          $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
+        reference:
+          $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
+        runbook:
+          $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
+        severity:
+          $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
+        title:
+          $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
+    RuleAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    RuleAPI.TestDetectionSubRecord:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/RuleAPI.TestErr'
+        output:
+          type: string
+    RuleAPI.UnitTestMock:
+      type: object
+      additionalProperties:
+        type: string
+    RuleAPI.BadRequestWithTestResultsErr:
+      type: object
+      properties:
+        message:
+          type: string
+        testResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleAPI.TestDetectionRecord'
+      required:
+      - message
+    RuleAPI.TestDetectionRecord:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/RuleAPI.TestErr'
+        errored:
+          type: boolean
+        functions:
+          $ref: '#/components/schemas/RuleAPI.TestDetectionRecordFunctions'
+        name:
+          type: string
+        passed:
+          type: boolean
+        triggerAlert:
+          type: boolean
     RuleAPI.ModifyRule:
       type: object
       properties:
@@ -488,93 +558,23 @@ components:
       - id
       - body
       - severity
-    RuleAPI.BadRequestWithTestResultsErr:
+    RuleAPI.ListResp:
       type: object
       properties:
-        message:
+        next:
           type: string
-        testResults:
+          description: pagination token for the next page of results
+        results:
           type: array
           items:
-            $ref: '#/components/schemas/RuleAPI.TestDetectionRecord'
-      required:
-      - message
-    RuleAPI.UnitTestMock:
-      type: object
-      additionalProperties:
-        type: string
-    RuleAPI.TestErr:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    RuleAPI.UnitTest:
-      type: object
-      properties:
-        expectedResult:
-          type: boolean
-          description: The expected result
-        log:
-          description: A test event object that your detection will receive as input.
-        mocks:
-          type: array
-          items:
-            $ref: '#/components/schemas/RuleAPI.UnitTestMock'
-          description: mocks
-        name:
-          type: string
-          description: name
-        resource:
-          type: string
-          description: A test event object that your detection will receive as input, JSON-encoded. Prefer `log`.
-      required:
-      - name
-      - expectedResult
-    RuleAPI.ExistsError:
+            $ref: '#/components/schemas/RuleAPI.Rule'
+    RuleAPI.NotFoundError:
       type: object
       properties:
         message:
           type: string
       required:
       - message
-    RuleAPI.TestDetectionRecordFunctions:
-      type: object
-      properties:
-        alertContext:
-          $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
-        dedup:
-          $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
-        description:
-          $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
-        destinations:
-          $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
-        detection:
-          $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
-        reference:
-          $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
-        runbook:
-          $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
-        severity:
-          $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
-        title:
-          $ref: '#/components/schemas/RuleAPI.TestDetectionSubRecord'
-    RuleAPI.TestDetectionRecord:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/RuleAPI.TestErr'
-        errored:
-          type: boolean
-        functions:
-          $ref: '#/components/schemas/RuleAPI.TestDetectionRecordFunctions'
-        name:
-          type: string
-        passed:
-          type: boolean
-        triggerAlert:
-          type: boolean
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

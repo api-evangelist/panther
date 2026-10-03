@@ -184,30 +184,6 @@ paths:
       x-operation-id-original: log source alarm#put
 components:
   schemas:
-    LogSourceAlarmAPI.PutSourceAlarmData:
-      type: object
-      properties:
-        minutesThreshold:
-          type: integer
-          description: The no-data evaluation period in minutes. Minimum 15, maximum 43200 (30 days).
-          format: int32
-      required:
-      - minutesThreshold
-    LogSourceAlarmAPI.PutSourceAlarmResp:
-      type: object
-      properties:
-        minutesThreshold:
-          type: integer
-          description: The configured no-data evaluation period in minutes
-          format: int32
-        type:
-          type: string
-          description: The alarm type
-          enum:
-          - SOURCE_NO_DATA
-      required:
-      - type
-      - minutesThreshold
     LogSourceAlarmAPI.Error:
       type: object
       properties:
@@ -239,13 +215,22 @@ components:
       - temporary
       - timeout
       - fault
-    LogSourceAlarmAPI.BadRequestError:
+    LogSourceAlarmAPI.ServiceError:
       type: object
       properties:
         message:
           type: string
       required:
       - message
+    LogSourceAlarmAPI.PutSourceAlarmData:
+      type: object
+      properties:
+        minutesThreshold:
+          type: integer
+          description: The no-data evaluation period in minutes. Minimum 15, maximum 43200 (30 days).
+          format: int32
+      required:
+      - minutesThreshold
     LogSourceAlarmAPI.NotFoundError:
       type: object
       properties:
@@ -253,7 +238,22 @@ components:
           type: string
       required:
       - message
-    LogSourceAlarmAPI.ServiceError:
+    LogSourceAlarmAPI.PutSourceAlarmResp:
+      type: object
+      properties:
+        minutesThreshold:
+          type: integer
+          description: The configured no-data evaluation period in minutes
+          format: int32
+        type:
+          type: string
+          description: The alarm type
+          enum:
+          - SOURCE_NO_DATA
+      required:
+      - type
+      - minutesThreshold
+    LogSourceAlarmAPI.BadRequestError:
       type: object
       properties:
         message:

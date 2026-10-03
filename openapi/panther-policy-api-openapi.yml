@@ -282,24 +282,6 @@ paths:
                 $ref: '#/components/schemas/PolicyAPI.BadRequestWithTestResultsErr'
 components:
   schemas:
-    PolicyAPI.BadRequestWithTestResultsErr:
-      type: object
-      properties:
-        message:
-          type: string
-        testResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/PolicyAPI.TestDetectionRecord'
-      required:
-      - message
-    PolicyAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     PolicyAPI.UnitTest:
       type: object
       properties:
@@ -322,102 +304,27 @@ components:
       required:
       - name
       - expectedResult
-    PolicyAPI.ModifyPolicy:
+    PolicyAPI.TestDetectionRecordFunctions:
       type: object
       properties:
-        body:
-          type: string
-          description: The python body of the policy
+        alertContext:
+          $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
+        dedup:
+          $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
         description:
-          type: string
-          description: The description of the policy
-        displayName:
-          type: string
-          description: The display name of the policy
-        enabled:
-          type: boolean
-          description: Determines whether or not the policy is active
-        id:
-          type: string
-          description: The id of the policy
-        managed:
-          type: boolean
-          description: Determines if the policy is managed by panther
-        outputIDs:
-          type: array
-          items:
-            type: string
-          description: Destination IDs that override default alert routing based on severity
+          $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
+        destinations:
+          $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
+        detection:
+          $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
         reference:
-          type: string
-          description: A URL or note for additional reference material
-        reports:
-          type: object
-          description: Reports
-          additionalProperties:
-            items:
-              type: string
-            type: array
-        resourceTypes:
-          type: array
-          items:
-            type: string
-          description: Resource types
+          $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
+        runbook:
+          $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
         severity:
-          type: string
-          enum:
-          - INFO
-          - LOW
-          - MEDIUM
-          - HIGH
-          - CRITICAL
-        suppressions:
-          type: array
-          items:
-            type: string
-          description: Resources to ignore via a pattern that matches the resource id
-          example:
-          - aws::s3::*
-        tags:
-          type: array
-          items:
-            type: string
-          description: The tags for the policy
-        tests:
-          type: array
-          items:
-            $ref: '#/components/schemas/PolicyAPI.UnitTest'
-          description: Unit tests for the Policy. Best practice is to include a positive and negative case
-      required:
-      - id
-      - body
-      - severity
-    PolicyAPI.TestDetectionRecord:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/PolicyAPI.TestErr'
-        errored:
-          type: boolean
-        functions:
-          $ref: '#/components/schemas/PolicyAPI.TestDetectionRecordFunctions'
-        name:
-          type: string
-        passed:
-          type: boolean
-        triggerAlert:
-          type: boolean
-    PolicyAPI.UnitTestMock:
-      type: object
-      additionalProperties:
-        type: string
-    PolicyAPI.ExistsError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
+          $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
+        title:
+          $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
     PolicyAPI.Policy:
       type: object
       properties:
@@ -503,6 +410,20 @@ components:
           items:
             $ref: '#/components/schemas/PolicyAPI.UnitTest'
           description: Unit tests for the Policy. Best practice is to include a positive and negative case
+    PolicyAPI.TestDetectionSubRecord:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/PolicyAPI.TestErr'
+        output:
+          type: string
+    PolicyAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     PolicyAPI.ListResp:
       type: object
       properties:
@@ -513,34 +434,113 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PolicyAPI.Policy'
-    PolicyAPI.TestDetectionSubRecord:
+    PolicyAPI.BadRequestWithTestResultsErr:
+      type: object
+      properties:
+        message:
+          type: string
+        testResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyAPI.TestDetectionRecord'
+      required:
+      - message
+    PolicyAPI.ModifyPolicy:
+      type: object
+      properties:
+        body:
+          type: string
+          description: The python body of the policy
+        description:
+          type: string
+          description: The description of the policy
+        displayName:
+          type: string
+          description: The display name of the policy
+        enabled:
+          type: boolean
+          description: Determines whether or not the policy is active
+        id:
+          type: string
+          description: The id of the policy
+        managed:
+          type: boolean
+          description: Determines if the policy is managed by panther
+        outputIDs:
+          type: array
+          items:
+            type: string
+          description: Destination IDs that override default alert routing based on severity
+        reference:
+          type: string
+          description: A URL or note for additional reference material
+        reports:
+          type: object
+          description: Reports
+          additionalProperties:
+            items:
+              type: string
+            type: array
+        resourceTypes:
+          type: array
+          items:
+            type: string
+          description: Resource types
+        severity:
+          type: string
+          enum:
+          - INFO
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        suppressions:
+          type: array
+          items:
+            type: string
+          description: Resources to ignore via a pattern that matches the resource id
+          example:
+          - aws::s3::*
+        tags:
+          type: array
+          items:
+            type: string
+          description: The tags for the policy
+        tests:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyAPI.UnitTest'
+          description: Unit tests for the Policy. Best practice is to include a positive and negative case
+      required:
+      - id
+      - body
+      - severity
+    PolicyAPI.UnitTestMock:
+      type: object
+      additionalProperties:
+        type: string
+    PolicyAPI.TestDetectionRecord:
       type: object
       properties:
         error:
           $ref: '#/components/schemas/PolicyAPI.TestErr'
-        output:
+        errored:
+          type: boolean
+        functions:
+          $ref: '#/components/schemas/PolicyAPI.TestDetectionRecordFunctions'
+        name:
           type: string
-    PolicyAPI.TestDetectionRecordFunctions:
+        passed:
+          type: boolean
+        triggerAlert:
+          type: boolean
+    PolicyAPI.ExistsError:
       type: object
       properties:
-        alertContext:
-          $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
-        dedup:
-          $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
-        description:
-          $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
-        destinations:
-          $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
-        detection:
-          $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
-        reference:
-          $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
-        runbook:
-          $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
-        severity:
-          $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
-        title:
-          $ref: '#/components/schemas/PolicyAPI.TestDetectionSubRecord'
+        message:
+          type: string
+      required:
+      - message
     PolicyAPI.TestErr:
       type: object
       properties:

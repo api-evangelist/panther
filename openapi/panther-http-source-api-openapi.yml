@@ -195,58 +195,20 @@ components:
           type: string
       required:
       - message
-    HttpSourceAPI.HTTPSource:
+    HttpSourceAPI.NotFoundError:
       type: object
       properties:
-        authBearerToken:
+        message:
           type: string
-          description: The authentication bearer token value of the http source. Used for Bearer auth method
-        authHeaderKey:
+      required:
+      - message
+    HttpSourceAPI.ServiceError:
+      type: object
+      properties:
+        message:
           type: string
-          description: The authentication header key of the http source. Used for HMAC and SharedSecret auth methods
-        authHmacAlg:
-          type: string
-          description: The authentication algorithm of the http source. Used for HMAC auth method
-        authMethod:
-          type: string
-          description: The authentication method of the http source
-          enum:
-          - SharedSecret
-          - HMAC
-          - Bearer
-          - Basic
-          - None
-        authPassword:
-          type: string
-          description: The authentication header password of the http source. Used for Basic auth method
-        authSecretValue:
-          type: string
-          description: The authentication header secret value of the http source. Used for HMAC and SharedSecret auth methods
-        authUsername:
-          type: string
-          description: The authentication header username of the http source. Used for Basic auth method
-        integrationId:
-          type: string
-          description: The id of the http source
-        integrationLabel:
-          type: string
-          description: The integration label (name)
-        logStreamType:
-          type: string
-          description: 'The log stream type. Supported log stream types: Auto, JSON, JsonArray, Lines, XML'
-          enum:
-          - Auto
-          - JSON
-          - JsonArray
-          - Lines
-          - XML
-        logStreamTypeOptions:
-          $ref: '#/components/schemas/HttpSourceAPI.LogStreamTypeOptions'
-        logTypes:
-          type: array
-          items:
-            type: string
-          description: The log types of the integration
+      required:
+      - message
     HttpSourceAPI.ModifyHTTPSource:
       type: object
       properties:
@@ -301,13 +263,6 @@ components:
       - logTypes
       - logStreamType
       - authMethod
-    HttpSourceAPI.ServiceError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     HttpSourceAPI.ExistsError:
       type: object
       properties:
@@ -315,13 +270,58 @@ components:
           type: string
       required:
       - message
-    HttpSourceAPI.NotFoundError:
+    HttpSourceAPI.HTTPSource:
       type: object
       properties:
-        message:
+        authBearerToken:
           type: string
-      required:
-      - message
+          description: The authentication bearer token value of the http source. Used for Bearer auth method
+        authHeaderKey:
+          type: string
+          description: The authentication header key of the http source. Used for HMAC and SharedSecret auth methods
+        authHmacAlg:
+          type: string
+          description: The authentication algorithm of the http source. Used for HMAC auth method
+        authMethod:
+          type: string
+          description: The authentication method of the http source
+          enum:
+          - SharedSecret
+          - HMAC
+          - Bearer
+          - Basic
+          - None
+        authPassword:
+          type: string
+          description: The authentication header password of the http source. Used for Basic auth method
+        authSecretValue:
+          type: string
+          description: The authentication header secret value of the http source. Used for HMAC and SharedSecret auth methods
+        authUsername:
+          type: string
+          description: The authentication header username of the http source. Used for Basic auth method
+        integrationId:
+          type: string
+          description: The id of the http source
+        integrationLabel:
+          type: string
+          description: The integration label (name)
+        logStreamType:
+          type: string
+          description: 'The log stream type. Supported log stream types: Auto, JSON, JsonArray, Lines, XML'
+          enum:
+          - Auto
+          - JSON
+          - JsonArray
+          - Lines
+          - XML
+        logStreamTypeOptions:
+          $ref: '#/components/schemas/HttpSourceAPI.LogStreamTypeOptions'
+        logTypes:
+          type: array
+          items:
+            type: string
+          description: The log types of the integration
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
