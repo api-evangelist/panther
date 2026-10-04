@@ -556,6 +556,9 @@ x-enrichment:
   artifacts_added: 16
   pass: local-v1
 common:
+- type: CapabilityMap
+  url: capabilities/panther-capability-edges.yml
+  name: Panther Business Capability Map
 - type: Overlay
   url: overlays/panther-rest-overlay.yaml
 - type: AgenticAccess

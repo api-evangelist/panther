@@ -1,0 +1,124 @@
+slug: panther
+provider: Panther
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 11
+edges:
+- tag: Alert
+  spec_file: panther-alert-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.9
+  evidence: '"alert#patch  Update the status, assignee, quality or contextTags of an alert"; "alert#events  List
+    alert events"; schema "AlertAPI.DetectionInfo"'
+  reason: Alerts here are security detection alerts in a detection-and-response/SOC platform, with triage
+    fields (status, assignee) and underlying log events — squarely SOC/SIEM threat detection and incident
+    response, not financial-crime or infrastructure alerting.
+- tag: Rule
+  spec_file: panther-rule-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.9
+  evidence: '"The rule api handles all operations for rules"; schemas "RuleAPI.TestDetectionRecord", "RuleAPI.UnitTest"'
+  reason: Rules here are Panther's Python detection rules (schemas explicitly reference TestDetectionRecord/detection
+    unit tests), which is SIEM detection engineering under threat detection and response.
+- tag: correlation rule
+  spec_file: panther-correlation-rule-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.9
+  evidence: POST /correlation-rules "create correlation rule"; schemas "CorrelationRuleAPI.CorrelationRuleUnitTest",
+    "CorrelationRuleAPI.CorrelationRuleTestMatch"
+  reason: Correlation rules chain detection signals into alerts — core SIEM detection engineering, squarely
+    threat detection and response.
+- tag: Role
+  spec_file: panther-role-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: GET /roles "List roles", POST /roles "Create a role"; schema "RoleAPI.ModifyRole"
+  reason: Role definition and lifecycle for platform access control is identity and access management.
+    Not a security-detection surface despite the vendor being a SOC platform.
+- tag: User
+  spec_file: panther-user-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: POST /users "Create a user", DELETE /users/{id} "Delete a user"; schemas "UserAPI.User", "UserAPI.Role"
+  reason: Create/update/delete of platform user accounts with associated roles is identity and access
+    administration, not HR employee records.
+- tag: scheduled rule
+  spec_file: panther-scheduled-rule-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.85
+  evidence: '"create scheduled rule", schemas ScheduledRuleAPI.ScheduledRule, ScheduledRuleAPI.TestDetectionRecord'
+  reason: Scheduled detection rules (detection-as-code) are the core SIEM/SOC detection surface — clearly
+    Threat Detection & Response Management.
+- tag: simple rule
+  spec_file: panther-simple-rule-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.85
+  evidence: '"list simple rules" / "create simple rule", schemas SimpleRuleAPI.SimpleRule, SimpleRuleAPI.TestDetectionRecord'
+  reason: Lifecycle of security detection rules with unit tests on a detection and response platform;
+    squarely SOC/SIEM detection management.
+- tag: gcs source
+  spec_file: panther-gcs-source-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.8
+  evidence: '"The GCS source API handles all operations for Google Cloud Storage log sources"; POST /log-sources/gcs
+    "create gcs source"'
+  reason: Onboarding and configuring security log sources for ingestion into the detection pipeline is
+    SIEM/SOC log collection, part of threat detection and response rather than generic IT infrastructure.
+- tag: http source
+  spec_file: panther-http-source-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.8
+  evidence: '"The http source api handles all operations for http sources"; POST /log-sources/http "create
+    http source"'
+  reason: 'Same as other log-source tags: configuration of HTTP log ingestion endpoints feeding the security
+    data lake and detections, i.e. SIEM telemetry collection for threat detection and response.'
+- tag: Policy
+  spec_file: panther-policy-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.75
+  evidence: '"The policy api handles all operations for policies"; schemas "PolicyAPI.Policy", "PolicyAPI.UnitTest",
+    "PolicyAPI.TestDetectionRecord"'
+  reason: Vendor context states Panther offers "cloud-security policies" and the schemas show policies
+    are unit-tested detections (TestDetectionRecord), i.e. cloud-security posture rules. Clearly cybersecurity,
+    but ambiguous between security governance/policy and detection sub-capabilities, so L1 only.
+- tag: Comment
+  spec_file: panther-comment-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.7
+  evidence: '"The comment api handles all operations for alerts comments"; POST /alert-comments "Create
+    a comment for an alert"'
+  reason: Comments are attached to security alerts in Panther's detection-and-response/SOC workflow, i.e.
+    analyst collaboration during alert triage, which sits under SOC/threat detection and response rather
+    than any generic collaboration capability. Confidence held moderate because commenting is a thin,
+    supporting surface.
