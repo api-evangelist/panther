@@ -194,18 +194,86 @@ paths:
                 $ref: '#/components/schemas/RoleAPI.NotFoundError'
 components:
   schemas:
-    RoleAPI.ListResp:
+    RoleAPI.ModifyRole:
       type: object
       properties:
-        next:
-          type: string
-          description: Pagination token for the next page of results
-        results:
+        logTypeAccess:
           type: array
           items:
-            $ref: '#/components/schemas/RoleAPI.Role'
+            type: string
+          description: The log types that the role can or cannot access, according to the `logTypeAccessKind` field. This field should be omitted if `logTypeAccessKind` has a value of `ALLOW_ALL` or `DENY_ALL`
+        logTypeAccessKind:
+          type: string
+          description: Defines the role's access to log types. This field is required and has effect only if the datalake RBAC feature is enabled.
+          enum:
+          - ALLOW
+          - ALLOW_ALL
+          - DENY
+          - DENY_ALL
+        name:
+          type: string
+          description: The name of the role
+        permissions:
+          type: array
+          items:
+            type: string
+            enum:
+            - AIRunAsModify
+            - AlertModify
+            - AlertRead
+            - BulkUpload
+            - BulkUploadValidate
+            - CloudsecSourceModify
+            - CloudsecSourceRead
+            - DataAnalyticsModify
+            - DataAnalyticsRead
+            - DestinationModify
+            - DestinationRead
+            - GeneralSettingsModify
+            - GeneralSettingsRead
+            - LogSourceModify
+            - LogSourceRawDataRead
+            - LogSourceRead
+            - LookupModify
+            - LookupRead
+            - ManageAIResponses
+            - ManageAISkills
+            - ManageScheduledPrompts
+            - McpServerModify
+            - McpServerRead
+            - NotificationsSend
+            - OrganizationAPITokenModify
+            - OrganizationAPITokenRead
+            - PolicyModify
+            - PolicyRead
+            - ResourceModify
+            - ResourceRead
+            - RuleModify
+            - RuleRead
+            - RunPantherAI
+            - SummaryRead
+            - UserModify
+            - UserRead
+            - ViewAIPrivateResponses
+            - ViewAISkills
+            - ViewScheduledPrompts
       required:
-      - results
+      - name
+      - permissions
+    RoleAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    RoleAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     RoleAPI.Role:
       type: object
       properties:
@@ -280,86 +348,18 @@ components:
       - name
       - permissions
       - logTypeAccessKind
-    RoleAPI.BadRequestError:
+    RoleAPI.ListResp:
       type: object
       properties:
-        message:
+        next:
           type: string
-      required:
-      - message
-    RoleAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    RoleAPI.ModifyRole:
-      type: object
-      properties:
-        logTypeAccess:
+          description: Pagination token for the next page of results
+        results:
           type: array
           items:
-            type: string
-          description: The log types that the role can or cannot access, according to the `logTypeAccessKind` field. This field should be omitted if `logTypeAccessKind` has a value of `ALLOW_ALL` or `DENY_ALL`
-        logTypeAccessKind:
-          type: string
-          description: Defines the role's access to log types. This field is required and has effect only if the datalake RBAC feature is enabled.
-          enum:
-          - ALLOW
-          - ALLOW_ALL
-          - DENY
-          - DENY_ALL
-        name:
-          type: string
-          description: The name of the role
-        permissions:
-          type: array
-          items:
-            type: string
-            enum:
-            - AIRunAsModify
-            - AlertModify
-            - AlertRead
-            - BulkUpload
-            - BulkUploadValidate
-            - CloudsecSourceModify
-            - CloudsecSourceRead
-            - DataAnalyticsModify
-            - DataAnalyticsRead
-            - DestinationModify
-            - DestinationRead
-            - GeneralSettingsModify
-            - GeneralSettingsRead
-            - LogSourceModify
-            - LogSourceRawDataRead
-            - LogSourceRead
-            - LookupModify
-            - LookupRead
-            - ManageAIResponses
-            - ManageAISkills
-            - ManageScheduledPrompts
-            - McpServerModify
-            - McpServerRead
-            - NotificationsSend
-            - OrganizationAPITokenModify
-            - OrganizationAPITokenRead
-            - PolicyModify
-            - PolicyRead
-            - ResourceModify
-            - ResourceRead
-            - RuleModify
-            - RuleRead
-            - RunPantherAI
-            - SummaryRead
-            - UserModify
-            - UserRead
-            - ViewAIPrivateResponses
-            - ViewAISkills
-            - ViewScheduledPrompts
+            $ref: '#/components/schemas/RoleAPI.Role'
       required:
-      - name
-      - permissions
+      - results
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

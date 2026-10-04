@@ -179,23 +179,7 @@ paths:
       x-operation-id-original: http source#put
 components:
   schemas:
-    HttpSourceAPI.LogStreamTypeOptions:
-      type: object
-      properties:
-        jsonArrayEnvelopeField:
-          type: string
-          description: Path to the array value to extract elements from, only applicable if logStreamType is JsonArray. Leave empty if the input JSON is an array itself
-        xmlRootElement:
-          type: string
-          description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
     HttpSourceAPI.BadRequestError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    HttpSourceAPI.NotFoundError:
       type: object
       properties:
         message:
@@ -263,6 +247,15 @@ components:
       - logTypes
       - logStreamType
       - authMethod
+    HttpSourceAPI.LogStreamTypeOptions:
+      type: object
+      properties:
+        jsonArrayEnvelopeField:
+          type: string
+          description: Path to the array value to extract elements from, only applicable if logStreamType is JsonArray. Leave empty if the input JSON is an array itself
+        xmlRootElement:
+          type: string
+          description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
     HttpSourceAPI.ExistsError:
       type: object
       properties:
@@ -322,6 +315,13 @@ components:
           items:
             type: string
           description: The log types of the integration
+    HttpSourceAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

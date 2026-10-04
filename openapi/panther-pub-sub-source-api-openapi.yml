@@ -179,37 +179,7 @@ paths:
       x-operation-id-original: pub/sub source#put
 components:
   schemas:
-    PubSubSourceAPI.BadRequestError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    PubSubSourceAPI.ExistsError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     PubSubSourceAPI.ServiceError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    PubSubSourceAPI.LogStreamTypeOptions:
-      type: object
-      properties:
-        jsonArrayEnvelopeField:
-          type: string
-          description: Path to the array value to extract elements from, only applicable if logStreamType is JsonArray. Leave empty if the input JSON is an array itself
-        xmlRootElement:
-          type: string
-          description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
-    PubSubSourceAPI.NotFoundError:
       type: object
       properties:
         message:
@@ -262,6 +232,20 @@ components:
       - logTypes
       - logStreamType
       - credentialsType
+    PubSubSourceAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    PubSubSourceAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     PubSubSourceAPI.PubSubSource:
       type: object
       properties:
@@ -305,6 +289,22 @@ components:
         subscriptionId:
           type: string
           description: The GCP Pub/Sub subscription ID
+    PubSubSourceAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    PubSubSourceAPI.LogStreamTypeOptions:
+      type: object
+      properties:
+        jsonArrayEnvelopeField:
+          type: string
+          description: Path to the array value to extract elements from, only applicable if logStreamType is JsonArray. Leave empty if the input JSON is an array itself
+        xmlRootElement:
+          type: string
+          description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

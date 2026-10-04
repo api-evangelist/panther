@@ -210,6 +210,13 @@ components:
           description: The raw sql of the query
         updatedAt:
           type: string
+    QueryAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     QueryAPI.ListResp:
       type: object
       properties:
@@ -220,35 +227,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/QueryAPI.Query'
-    QueryAPI.Schedule:
-      type: object
-      properties:
-        cron:
-          type: string
-          description: The cron expression
-        disabled:
-          type: boolean
-          description: Disable the schedule
-        rateMinutes:
-          type: integer
-          format: int64
-        timeoutMinutes:
-          type: integer
-          format: int64
-    QueryAPI.ExistsError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    QueryAPI.BadRequestError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     QueryAPI.ModifyQuery:
       type: object
       properties:
@@ -268,7 +246,29 @@ components:
       required:
       - sql
       - name
+    QueryAPI.Schedule:
+      type: object
+      properties:
+        cron:
+          type: string
+          description: The cron expression
+        disabled:
+          type: boolean
+          description: Disable the schedule
+        rateMinutes:
+          type: integer
+          format: int64
+        timeoutMinutes:
+          type: integer
+          format: int64
     QueryAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    QueryAPI.ExistsError:
       type: object
       properties:
         message:

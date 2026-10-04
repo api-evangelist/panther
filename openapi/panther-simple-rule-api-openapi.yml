@@ -297,10 +297,70 @@ paths:
       x-operation-id-original: simple rule#put
 components:
   schemas:
-    SimpleRuleAPI.UnitTestMock:
+    SimpleRuleAPI.ListResp:
       type: object
-      additionalProperties:
-        type: string
+      properties:
+        next:
+          type: string
+          description: pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleRuleAPI.SimpleRule'
+    SimpleRuleAPI.TestDetectionRecordFunctions:
+      type: object
+      properties:
+        alertContext:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        dedup:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        description:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        destinations:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        detection:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        reference:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        runbook:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        severity:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+        title:
+          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
+    SimpleRuleAPI.UnitTest:
+      type: object
+      properties:
+        expectedResult:
+          type: boolean
+          description: The expected result
+        log:
+          description: A test event object that your detection will receive as input.
+        mocks:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleRuleAPI.UnitTestMock'
+          description: mocks
+        name:
+          type: string
+          description: name
+        resource:
+          type: string
+          description: A test event object that your detection will receive as input, JSON-encoded. Prefer `log`.
+      required:
+      - name
+      - expectedResult
+    SimpleRuleAPI.BadRequestWithTestResultsErr:
+      type: object
+      properties:
+        message:
+          type: string
+        testResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionRecord'
+      required:
+      - message
     SimpleRuleAPI.ModifyRule:
       type: object
       properties:
@@ -405,41 +465,6 @@ components:
       - id
       - detection
       - severity
-    SimpleRuleAPI.ExistsError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    SimpleRuleAPI.TestDetectionRecordFunctions:
-      type: object
-      properties:
-        alertContext:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        dedup:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        description:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        destinations:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        detection:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        reference:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        runbook:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        severity:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-        title:
-          $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionSubRecord'
-    SimpleRuleAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     SimpleRuleAPI.TestDetectionSubRecord:
       type: object
       properties:
@@ -447,34 +472,6 @@ components:
           $ref: '#/components/schemas/SimpleRuleAPI.TestErr'
         output:
           type: string
-    SimpleRuleAPI.TestErr:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    SimpleRuleAPI.BadRequestWithTestResultsErr:
-      type: object
-      properties:
-        message:
-          type: string
-        testResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/SimpleRuleAPI.TestDetectionRecord'
-      required:
-      - message
-    SimpleRuleAPI.ListResp:
-      type: object
-      properties:
-        next:
-          type: string
-          description: pagination token for the next page of results
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SimpleRuleAPI.SimpleRule'
     SimpleRuleAPI.TestDetectionRecord:
       type: object
       properties:
@@ -490,6 +487,17 @@ components:
           type: boolean
         triggerAlert:
           type: boolean
+    SimpleRuleAPI.TestErr:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    SimpleRuleAPI.UnitTestMock:
+      type: object
+      additionalProperties:
+        type: string
     SimpleRuleAPI.SimpleRule:
       type: object
       properties:
@@ -609,28 +617,20 @@ components:
           default: 1
           format: int64
           minimum: 1
-    SimpleRuleAPI.UnitTest:
+    SimpleRuleAPI.NotFoundError:
       type: object
       properties:
-        expectedResult:
-          type: boolean
-          description: The expected result
-        log:
-          description: A test event object that your detection will receive as input.
-        mocks:
-          type: array
-          items:
-            $ref: '#/components/schemas/SimpleRuleAPI.UnitTestMock'
-          description: mocks
-        name:
+        message:
           type: string
-          description: name
-        resource:
-          type: string
-          description: A test event object that your detection will receive as input, JSON-encoded. Prefer `log`.
       required:
-      - name
-      - expectedResult
+      - message
+    SimpleRuleAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

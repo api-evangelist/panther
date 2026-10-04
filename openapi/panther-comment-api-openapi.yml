@@ -162,6 +162,13 @@ paths:
                 $ref: '#/components/schemas/CommentAPI.NotFoundError'
 components:
   schemas:
+    CommentAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     CommentAPI.ListResp:
       type: object
       properties:
@@ -174,39 +181,6 @@ components:
             $ref: '#/components/schemas/CommentAPI.Comment'
       required:
       - results
-    CommentAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    CommentAPI.BadRequestError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    CommentAPI.ModifyCommentReq:
-      type: object
-      properties:
-        alertId:
-          type: string
-          description: The alert ID the comment is associated with
-        body:
-          type: string
-          description: The body of the comment
-        format:
-          type: string
-          description: The format of the comment
-          enum:
-          - PLAIN_TEXT
-          - HTML
-      required:
-      - alertId
-      - body
-      - format
     CommentAPI.Comment:
       type: object
       properties:
@@ -254,6 +228,32 @@ components:
             type:
               type: string
           description: The actor who updated the comment
+    CommentAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    CommentAPI.ModifyCommentReq:
+      type: object
+      properties:
+        alertId:
+          type: string
+          description: The alert ID the comment is associated with
+        body:
+          type: string
+          description: The body of the comment
+        format:
+          type: string
+          description: The format of the comment
+          enum:
+          - PLAIN_TEXT
+          - HTML
+      required:
+      - alertId
+      - body
+      - format
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

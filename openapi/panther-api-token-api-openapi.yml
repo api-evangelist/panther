@@ -203,20 +203,6 @@ paths:
       x-operation-id-original: api token#rotate
 components:
   schemas:
-    APITokenAPI.ForbiddenErr:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    APITokenAPI.BadRequestError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     APITokenAPI.NotFoundError:
       type: object
       properties:
@@ -224,18 +210,6 @@ components:
           type: string
       required:
       - message
-    APITokenAPI.ListResp:
-      type: object
-      properties:
-        next:
-          type: string
-          description: Pagination token for the next page of results
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/APITokenAPI.APIToken'
-      required:
-      - results
     APITokenAPI.ModifyAPIToken:
       type: object
       properties:
@@ -294,6 +268,32 @@ components:
       required:
       - name
       - permissions
+    APITokenAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    APITokenAPI.ForbiddenErr:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    APITokenAPI.ListResp:
+      type: object
+      properties:
+        next:
+          type: string
+          description: Pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/APITokenAPI.APIToken'
+      required:
+      - results
     APITokenAPI.APIToken:
       type: object
       properties:

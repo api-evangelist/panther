@@ -393,6 +393,24 @@ components:
       required:
       - id
       - detection
+    CorrelationRuleAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    CorrelationRuleAPI.CorrelationBadRequestErr:
+      type: object
+      properties:
+        message:
+          type: string
+        testResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/CorrelationRuleAPI.CorrelationTestResult'
+      required:
+      - message
     CorrelationRuleAPI.CorrelationRuleUnitTest:
       type: object
       properties:
@@ -411,6 +429,11 @@ components:
       - name
       - expectedResult
       - ruleOutputs
+    CorrelationRuleAPI.CorrelationRuleTestMatch:
+      type: object
+      additionalProperties:
+        items: {}
+        type: array
     CorrelationRuleAPI.ExistsError:
       type: object
       properties:
@@ -418,27 +441,19 @@ components:
           type: string
       required:
       - message
-    CorrelationRuleAPI.ListCorrelationRuleResp:
+    CorrelationRuleAPI.CorrelationRuleTestOutput:
       type: object
       properties:
-        next:
+        id:
           type: string
-          description: pagination token for the next page of results
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/CorrelationRuleAPI.CorrelationRule'
-    CorrelationRuleAPI.CorrelationBadRequestErr:
-      type: object
-      properties:
-        message:
-          type: string
-        testResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/CorrelationRuleAPI.CorrelationTestResult'
+          description: The sequence/group ID from the correlation rule
+        matches:
+          type: object
+          description: Match field to match value to event times
+          additionalProperties:
+            $ref: '#/components/schemas/CorrelationRuleAPI.CorrelationRuleTestMatch'
       required:
-      - message
+      - id
     CorrelationRuleAPI.ModifyCorrelationRule:
       type: object
       properties:
@@ -517,19 +532,16 @@ components:
       - id
       - detection
       - severity
-    CorrelationRuleAPI.CorrelationRuleTestOutput:
+    CorrelationRuleAPI.ListCorrelationRuleResp:
       type: object
       properties:
-        id:
+        next:
           type: string
-          description: The sequence/group ID from the correlation rule
-        matches:
-          type: object
-          description: Match field to match value to event times
-          additionalProperties:
-            $ref: '#/components/schemas/CorrelationRuleAPI.CorrelationRuleTestMatch'
-      required:
-      - id
+          description: pagination token for the next page of results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CorrelationRuleAPI.CorrelationRule'
     CorrelationRuleAPI.CorrelationTestResult:
       type: object
       properties:
@@ -542,18 +554,6 @@ components:
         passed:
           type: boolean
           description: Whether the test passed
-    CorrelationRuleAPI.CorrelationRuleTestMatch:
-      type: object
-      additionalProperties:
-        items: {}
-        type: array
-    CorrelationRuleAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

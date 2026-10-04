@@ -172,6 +172,13 @@ paths:
       x-operation-id-original: aws cloud account#put
 components:
   schemas:
+    AWSCloudAccountAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     AWSCloudAccountAPI.ExistsError:
       type: object
       properties:
@@ -179,19 +186,9 @@ components:
           type: string
       required:
       - message
-    AWSCloudAccountAPI.AWSScanConfig:
+    AWSCloudAccountAPI.ModifyAWSCloudAccount:
       type: object
       properties:
-        auditRole:
-          type: string
-          description: The IAM role ARN that Panther assumes to scan the AWS account
-    AWSCloudAccountAPI.CreateAWSCloudAccount:
-      type: object
-      properties:
-        awsAccountId:
-          type: string
-          description: The 12-digit AWS account ID
-          pattern: ^[0-9]{12}$
         awsScanConfig:
           $ref: '#/components/schemas/AWSCloudAccountAPI.AWSScanConfig'
         integrationLabel:
@@ -216,23 +213,8 @@ components:
             type: string
           description: Resource types to exclude from scanning (e.g. AWS.S3.Bucket)
       required:
-      - awsAccountId
       - integrationLabel
       - awsScanConfig
-    AWSCloudAccountAPI.BadRequestError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    AWSCloudAccountAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     AWSCloudAccountAPI.AWSCloudAccount:
       type: object
       properties:
@@ -276,9 +258,13 @@ components:
           type: string
       required:
       - message
-    AWSCloudAccountAPI.ModifyAWSCloudAccount:
+    AWSCloudAccountAPI.CreateAWSCloudAccount:
       type: object
       properties:
+        awsAccountId:
+          type: string
+          description: The 12-digit AWS account ID
+          pattern: ^[0-9]{12}$
         awsScanConfig:
           $ref: '#/components/schemas/AWSCloudAccountAPI.AWSScanConfig'
         integrationLabel:
@@ -303,8 +289,22 @@ components:
             type: string
           description: Resource types to exclude from scanning (e.g. AWS.S3.Bucket)
       required:
+      - awsAccountId
       - integrationLabel
       - awsScanConfig
+    AWSCloudAccountAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    AWSCloudAccountAPI.AWSScanConfig:
+      type: object
+      properties:
+        auditRole:
+          type: string
+          description: The IAM role ARN that Panther assumes to scan the AWS account
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

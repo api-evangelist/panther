@@ -204,43 +204,6 @@ components:
           items:
             type: string
           description: The log types of the integration
-    LogForwarderSourceAPI.ExistsError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    LogForwarderSourceAPI.ServiceError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    LogForwarderSourceAPI.LogStreamTypeOptions:
-      type: object
-      properties:
-        jsonArrayEnvelopeField:
-          type: string
-          description: Path to the array value to extract elements from, only applicable if logStreamType is JsonArray. Leave empty if the input JSON is an array itself
-        xmlRootElement:
-          type: string
-          description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
-    LogForwarderSourceAPI.BadRequestError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    LogForwarderSourceAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     LogForwarderSourceAPI.ModifyLogForwarderSource:
       type: object
       properties:
@@ -267,6 +230,43 @@ components:
       - integrationLabel
       - logTypes
       - logStreamType
+    LogForwarderSourceAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    LogForwarderSourceAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    LogForwarderSourceAPI.LogStreamTypeOptions:
+      type: object
+      properties:
+        jsonArrayEnvelopeField:
+          type: string
+          description: Path to the array value to extract elements from, only applicable if logStreamType is JsonArray. Leave empty if the input JSON is an array itself
+        xmlRootElement:
+          type: string
+          description: The root element name for XML streams, only applicable if logStreamType is XML. Leave empty if the XML events are not enclosed in a root element
+    LogForwarderSourceAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    LogForwarderSourceAPI.ServiceError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

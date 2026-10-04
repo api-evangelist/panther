@@ -180,13 +180,6 @@ paths:
       x-operation-id-original: data model#put
 components:
   schemas:
-    DataModelAPI.ExistsError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     DataModelAPI.ListResp:
       type: object
       properties:
@@ -197,42 +190,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DataModelAPI.DataModel'
-    DataModelAPI.ModifyDataModel:
-      type: object
-      properties:
-        body:
-          type: string
-          description: The python body of the data model
-        description:
-          type: string
-          description: The description of the data model
-        displayName:
-          type: string
-          description: The name used for the data model
-        enabled:
-          type: boolean
-          description: enables/disables a data model
-        id:
-          type: string
-          description: The id of the data model
-        logTypes:
-          type: array
-          items:
-            type: string
-          description: 'The log type this data model should associate to. NOTE: only one data model can be assigned to a log type'
-        mappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataModelAPI.DataModelMapping'
-      required:
-      - id
-    DataModelAPI.NotFoundError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     DataModelAPI.DataModelMapping:
       type: object
       properties:
@@ -247,13 +204,6 @@ components:
           description: the json path
       required:
       - name
-    DataModelAPI.BadRequestError:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     DataModelAPI.DataModel:
       type: object
       properties:
@@ -285,6 +235,56 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DataModelAPI.DataModelMapping'
+    DataModelAPI.BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    DataModelAPI.ExistsError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    DataModelAPI.NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    DataModelAPI.ModifyDataModel:
+      type: object
+      properties:
+        body:
+          type: string
+          description: The python body of the data model
+        description:
+          type: string
+          description: The description of the data model
+        displayName:
+          type: string
+          description: The name used for the data model
+        enabled:
+          type: boolean
+          description: enables/disables a data model
+        id:
+          type: string
+          description: The id of the data model
+        logTypes:
+          type: array
+          items:
+            type: string
+          description: 'The log type this data model should associate to. NOTE: only one data model can be assigned to a log type'
+        mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataModelAPI.DataModelMapping'
+      required:
+      - id
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
