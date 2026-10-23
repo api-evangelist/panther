@@ -290,3 +290,9 @@ components:
       type: apiKey
       name: X-API-Key
       in: header
+x-provenance:
+  method: harvested
+  publisher: Panther
+  source: https://openapi.gitbook.com/o/-LgddDaIOc7MA4mxoaPa/spec/panther-labs-api.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
